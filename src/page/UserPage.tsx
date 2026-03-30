@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import "./Game.css";
+import styles from "./UserPage.module.css";
 import type { User } from "../entity/user";
 import React from "react";
 
@@ -15,12 +15,13 @@ export default function Game({ setUser, setPage }: Props) {
 
     return (
         <>
-            <div className="users">
+            <div className={styles.users}>
                 {users.map((user) => (
                     <React.Fragment key={user.name}>
                         <div>{user.name}</div>
-                        <div>{user.name}</div>
-                        <Button onClick={() => select(user)}>Select</Button>
+                        <div>
+                            <Button onClick={() => select(user)}>Bewerk &gt;</Button>
+                        </div>
                     </React.Fragment>
                 ))}
             </div>

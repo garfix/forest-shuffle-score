@@ -5,22 +5,52 @@ import "@fontsource/roboto/700.css";
 
 import { useState } from "react";
 import "./App.css";
-import Home from "./page/Home";
-import Game from "./page/Game";
-import Main from "./page/Main";
+import Home from "./page/HomePage";
+import Game from "./page/UserPage";
+import CategoryPage from "./page/CategoryPage";
 import type { User } from "./entity/user";
+import { loadCards } from "./utils/cards";
+import type { Category } from "./page/data/category";
+import SortPage from "./page/SortPage";
+
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#63d219", // required
+            light: "#7cda3e", // optional, auto-derived if omitted
+            dark: "#479613", // optional
+            contrastText: "#fff", // optional
+        },
+    },
+});
 
 function App() {
     const [page, setPage] = useState("home");
     const [user, setUser] = useState<User | null>(null);
+    const [category, setCategory] = useState<Category | null>(null);
+    const cards = loadCards();
 
     return (
         <>
-            <section id="center">
-                {page == "home" && <Home setPage={setPage}></Home>}
-                {page == "game" && <Game setPage={setPage} setUser={setUser}></Game>}
-                {page == "main" && <Main setPage={setPage} user={user!}></Main>}
-            </section>
+            <ThemeProvider theme={theme}>
+                <section id="center">
+                    {page == "home" && <Home setPage={setPage}></Home>}
+                    {page == "game" && <Game setPage={setPage} setUser={setUser}></Game>}
+                    {page == "main" && (
+                        <CategoryPage setPage={setPage} setCategory={setCategory} user={user!}></CategoryPage>
+                    )}
+                    {page == "sort" && (
+                        <SortPage
+                            setPage={setPage}
+                            setCategory={setCategory}
+                            user={user!}
+                            category={category!}
+                        ></SortPage>
+                    )}
+                </section>
+            </ThemeProvider>
         </>
     );
 }

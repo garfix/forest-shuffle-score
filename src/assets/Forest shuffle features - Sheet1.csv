@@ -1,0 +1,125 @@
+Spelvariant,Categorie,Soort,Naam,Hoeveel,Score,Voorwaarde,Subvraag,Uniek
+Basisspel,Boom,Boom,Paardenkastanje,11,Aantal in kwadraat,Max. 7,Houtbij?,ja
+Basisspel,Boom,Boom,Berk,10,Aantal keer 1,,,ja
+Basisspel,Boom,Boom,Beuk,10,Aantal keer 5,Min. 4,Houtbij?,ja
+Basisspel,Boom,Boom,Linde,9,Aantal keer 1 of 3,Meer aantal dan ander bos,Houtbij?,ja
+Basisspel,Boom,Boom,Douglasspar,7,Aantal keer 5,,,ja
+Basisspel,Boom,Boom,Eik,7,Aantal keer 10,Unieke boom min. 8,,ja
+Basisspel,Boom,Boom,Zilverspar,6,Kaarten erom keer 2,,Totaal kaarten erom?,ja
+Basisspel,Boom,Boom,Esdoorn,6,Aantal bomen keer 1,,,ja
+Alpine,Boom,"Boom, Alpine",Europese lariks,7,Aantal keer 3,,,ja
+Alpine,Boom,"Boom, Alpine",Alpenden,7,Aantal keer Alpine keer 1,,,ja
+Exploration,Boom,Boom,"O, dennenboom",1,Kaarten erom keer 2,,Totaal kaarten erom?,"nee, Zilverspar"
+Exploration,Boom,Boom,Mosseik,1,Evenhoevig dier keer 1,,,"nee, Eik"
+Exploration,Boom,Boom,Palmboom,1,Vogel keer 1,,,ja
+Exploration,Boom,Boom,Zachte berk,1,Aantal keer 1,,,"nee, Berk"
+,,,,,,,,
+Basisspel,Boven,Vogel,Bosuil,4,Aantal keer 5,,,ja
+Basisspel,Boven,Vogel,Goudvink,4,Aantal keer Insect keer 2,,,ja
+Basisspel,Boven,Vogel,Grote bonte specht,4,Aantal keer 10,Meer bomen dan ander bos,,ja
+Basisspel,Boven,Vogel,Havik,4,Aantal keer Vogel keer 3,,,ja
+Basisspel,Boven,Vogel,Vink,4,Aantal keer Op beuk keer 5,,Op beuk?,ja
+Basisspel,Boven,Vogel,Vlaamse gaai,4,Aantal keer 3,,,ja
+Woodland edge,Boven,"Vogel, Woodland edge",Ekster,3,Aantal keer 3,,,ja
+Woodland edge,Boven,"Vogel, Woodland edge",Kerkuil,2,Aantal keer Vleermuis keer 3,,,ja
+Woodland edge,Boven,"Vogel, Woodland edge",Nachtegaal,3,Aantal keer Op struik keer 5,,Op struik?,ja
+Exploration,Boven,"Vogel, Woodland edge",Rode kardinaal,1,Aantal keer 5,,,ja
+Exploration,Boven,"Vogel, Woodland edge",Roodborstje,1,Insect keer 1,,,ja
+Alpine,Boven,"Vogel, Alpine",Lammergier,3,Aantal keer Grot keer 1,,,ja
+Alpine,Boven,"Vogel, Alpine",Raaf,2,Aantal keer 5,,,ja
+Alpine,Boven,"Vogel, Alpine",Steenarend,3,Aantal keer (Pootdier plus Amfibie) keer 1,,,ja
+Exploration,Boven,Vogel,Koekoek,1,Aantal keer 7,,,ja
+Exploration,Boven,Vogel,Paapje,1,Plant keer 1,,,ja
+Basisspel,Boven,"Vlinder, Insect",Dagpauwoog,4,Groepjes score vlinder,1:0,,ja
+Basisspel,Boven,"Vlinder, Insect",Grote vos,4,Groepjes score vlinder,2:3,,ja
+Basisspel,Boven,"Vlinder, Insect",Grote weerschijnvlinder,4,Groepjes score vlinder,3:6,,ja
+Basisspel,Boven,"Vlinder, Insect",Keizersmantel,4,Groepjes score vlinder,4:12,,ja
+Basisspel,Boven,"Vlinder, Insect",Rouwmantel,4,Groepjes score vlinder,5:20,,ja
+Woodland edge,Boven,"Vlinder, Insect, Woodland edge",Landkaartje,4,Groepjes score vlinder,6:35,,ja
+Alpine,Boven,"Vlinder, Insect, Alpine",Kleine Apollovlinder,4,Groepjes score vlinder,7:55,,ja
+Exploration,Boven,"Vlinder, Insect",Citroenvlinder,1,Groepjes score vlinder,8:80,,ja
+Basisspel,Boven,Pootdier,Rode eekhoorn,4,Aantal keer Op eik keer 5,,Op eik?,ja
+Exploration,Boven,Plant,Maretak,1,Plant keer 1,,,ja
+,,,,78,,,,
+Basisspel,Onder,Plant,Boomvarens,3,Aantal keer Amfibie keer 6,,,ja
+Basisspel,Onder,Plant,Bramen,3,Aantal keer Plant keer 2,,,ja
+Basisspel,Onder,Plant,Mos,3,Aantal keer 10,,,ja
+Basisspel,Onder,Plant,Wilde aardbeien,3,Aantal keer 10,Unieke boom min. 8,,ja
+Woodland edge,Onder,"Plant, Woodland edge",Grote brandnetel,3,Aantal keer vlinder keer 2,,,ja
+Woodland edge,Onder,"Plant, Woodland edge",Vingerhoedskruid,4,Aantal Groepjes score uniek plant,"1:1, 2:3, 3:6, 4:10, 5+:15",,ja
+Alpine,Onder,"Plant, Alpine",Blauwe bes,2,Aantal keer Uniek vogel keer 2,,,ja
+Alpine,Onder,"Plant, Alpine",Edelweiss,2,Aantal keer 3,,,ja
+Alpine,Onder,"Plant, Alpine",Gentiaan,3,Aantal keer vlinder keer 3,,,ja
+Exploration,Onder,"Plant, Woodland edge",Bostulp,1,Aantal keer 3,,,ja
+Exploration,Onder,Plant,Wateraardbei,1,"boom 0-5: 15, 6-10: 7, 15+: 3",,,ja
+Basisspel,Onder,Amfibie,Boomkikker,3,Aantal keer (mug plus vliegende hooiwagen) keer 5,,,ja
+Basisspel,Onder,Amfibie,Gewone pad,6,paar keer 5,,Hoeveel paar op één plek?,ja
+Basisspel,Onder,Amfibie,Moerasschildpad,2,Aantal keer 5,,,ja
+Basisspel,Onder,Amfibie,Vuursalamander,3,"1:5, 2:15, 3+:25",,,ja
+Alpine,Onder,"Amfibie, Alpine",Alpenwatersalamander,3,Aantal keer insect keer 2,,,ja
+Exploration,Onder,Amfibie,Vuursalamander,1,"1:5, 2:15, 3+:25",,,"nee, Vuursalamander"
+Basisspel,Onder,Insect,Bosmier,3,Aantal keer onder keer 2,,,ja
+Basisspel,Onder,Insect,Vliegend hert,2,Aantal keer pootdier keer 1,,,ja
+Basisspel,Onder,Insect,Vuurvliegjes,4,"1:0, 2:10, 3:15, 4+:20",,,ja
+Woodland edge,Onder,"Insect, Woodland edge",Grote groene sabelsprinkhaan,3,Aantal keer insect keer 1,,,ja
+Exploration,Onder,"Insect, Woodland edge",Vuurvliegjes,1,"1:0, 2:10, 3:15, 4+:20",,,"nee, Vuurvliegjes"
+Basisspel,Onder,Pootdier,Egel,3,Aantal keer Vlinder keer 2,,,ja
+Basisspel,Onder,Pootdier,Mol,2,,,,ja
+Woodland edge,Onder,"Pootdier, Woodland edge",Woelrat,2,,,,ja
+Exploration,Onder,"Pootdier, Woodland edge",Woelrat,1,,,,"nee, Woelrat"
+Basisspel,Onder,Paddenstoel,Cantharel,2,,,,ja
+Basisspel,Onder,Paddenstoel,Eekhoorntjesbrood,2,,,,ja
+Basisspel,Onder,Paddenstoel,Grote parasolzwam,2,,,,ja
+Basisspel,Onder,Paddenstoel,Vliegenzwam,2,,,,ja
+Alpine,Onder,"Paddenstoel, Alpine",Hoorn-van-overvloed,2,,,,ja
+Exploration,Onder,Paddenstoel,Cantharel,1,,,,"nee, Cantharel"
+,,,,78,,,,
+Woodland edge,Struiken,"Struiken, Woodland edge",Gewone vlier,4,,,,ja
+Woodland edge,Struiken,"Struiken, Woodland edge",Hazelaar,4,,,,ja
+Woodland edge,Struiken,"Struiken, Woodland edge",Sleedoorn,4,,,,ja
+,,,,,,,,
+Basisspel,Naast,Pootdier,Bruine beer,3,,,,
+Basisspel,Naast,Pootdier,Europese das,4,Aantal keer 2,,,
+Basisspel,Naast,Pootdier,Europese haas,11,(Aantal plus Sneeuwhaas) in kwadraat,,,ja
+Basisspel,Naast,Pootdier,Lynx,6,Aantal keer 10,min. 1 Ree,,ja
+Basisspel,Naast,Pootdier,Relmuis,4,Samen met vleermuis keer 15,,Samen met Vleermuis?,ja
+Basisspel,Naast,Pootdier,Rode vos,5,(Europese haas plus Sneeuwhaas) keer 2,,,ja
+Basisspel,Naast,Pootdier,Steenmarter,5,Aantal keer Volledig bewoonde boom keer 5,,Volledig bewoonde boom?,ja
+Basisspel,Naast,Pootdier,Wasbeer,4,,,,ja
+Basisspel,Naast,Pootdier,Wolf,4,Aantal keer Hert keer 5,,,ja
+Woodland edge,Naast,"Pootdier, Woodland edge",Bunzing,3,Aantal keer Enige bij boom of struik keer 10,,Enige bij boom of struik,ja
+Woodland edge,Naast,"Pootdier, Woodland edge",Wilde kat,3,Aantal keer Woodland edge keer 1,,,ja
+Alpine,Naast,"Pootdier, Alpine",Alpenmarmot,4,Aantal keer unieke Plant keer 3,,,ja
+Alpine,Naast,"Pootdier, Alpine",Sneeuwhaas,3,(Aantal plus Europese haas) in kwadraat,,,ja
+Exploration,Naast,Pootdier,Civetkat,1,Aantal keer 5,,,ja
+Exploration,Naast,Pootdier,Europese das,1,Aantal keer 2,,,"nee, Europese das"
+Exploration,Naast,Pootdier,Poolvos,1,(Europese haas plus Sneeuwhaas) keer 2,,,ja
+Exploration,Naast,Pootdier,Rode panda,1,Aantal keer 2,,,ja
+Exploration,Naast,Pootdier,Sabelmarter,1,Aantal keer Pootdier keer 3,,,ja
+Exploration,Naast,Pootdier,Trol,1,Aantal keer Boom keer 1,,,ja
+Basisspel,Naast,"Evenhoevig dier, Hert",Damhert,4,Aantal keer Evenhoevig dier keer 3,,,ja
+Basisspel,Naast,"Evenhoevig dier, Hert",Edelhert,5,Aantal keer (Boom plus plant) keer 1,,,ja
+Basisspel,Naast,"Evenhoevig dier, Hert",Ree,5,Kleur? hoeveel keer 3,Berk Beuk Linde Paardenkastanje Zilverspar,Hoeveel van welke  Boom kleur?,ja
+Basisspel,Naast,Evenhoevig dier,Wildzwijn,5,Aantal keer 10,min. 1 Zwijnenbig,,ja
+Basisspel,Naast,Evenhoevig dier,Zwijnenbig,4,Aantal keer 1,,,ja
+Woodland edge,Naast,"Evenhoevig dier, Woodland edge",Wild zwijn (zeug),3,Aantal keer zwijnenbig keer 10,,,ja
+Woodland edge,Naast,"Evenhoevig dier, Woodland edge",Wisent,3,Aantal keer (Beuk plus Eik) keer 2,,"Hoeveel van beuk kleur , eik kleur",ja
+Woodland edge,Naast,"Evenhoevig dier, Woodland edge",Zwijnenbig,3,Aantal keer 1,,,"nee, Zwijnenbig"
+Alpine,Naast,"Evenhoevig dier, Alpine",Alpensteenbok,3,Aantal keer 10,,,ja
+Alpine,Naast,"Evenhoevig dier, Alpine",Gems,3,Kleur? hoeveel keer 3,Alpenden Douglasspar Euopese lariks,Hoeveel van welke Boom kleur?,ja
+Exploration,Naast,"Evenhoevig dier, Hert",Eland,1,(Jong Boompje plus Berk plus Douglas spar) keer 3,,Hoeveel van welke  ?,ja
+Exploration,Naast,"Evenhoevig dier, Woodland edge",Wisent,1,Aantal keer (Beuk plus Eik) keer 2,,,"nee, Wisent"
+Basisspel,Naast,Vleermuis,Bechsteins vleermuis,3,Aantal keer 5,min. 3 uniek vleermuis,,ja
+Basisspel,Naast,Vleermuis,Bruine grootoorvleermuis,3,Aantal keer 5,min. 3 uniek vleermuis,,ja
+Basisspel,Naast,Vleermuis,Grote hoefijzerneus,3,Aantal keer 5,min. 3 uniek vleermuis,,ja
+Basisspel,Naast,Vleermuis,Mopsvleermuis,3,Aantal keer 5,min. 3 uniek vleermuis,,ja
+Woodland edge,Naast,"Vleermuis, Woodland edge",Gewone dwergvleermuis,3,Aantal keer 5,min. 3 uniek vleermuis,,ja
+Alpine,Naast,"Vleermuis, Alpine",Savi's dwergvleermuis,3,Aantal keer 5,min. 3 uniek vleermuis,,ja
+Basisspel,Naast,Insect,Houtbij,4,,,,ja
+Basisspel,Naast,Insect,Mug,3,Aantal keer Vleermuis keer 1,,,ja
+Woodland edge,Naast,"Insect, Woodland edge",Vliegende hooiwagen,3,Aantal keer Vleermuis keer 1,,,ja
+Woodland edge,Naast,"Insect, Woodland edge",Zwerm honingbijen,3,Aantal keer plant keer 1,,,ja
+Exploration,Naast,Insect,Mug,1,Aantal keer Vleermuis keer 1,,,nee Mug
+Alpine,Naast,"Vogel, Alpine",Auerhoen,4,Aantal keer plant keer 1,,,ja
+Exploration,Naast,"Vogel, Woodland edge",Ooievaar,1,Aantal keer (Insect plus Amfibie) keer 1,,,ja
+,,,,142,,,,

@@ -3,7 +3,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 import Home from "./page/HomePage";
 import Game from "./page/UserPage";
@@ -30,7 +30,9 @@ function App() {
     const [page, setPage] = useState("home");
     const [user, setUser] = useState<User | null>(null);
     const [category, setCategory] = useState<Category | null>(null);
-    const cards = loadCards();
+    const cards = useMemo(() => loadCards(), []);
+
+    console.log(cards);
 
     return (
         <>
@@ -47,6 +49,7 @@ function App() {
                             setCategory={setCategory}
                             user={user!}
                             category={category!}
+                            cards={cards}
                         ></SortPage>
                     )}
                 </section>

@@ -1,6 +1,7 @@
 import type { Card } from "../page/data/card";
 import csv from "../assets/Forest shuffle features - Sheet1.csv?raw";
 import { parseCSV } from "./parseCsv";
+import type { Category } from "../page/data/category";
 
 export function loadCards(): Card[] {
     const rows = parseCSV(csv);
@@ -25,4 +26,8 @@ export function loadCards(): Card[] {
     }
 
     return cards;
+}
+
+export function getCardsByCategory(cards: Card[], category: Category): Card[] {
+    return cards.filter((card) => card.category == category.name);
 }

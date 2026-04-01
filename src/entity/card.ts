@@ -2,7 +2,7 @@ export type Card = {
     id: number;
     game_variant: string;
     category: string;
-    sort: string;
+    sort: string[];
     name: string;
     amount: number;
     score: string;

@@ -47,14 +47,14 @@ export default function SortPage({ setPage, setCategory, user, users, category, 
     return (
         <>
             <Breadcrumbs>
-                <Link onClick={() => setPage("user")}>Users</Link>
+                <Link onClick={() => setPage("user")}>Start</Link>
                 <Link onClick={() => setPage("category")}>{user.name}</Link>
                 <div>{category.name}</div>
             </Breadcrumbs>
             <div className={styles.cards}>
                 {categoryCards.map((card) => (
                     <div className={styles.card} key={card.id}>
-                        <div className={styles.name}></div>
+                        <div className={styles.name}>{card.name}</div>
                         <div>
                             <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
                         </div>

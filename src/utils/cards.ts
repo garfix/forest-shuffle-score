@@ -19,7 +19,7 @@ export function loadCards(): Card[] {
             score: row["Score"],
             game_variant: row["Spelvariant"],
             category: row["Categorie"],
-            sort: row["Soort"],
+            sort: row["Soort"].split(",").map((s) => s.trim()),
             amount: parseInt(row["Hoeveel"]),
             condition: row["Voorwaarde"],
             sub_question: row["Subvraag"],

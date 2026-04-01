@@ -29,7 +29,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, scores
     return (
         <>
             <Breadcrumbs>
-                <Link onClick={() => setPage("user")}>Users</Link>
+                <Link onClick={() => setPage("user")}>Start</Link>
                 <div>{user.name}</div>
             </Breadcrumbs>
             <div className={styles.categories}>

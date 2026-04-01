@@ -13,7 +13,7 @@ export default function Home({ setPage }: Props) {
                 <h1>Score</h1>
                 <p>Rekenhulp bij het berekenen van de score</p>
             </div>
-            <Button variant="contained" onClick={() => setPage("game")}>
+            <Button variant="contained" onClick={() => setPage("user")}>
                 Start
             </Button>
         </>

@@ -3,14 +3,12 @@ import styles from "./UserPage.module.css";
 import type { User } from "../entity/user";
 import React from "react";
 
-type Props = { setPage: (page: string) => void; setUser: (user: User) => void };
+type Props = { users: User[]; setPage: (page: string) => void; setUser: (user: User) => void };
 
-export default function Game({ setUser, setPage }: Props) {
-    const users = [{ name: "Patrick" }, { name: "Katja" }];
-
+export default function UserPage({ users, setUser, setPage }: Props) {
     const select = (user: User) => {
         setUser(user);
-        setPage("main");
+        setPage("category");
     };
 
     return (

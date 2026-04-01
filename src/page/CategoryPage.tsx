@@ -1,7 +1,7 @@
 import styles from "./CategoryPage.module.css";
 import type { User } from "../entity/user";
 import Button from "@mui/material/Button";
-import { categories, type Category } from "./data/category";
+import { categories, type Category } from "../entity/category";
 import React from "react";
 
 type Props = { setPage: (page: string) => void; setCategory: (category: Category) => void; user: User };

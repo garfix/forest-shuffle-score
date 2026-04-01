@@ -5,15 +5,17 @@ import "@fontsource/roboto/700.css";
 
 import { useMemo, useState } from "react";
 import "./App.css";
-import Home from "./page/HomePage";
-import Game from "./page/UserPage";
+import HomePage from "./page/HomePage";
+import UserPage from "./page/UserPage";
 import CategoryPage from "./page/CategoryPage";
 import type { User } from "./entity/user";
 import { loadCards } from "./utils/cards";
-import type { Category } from "./page/data/category";
+import type { Category } from "./entity/category";
 import SortPage from "./page/SortPage";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import type { Scores } from "./entity/score";
+import { initScores } from "./utils/scores";
 
 const theme = createTheme({
     palette: {
@@ -27,29 +29,32 @@ const theme = createTheme({
 });
 
 function App() {
+    const [users] = useState<User[]>([{ name: "Patrick" }, { name: "Katja" }]);
     const [page, setPage] = useState("home");
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User>(users[0]);
     const [category, setCategory] = useState<Category | null>(null);
     const cards = useMemo(() => loadCards(), []);
-
-    console.log(cards);
+    const [scores, setScores] = useState<Scores>(initScores(users));
 
     return (
         <>
             <ThemeProvider theme={theme}>
                 <section id="center">
-                    {page == "home" && <Home setPage={setPage}></Home>}
-                    {page == "game" && <Game setPage={setPage} setUser={setUser}></Game>}
-                    {page == "main" && (
+                    {page == "home" && <HomePage setPage={setPage}></HomePage>}
+                    {page == "user" && <UserPage users={users} setPage={setPage} setUser={setUser}></UserPage>}
+                    {page == "category" && (
                         <CategoryPage setPage={setPage} setCategory={setCategory} user={user!}></CategoryPage>
                     )}
                     {page == "sort" && (
                         <SortPage
                             setPage={setPage}
                             setCategory={setCategory}
+                            users={users}
                             user={user!}
                             category={category!}
                             cards={cards}
+                            scores={scores}
+                            setScores={setScores}
                         ></SortPage>
                     )}
                 </section>

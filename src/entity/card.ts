@@ -1,4 +1,5 @@
 export type Card = {
+    id: number;
     game_variant: string;
     category: string;
     sort: string;

@@ -1,17 +1,19 @@
-import type { Card } from "../page/data/card";
+import type { Card } from "../entity/card";
 import csv from "../assets/Forest shuffle features - Sheet1.csv?raw";
 import { parseCSV } from "./parseCsv";
-import type { Category } from "../page/data/category";
+import type { Category } from "../entity/category";
 
 export function loadCards(): Card[] {
     const rows = parseCSV(csv);
 
     const cards: Card[] = [];
+    let id = 0;
     for (const row of rows) {
         if (row["Spelvariant"] == "") {
             continue;
         }
         const card: Card = {
+            id,
             name: row["Naam"],
             score: row["Score"],
             game_variant: row["Spelvariant"],
@@ -23,6 +25,7 @@ export function loadCards(): Card[] {
             unique: row["Uniek"],
         };
         cards.push(card);
+        id++;
     }
 
     return cards;

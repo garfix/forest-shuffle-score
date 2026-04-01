@@ -6,6 +6,8 @@ import type { Card } from "../entity/card";
 import { getCardsByCategory } from "../utils/cards";
 import Amount from "./component/Amount";
 import type { Scores } from "../entity/score";
+import Link from "./component/Link";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 
 type Props = {
     setPage: (page: string) => void;
@@ -35,9 +37,11 @@ export default function SortPage({ setPage, setCategory, user, users, category, 
 
     return (
         <>
-            <h2>
-                {user.name} &gt; {category.name}
-            </h2>
+            <Breadcrumbs>
+                <Link onClick={() => setPage("user")}>Users</Link>
+                <Link onClick={() => setPage("category")}>{user.name}</Link>
+                <div>{category.name}</div>
+            </Breadcrumbs>
             <div className={styles.cards}>
                 {categoryCards.map((card) => (
                     <div className={styles.card} key={card.name}>

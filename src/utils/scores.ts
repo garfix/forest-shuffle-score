@@ -30,7 +30,7 @@ export function calculateScores(inputs: Inputs, cards: Card[]) {
 
 const scoreFuncs: Record<string, (string | number)[]> = {
     Berk: ["count-x", 1],
-    Paardenkastanje: ["count^2"],
+    Paardenkastanje: ["count^2-max", 7],
 };
 
 function calculateTotal(input: Input, cards: Card[]): [Record<number, number>, Record<string, number>, number] {
@@ -56,8 +56,9 @@ function calculateCardScore(cardName: string, count: number) {
         const predicate = scoreFunc[0];
         if (predicate == "count-x") {
             score = (scoreFunc[1] as number) * count;
-        } else if (predicate == "count^2") {
-            score = count * count;
+        } else if (predicate == "count^2-max") {
+            const c = Math.min(count, Number(scoreFunc[1]));
+            score = c * c;
         }
     }
     return score;

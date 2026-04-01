@@ -7,24 +7,24 @@ import { Breadcrumbs, Chip } from "@mui/material";
 import Link from "./component/Link";
 import { getCountsByCategory } from "../utils/cards";
 import type { Card } from "../entity/card";
-import type { Scores } from "../entity/score";
 import { categories } from "../utils/categories";
+import type { Inputs } from "../entity/input";
 
 type Props = {
     setPage: (page: string) => void;
     setCategory: (category: Category) => void;
     user: User;
     cards: Card[];
-    scores: Scores;
+    inputs: Inputs;
 };
 
-export default function CategoryPage({ setPage, setCategory, user, cards, scores }: Props) {
+export default function CategoryPage({ setPage, setCategory, user, cards, inputs }: Props) {
     function select(category: Category) {
         setCategory(category);
         setPage("sort");
     }
 
-    const counts = getCountsByCategory(cards, scores[user.name]);
+    const counts = getCountsByCategory(cards, inputs[user.name]);
 
     return (
         <>

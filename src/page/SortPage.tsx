@@ -9,6 +9,7 @@ import type { Scores } from "../entity/score";
 import Link from "./component/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { getNextCategory } from "../utils/categories";
+import type { Inputs } from "../entity/input";
 
 type Props = {
     setPage: (page: string) => void;
@@ -17,21 +18,21 @@ type Props = {
     user: User;
     category: Category;
     cards: Card[];
-    scores: Scores;
-    setScores: (scores: Scores) => void;
+    inputs: Inputs;
+    setUserInput: (inputs: Inputs) => void;
 };
 
-export default function SortPage({ setPage, setCategory, user, users, category, cards, scores, setScores }: Props) {
+export default function SortPage({ setPage, setCategory, user, users, category, cards, inputs, setUserInput }: Props) {
     const getCount = (card: Card) => {
-        return scores[user.name].card_count[card.id] ?? 0;
+        return inputs[user.name].card_count[card.id] ?? 0;
     };
 
     const setCount = (card: Card, count: number) => {
-        const newScores: Scores = { ...scores };
-        newScores[user.name] = { ...scores[user.name] };
-        newScores[user.name].card_count = { ...scores[user.name].card_count };
-        newScores[user.name].card_count[card.id] = count;
-        setScores(newScores);
+        const newInputs: Inputs = { ...inputs };
+        newInputs[user.name] = { ...inputs[user.name] };
+        newInputs[user.name].card_count = { ...inputs[user.name].card_count };
+        newInputs[user.name].card_count[card.id] = count;
+        setUserInput(newInputs);
     };
 
     const nextCategory = getNextCategory(category);

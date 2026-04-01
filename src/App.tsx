@@ -14,7 +14,8 @@ import type { Category } from "./entity/category";
 import SortPage from "./page/SortPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import type { Scores } from "./entity/score";
-import { calculateScores, initScores } from "./utils/scores";
+import { calculateScores, initScores, initInputs } from "./utils/scores";
+import type { Inputs } from "./entity/input";
 
 const theme = createTheme({
     palette: {
@@ -33,11 +34,12 @@ function App() {
     const [user, setUser] = useState<User>(users[0]);
     const [category, setCategory] = useState<Category | null>(null);
     const cards = useMemo(() => loadCards(), []);
+    const [inputs, setInputs] = useState<Inputs>(initInputs(users));
     const [scores, setScores] = useState<Scores>(initScores(users));
 
     useEffect(() => {
-        setScores(calculateScores(scores, cards));
-    }, [scores]);
+        setScores(calculateScores(inputs, cards));
+    }, [inputs]);
 
     return (
         <>
@@ -53,7 +55,7 @@ function App() {
                             setCategory={setCategory}
                             user={user!}
                             cards={cards}
-                            scores={scores}
+                            inputs={inputs}
                         ></CategoryPage>
                     )}
                     {page == "sort" && (
@@ -64,8 +66,8 @@ function App() {
                             user={user!}
                             category={category!}
                             cards={cards}
-                            scores={scores}
-                            setScores={setScores}
+                            inputs={inputs}
+                            setUserInput={setInputs}
                         ></SortPage>
                     )}
                 </section>

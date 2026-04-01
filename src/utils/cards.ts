@@ -3,6 +3,7 @@ import csv from "../assets/Forest shuffle features - Sheet1.csv?raw";
 import { parseCSV } from "./parseCsv";
 import type { Category } from "../entity/category";
 import type { Score } from "../entity/score";
+import type { Input } from "../entity/input";
 
 export function loadCards(): Card[] {
     const rows = parseCSV(csv);
@@ -36,10 +37,10 @@ export function getCategoryCards(cards: Card[], category: Category): Card[] {
     return cards.filter((card) => card.category == category.name);
 }
 
-export function getCountsByCategory(cards: Card[], score: Score) {
+export function getCountsByCategory(cards: Card[], input: Input) {
     const counts: Record<string, number> = {};
     for (const card of cards) {
-        const cardCount = score.card_count[card.id];
+        const cardCount = input.card_count[card.id];
         if (cardCount) {
             counts[card.category] = counts[card.category] ? counts[card.category] + cardCount : cardCount;
         }

@@ -3,7 +3,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import HomePage from "./page/HomePage";
 import UserPage from "./page/UserPage";
@@ -12,10 +12,9 @@ import type { User } from "./entity/user";
 import { loadCards } from "./utils/cards";
 import type { Category } from "./entity/category";
 import SortPage from "./page/SortPage";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import type { Scores } from "./entity/score";
-import { initScores } from "./utils/scores";
+import { calculateScores, initScores } from "./utils/scores";
 
 const theme = createTheme({
     palette: {
@@ -36,12 +35,18 @@ function App() {
     const cards = useMemo(() => loadCards(), []);
     const [scores, setScores] = useState<Scores>(initScores(users));
 
+    useEffect(() => {
+        setScores(calculateScores(scores, cards));
+    }, [scores]);
+
     return (
         <>
             <ThemeProvider theme={theme}>
                 <section id="center">
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
-                    {page == "user" && <UserPage users={users} setPage={setPage} setUser={setUser}></UserPage>}
+                    {page == "user" && (
+                        <UserPage users={users} scores={scores} setPage={setPage} setUser={setUser}></UserPage>
+                    )}
                     {page == "category" && (
                         <CategoryPage
                             setPage={setPage}

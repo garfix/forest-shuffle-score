@@ -41,7 +41,12 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
     const next = () => {
         if (nextCategory) {
             setCategory(nextCategory);
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
+    };
+
+    const done = () => {
+        setPage("category");
     };
 
     const categoryCards: Card[] = useMemo(() => getCategoryCards(cards, category), [category]);
@@ -49,19 +54,23 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
     return (
         <>
             <div>
-                <Link onClick={() => setPage("user")}>Start</Link> /
-                <Link onClick={() => setPage("category")}>{user.name}</Link> / <span>{category.name}</span>
+                <Link onClick={() => setPage("user")}>Start</Link> &nbsp;/&nbsp;
+                <Link onClick={() => setPage("category")}>{user.name}</Link> &nbsp;/&nbsp; <span>{category.name}</span>
             </div>
             <div className={styles.cards}>
                 {categoryCards.map((card) => (
                     <div className={styles.card} key={card.id}>
                         <div className={styles.name}>{card.name}</div>
                         <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
-                        <Chip label={scores[user.name].cardScores[card.id]} color="success"></Chip>
+                        <Chip
+                            className={styles.chip}
+                            label={scores[user.name].cardScores[card.id]}
+                            color="success"
+                        ></Chip>
                     </div>
                 ))}
             </div>
-            {nextCategory && <Link onClick={next}>Volgende</Link>}
+            {nextCategory ? <Link onClick={next}>Volgende</Link> : <Link onClick={done}>Einde, naar overzicht</Link>}
         </>
     );
 }

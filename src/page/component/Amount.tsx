@@ -19,7 +19,7 @@ export default function Amount({ value, setValue }: Props) {
             <Button variant="contained" onClick={dec} className={styles.button}>
                 -1
             </Button>
-            <Chip label={value} color="warning" />
+            <Chip className={styles.chip} label={value} color="warning" />
             <Button variant="contained" onClick={inc} className={styles.button}>
                 +1
             </Button>

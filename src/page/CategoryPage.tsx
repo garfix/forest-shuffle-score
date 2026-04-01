@@ -31,7 +31,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
     return (
         <>
             <div>
-                <Link onClick={() => setPage("user")}>Start</Link> / <span>{user.name}</span>
+                <Link onClick={() => setPage("user")}>Start</Link> &nbsp;/&nbsp; <span>{user.name}</span>
             </div>
             <div className={styles.categories}>
                 <div></div>
@@ -40,9 +40,13 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                 <div></div>
                 {categories.map((category) => (
                     <React.Fragment key={category.name}>
-                        <div>{category.name}</div>
-                        <Chip label={counts[category.name]} color="info"></Chip>
-                        <Chip label={scores[user.name].categoryScores[category.name]} color="success"></Chip>
+                        <div className={styles.label}>{category.name}</div>
+                        <Chip className={styles.chip} label={counts[category.name]} color="info"></Chip>
+                        <Chip
+                            className={styles.chip}
+                            label={scores[user.name].categoryScores[category.name]}
+                            color="success"
+                        ></Chip>
                         <Button onClick={() => select(category)}>Bewerk</Button>
                     </React.Fragment>
                 ))}

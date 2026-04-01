@@ -1,10 +1,18 @@
 .users {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     gap: 8px;
+    justify-items: center;
 }
 
 .button {
     white-space: nowrap;
+}
+
+.label {
+    justify-self: left;
+}
+
+.chip {
+    width: 40px;
 }

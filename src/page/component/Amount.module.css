@@ -6,3 +6,7 @@
 .button {
     min-width: 30px !important;
 }
+
+.chip {
+    width: 40px;
+}

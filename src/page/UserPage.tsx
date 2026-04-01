@@ -33,11 +33,11 @@ export default function UserPage({ users, setUser, scores, setPage, inputs }: Pr
                 {users.map((user) => (
                     <React.Fragment key={user.name}>
                         <div>{user.name}</div>
-                        <Chip label={counts[user.name]} />
+                        <Chip label={counts[user.name]} color="info" />
                         <Chip color="success" label={scores[user.name].total} />
-                        <div>
-                            <Button onClick={() => select(user)}>Bewerk &gt;</Button>
-                        </div>
+                        <Button className={styles.button} onClick={() => select(user)}>
+                            Bewerk
+                        </Button>
                     </React.Fragment>
                 ))}
             </div>

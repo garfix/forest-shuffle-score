@@ -3,7 +3,7 @@ import type { User } from "../entity/user";
 import Button from "@mui/material/Button";
 import { type Category } from "../entity/category";
 import React from "react";
-import { Breadcrumbs, Chip } from "@mui/material";
+import { Chip } from "@mui/material";
 import Link from "./component/Link";
 import { getCountsByCategory } from "../utils/cards";
 import type { Card } from "../entity/card";
@@ -30,10 +30,9 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
 
     return (
         <>
-            <Breadcrumbs>
-                <Link onClick={() => setPage("user")}>Start</Link>
-                <div>{user.name}</div>
-            </Breadcrumbs>
+            <div>
+                <Link onClick={() => setPage("user")}>Start</Link> / <span>{user.name}</span>
+            </div>
             <div className={styles.categories}>
                 <div></div>
                 <div>Kaarten</div>
@@ -42,11 +41,9 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                 {categories.map((category) => (
                     <React.Fragment key={category.name}>
                         <div>{category.name}</div>
-                        <Chip label={counts[category.name]}></Chip>
+                        <Chip label={counts[category.name]} color="info"></Chip>
                         <Chip label={scores[user.name].categoryScores[category.name]} color="success"></Chip>
-                        <div>
-                            <Button onClick={() => select(category)}>Bewerk &gt;</Button>
-                        </div>
+                        <Button onClick={() => select(category)}>Bewerk</Button>
                     </React.Fragment>
                 ))}
             </div>

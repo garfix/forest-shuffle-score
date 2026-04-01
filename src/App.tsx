@@ -75,6 +75,7 @@ function App() {
                             cards={cards}
                             inputs={inputs}
                             setUserInput={setInputs}
+                            scores={scores}
                         ></SortPage>
                     )}
                 </section>

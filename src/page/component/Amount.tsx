@@ -16,11 +16,11 @@ export default function Amount({ value, setValue }: Props) {
 
     return (
         <div className={styles.buttons}>
-            <Chip label={value} />
-            <Button variant="contained" onClick={dec}>
+            <Button variant="contained" onClick={dec} className={styles.button}>
                 -1
             </Button>
-            <Button variant="contained" onClick={inc}>
+            <Chip label={value} color="warning" />
+            <Button variant="contained" onClick={inc} className={styles.button}>
                 +1
             </Button>
         </div>

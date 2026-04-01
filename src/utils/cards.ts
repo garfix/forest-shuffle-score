@@ -2,7 +2,6 @@ import type { Card } from "../entity/card";
 import csv from "../assets/Forest shuffle features - Sheet1.csv?raw";
 import { parseCSV } from "./parseCsv";
 import type { Category } from "../entity/category";
-import type { Score } from "../entity/score";
 import type { Input, Inputs } from "../entity/input";
 
 export function loadCards(): Card[] {

@@ -5,12 +5,15 @@
 }
 
 .card {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 40px;
     align-items: center;
     gap: 20px;
 }
 
 .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: left;
 }

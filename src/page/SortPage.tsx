@@ -24,14 +24,14 @@ type Props = {
 
 export default function SortPage({ setPage, setCategory, user, users, category, cards, inputs, setUserInput }: Props) {
     const getCount = (card: Card) => {
-        return inputs[user.name].card_count[card.id] ?? 0;
+        return inputs[user.name].cardCount[card.id] ?? 0;
     };
 
     const setCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
         newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].card_count = { ...inputs[user.name].card_count };
-        newInputs[user.name].card_count[card.id] = count;
+        newInputs[user.name].cardCount = { ...inputs[user.name].cardCount };
+        newInputs[user.name].cardCount[card.id] = count;
         setUserInput(newInputs);
     };
 

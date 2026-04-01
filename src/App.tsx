@@ -47,7 +47,13 @@ function App() {
                 <section id="center">
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
                     {page == "user" && (
-                        <UserPage users={users} scores={scores} setPage={setPage} setUser={setUser}></UserPage>
+                        <UserPage
+                            users={users}
+                            scores={scores}
+                            setPage={setPage}
+                            setUser={setUser}
+                            inputs={inputs}
+                        ></UserPage>
                     )}
                     {page == "category" && (
                         <CategoryPage
@@ -56,6 +62,7 @@ function App() {
                             user={user!}
                             cards={cards}
                             inputs={inputs}
+                            scores={scores}
                         ></CategoryPage>
                     )}
                     {page == "sort" && (

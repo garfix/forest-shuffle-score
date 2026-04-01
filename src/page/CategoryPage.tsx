@@ -9,6 +9,7 @@ import { getCountsByCategory } from "../utils/cards";
 import type { Card } from "../entity/card";
 import { categories } from "../utils/categories";
 import type { Inputs } from "../entity/input";
+import type { Scores } from "../entity/score";
 
 type Props = {
     setPage: (page: string) => void;
@@ -16,9 +17,10 @@ type Props = {
     user: User;
     cards: Card[];
     inputs: Inputs;
+    scores: Scores;
 };
 
-export default function CategoryPage({ setPage, setCategory, user, cards, inputs }: Props) {
+export default function CategoryPage({ setPage, setCategory, user, cards, inputs, scores }: Props) {
     function select(category: Category) {
         setCategory(category);
         setPage("sort");
@@ -33,10 +35,15 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                 <div>{user.name}</div>
             </Breadcrumbs>
             <div className={styles.categories}>
+                <div></div>
+                <div>Kaarten</div>
+                <div>Score</div>
+                <div></div>
                 {categories.map((category) => (
                     <React.Fragment key={category.name}>
                         <div>{category.name}</div>
                         <Chip label={counts[category.name]}></Chip>
+                        <Chip label={scores[user.name].categoryScores[category.name]} color="success"></Chip>
                         <div>
                             <Button onClick={() => select(category)}>Bewerk &gt;</Button>
                         </div>

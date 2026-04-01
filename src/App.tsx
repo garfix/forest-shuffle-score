@@ -43,7 +43,13 @@ function App() {
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
                     {page == "user" && <UserPage users={users} setPage={setPage} setUser={setUser}></UserPage>}
                     {page == "category" && (
-                        <CategoryPage setPage={setPage} setCategory={setCategory} user={user!}></CategoryPage>
+                        <CategoryPage
+                            setPage={setPage}
+                            setCategory={setCategory}
+                            user={user!}
+                            cards={cards}
+                            scores={scores}
+                        ></CategoryPage>
                     )}
                     {page == "sort" && (
                         <SortPage

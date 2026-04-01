@@ -3,11 +3,12 @@ import type { User } from "../entity/user";
 import { type Category } from "../entity/category";
 import { useMemo } from "react";
 import type { Card } from "../entity/card";
-import { getCardsByCategory } from "../utils/cards";
+import { getCategoryCards } from "../utils/cards";
 import Amount from "./component/Amount";
 import type { Scores } from "../entity/score";
 import Link from "./component/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { getNextCategory } from "../utils/categories";
 
 type Props = {
     setPage: (page: string) => void;
@@ -33,7 +34,15 @@ export default function SortPage({ setPage, setCategory, user, users, category, 
         setScores(newScores);
     };
 
-    const categoryCards: Card[] = useMemo(() => getCardsByCategory(cards, category), [category]);
+    const nextCategory = getNextCategory(category);
+
+    const next = () => {
+        if (nextCategory) {
+            setCategory(nextCategory);
+        }
+    };
+
+    const categoryCards: Card[] = useMemo(() => getCategoryCards(cards, category), [category]);
 
     return (
         <>
@@ -44,14 +53,15 @@ export default function SortPage({ setPage, setCategory, user, users, category, 
             </Breadcrumbs>
             <div className={styles.cards}>
                 {categoryCards.map((card) => (
-                    <div className={styles.card} key={card.name}>
-                        <div className={styles.name}>{card.name}</div>
+                    <div className={styles.card} key={card.id}>
+                        <div className={styles.name}></div>
                         <div>
                             <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
                         </div>
                     </div>
                 ))}
             </div>
+            {nextCategory && <Link onClick={next}>Volgende</Link>}
         </>
     );
 }

@@ -6,7 +6,7 @@ import type { Input, Inputs } from "../entity/input";
 export function initInputs(users: User[]) {
     const inputs: Inputs = {};
     for (const user of users) {
-        inputs[user.name] = { cardCount: {} };
+        inputs[user.name] = { cardCount: {}, cardSubCount: {} };
     }
     return inputs;
 }
@@ -29,12 +29,13 @@ export function calculateScores(inputs: Inputs, cards: Card[]) {
 }
 
 const scoreFuncs: Record<string, (string | number)[]> = {
-    Paardenkastanje: ["count^2-max", 7],
+    Paardenkastanje: ["count^2-max-houtbij", 7],
     Berk: ["count-x", 1],
-    Beuk: ["count-x-min", 5, 4],
-    Linde: ["count-x-users"],
+    Beuk: ["count-x-min-houtbij", 5, 4],
+    Linde: ["count-x-users-houtbij"],
     Douglasspar: ["count-x", 5],
     Eik: ["count-x-8trees", 10],
+    Zilverspar: ["cards-around"],
 };
 
 function calculateTotal(
@@ -64,16 +65,22 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         const predicate = scoreFunc[0];
         if (predicate == "count-x") {
             score = (scoreFunc[1] as number) * count;
-        } else if (predicate == "count-x-min") {
-            if (typeof scoreFunc[2] == "number" && count >= scoreFunc[2]) {
-                score = (scoreFunc[1] as number) * count;
+        } else if (predicate == "count-x-min-houtbij") {
+            const houtbij = input.cardSubCount[card.id] ?? 0;
+            const totalCount = count + houtbij;
+            if (typeof scoreFunc[2] == "number" && totalCount >= scoreFunc[2]) {
+                score = (scoreFunc[1] as number) * totalCount;
             }
-        } else if (predicate == "count^2-max") {
-            const c = Math.min(count, Number(scoreFunc[1]));
+        } else if (predicate == "count^2-max-houtbij") {
+            const houtbij = input.cardSubCount[card.id] ?? 0;
+            const totalCount = count + houtbij;
+            const c = Math.min(totalCount, Number(scoreFunc[1]));
             score = c * c;
-        } else if (predicate == "count-x-users") {
-            const m = getMaxCardCount(card, inputs);
-            score = (count == m ? 3 : 1) * count;
+        } else if (predicate == "count-x-users-houtbij") {
+            const houtbij = input.cardSubCount[card.id] ?? 0;
+            const totalCount = count + houtbij;
+            const m = getMaxCardCount(card, inputs, true);
+            score = (totalCount == m ? 3 : 1) * totalCount;
         } else if (predicate == "count-x-8trees") {
             const m = getCountDifferentTrees(input, cards);
             if (typeof scoreFunc[1] == "number" && m >= 8) {
@@ -84,11 +91,15 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
     return score;
 }
 
-function getMaxCardCount(card: Card, inputs: Inputs) {
+function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
     let max = 0;
     for (const [_, input] of Object.entries(inputs)) {
         if (input.cardCount[card.id]) {
-            max = Math.max(max, input.cardCount[card.id]);
+            let totalCount = input.cardCount[card.id];
+            if (houtbij && !!input.cardSubCount[card.id]) {
+                totalCount += input.cardSubCount[card.id];
+            }
+            max = Math.max(max, totalCount);
         }
     }
     return max;

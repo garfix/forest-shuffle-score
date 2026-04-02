@@ -54,7 +54,7 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
     const next = () => {
         if (nextCategory) {
             setCategory(nextCategory);
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo(0, 0);
         }
     };
 

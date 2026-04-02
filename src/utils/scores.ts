@@ -36,6 +36,13 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Douglasspar: ["count-x", 5],
     Eik: ["count-x-8trees", 10],
     Zilverspar: ["cards-around"],
+    Esdoorn: ["trees-x"],
+    "Europese lariks": ["count-x", 3],
+    Alpenden: ["sort-count-x", "Alpine", 1],
+    "O, dennenboom": ["cards-around"],
+    Moseik: ["sort-count-x", "Evenhoevig dier", 1],
+    Palmboom: ["sort-count-x", "Vogel", 1],
+    "Zachte berk": ["count-x", 1],
 };
 
 function calculateTotal(
@@ -86,6 +93,15 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             if (typeof scoreFunc[1] == "number" && m >= 8) {
                 score = scoreFunc[1] * count;
             }
+        } else if (predicate == "cards-around") {
+            const cardsAround = input.cardSubCount[card.id] ?? 0;
+            score = cardsAround * 2;
+        } else if (predicate == "trees-x") {
+            score = getSortCount(input, cards, "Boom") * count;
+        } else if (predicate == "sort-count-x") {
+            if (typeof scoreFunc[2] == "number") {
+                score = getSortCount(input, cards, scoreFunc[1] as string) * scoreFunc[2] * count;
+            }
         }
     }
     return score;
@@ -103,6 +119,18 @@ function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
         }
     }
     return max;
+}
+
+function getSortCount(input: Input, cards: Card[], sort: string) {
+    let count = 0;
+    for (const card of cards) {
+        if (card.sort.includes(sort)) {
+            if (input.cardCount[card.id] && input.cardCount[card.id] > 0) {
+                count += input.cardCount[card.id];
+            }
+        }
+    }
+    return count;
 }
 
 function getCountDifferentTrees(input: Input, cards: Card[]) {

@@ -8,5 +8,6 @@ export type Card = {
     score: string;
     condition: string;
     sub_question: string;
-    unique: string;
+    belongs_to: string;
+    canonical_name: string; // belongs_to ?? name
 };

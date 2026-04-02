@@ -22,7 +22,7 @@ export function initScores(users: User[]) {
 export function calculateScores(inputs: Inputs, cards: Card[]) {
     const newScores: Scores = {};
     for (const [userName, input] of Object.entries(inputs)) {
-        const [cardScores, categoryScores, newTotal] = calculateTotal(input, cards, inputs);
+        const [cardScores, categoryScores, newTotal] = calculateTotal(cards, input, inputs);
         newScores[userName] = { total: newTotal, cardScores: cardScores, categoryScores: categoryScores };
     }
     return newScores;
@@ -31,13 +31,15 @@ export function calculateScores(inputs: Inputs, cards: Card[]) {
 const scoreFuncs: Record<string, (string | number)[]> = {
     Paardenkastanje: ["count^2-max", 7],
     Berk: ["count-x", 1],
-    Beuk: ["count-x", 5],
-    Linde: ["count-x-1/3"],
+    Beuk: ["count-x-min", 5, 4],
+    Linde: ["count-x-users"],
+    Douglasspar: ["count-x", 5],
+    Eik: ["count-x-8trees", 10],
 };
 
 function calculateTotal(
-    input: Input,
     cards: Card[],
+    input: Input,
     inputs: Inputs,
 ): [Record<number, number>, Record<string, number>, number] {
     let total = 0;
@@ -46,7 +48,7 @@ function calculateTotal(
 
     for (const [cardId, count] of Object.entries(input.cardCount)) {
         const card = cards[Number(cardId)];
-        const score = calculateCardScore(card, count, inputs);
+        const score = calculateCardScore(count, card, cards, input, inputs);
         cardScores[Number(cardId)] = score;
         categoryScores[card.category] = categoryScores[card.category] ? categoryScores[card.category] + score : score;
         total += score;
@@ -55,20 +57,28 @@ function calculateTotal(
     return [cardScores, categoryScores, total];
 }
 
-function calculateCardScore(card: Card, count: number, inputs: Inputs) {
+function calculateCardScore(count: number, card: Card, cards: Card[], input: Input, inputs: Inputs) {
     let score = 0;
     const scoreFunc = scoreFuncs[card.name];
     if (scoreFunc) {
         const predicate = scoreFunc[0];
         if (predicate == "count-x") {
             score = (scoreFunc[1] as number) * count;
+        } else if (predicate == "count-x-min") {
+            if (typeof scoreFunc[2] == "number" && count >= scoreFunc[2]) {
+                score = (scoreFunc[1] as number) * count;
+            }
         } else if (predicate == "count^2-max") {
             const c = Math.min(count, Number(scoreFunc[1]));
             score = c * c;
-        } else if (predicate == "count-x-1/3") {
+        } else if (predicate == "count-x-users") {
             const m = getMaxCardCount(card, inputs);
-            const c = count == m ? 3 : 1;
-            score = c * count;
+            score = (count == m ? 3 : 1) * count;
+        } else if (predicate == "count-x-8trees") {
+            const m = getCountDifferentTrees(input, cards);
+            if (typeof scoreFunc[1] == "number" && m >= 8) {
+                score = scoreFunc[1] * count;
+            }
         }
     }
     return score;
@@ -82,4 +92,16 @@ function getMaxCardCount(card: Card, inputs: Inputs) {
         }
     }
     return max;
+}
+
+function getCountDifferentTrees(input: Input, cards: Card[]) {
+    const trees = new Set<string>();
+    for (const card of cards) {
+        if (card.sort.includes("Boom")) {
+            if (input.cardCount[card.id] && input.cardCount[card.id] > 0) {
+                trees.add(card.canonical_name);
+            }
+        }
+    }
+    return trees.size;
 }

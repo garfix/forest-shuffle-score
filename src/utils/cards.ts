@@ -23,7 +23,8 @@ export function loadCards(): Card[] {
             amount: parseInt(row["Hoeveel"]),
             condition: row["Voorwaarde"],
             sub_question: row["Subvraag"],
-            unique: row["Uniek"],
+            belongs_to: row["Valt onder"],
+            canonical_name: row["Valt onder"] ? row["Valt onder"] : row["Naam"],
         };
         cards.push(card);
         id++;

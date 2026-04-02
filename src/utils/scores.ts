@@ -29,6 +29,7 @@ export function calculateScores(inputs: Inputs, cards: Card[]) {
 }
 
 const scoreFuncs: Record<string, (string | number)[]> = {
+    // Bomen
     Paardenkastanje: ["count^2-max-houtbij", 7],
     Berk: ["count-x", 1],
     Beuk: ["count-x-min-houtbij", 5, 4],
@@ -43,6 +44,14 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Moseik: ["sort-count-x", "Evenhoevig dier", 1],
     Palmboom: ["sort-count-x", "Vogel", 1],
     "Zachte berk": ["count-x", 1],
+    // Boven
+    Bosuil: ["count-x", 5],
+    Goudvink: ["sort-count-x", "Insect", 2],
+    "Grote bonte specht": ["count-x", 10],
+    Havik: ["sort-count-x", "Vogel", 3],
+    Vink: ["count-x-op", "Beuk", 5],
+    "Vlaamse gaai": ["count-x", 3],
+    Ekster: ["count-x", 3],
 };
 
 function calculateTotal(
@@ -101,6 +110,12 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         } else if (predicate == "sort-count-x") {
             if (typeof scoreFunc[2] == "number") {
                 score = getSortCount(input, cards, scoreFunc[1] as string) * scoreFunc[2] * count;
+            }
+        } else if (predicate == "count-x-op") {
+            const cardsOp = input.cardSubCount[card.id] ?? 0;
+            const totalCount = Math.min(count, cardsOp);
+            if (typeof scoreFunc[2] == "number") {
+                score = scoreFunc[2] * totalCount;
             }
         }
     }

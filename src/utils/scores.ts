@@ -2,6 +2,7 @@ import type { Card } from "../entity/card";
 import type { Scores } from "../entity/score";
 import type { User } from "../entity/user";
 import type { Input, Inputs } from "../entity/input";
+import type { Game } from "../entity/game";
 
 export function initInputs(users: User[]) {
     const inputs: Inputs = {};
@@ -19,10 +20,10 @@ export function initScores(users: User[]) {
     return scores;
 }
 
-export function calculateScores(inputs: Inputs, cards: Card[]) {
+export function calculateScores(inputs: Inputs, cards: Card[], game: Game) {
     const newScores: Scores = {};
     for (const [userName, input] of Object.entries(inputs)) {
-        const [cardScores, categoryScores, newTotal] = calculateTotal(cards, input, inputs);
+        const [cardScores, categoryScores, newTotal] = calculateTotal(cards, input, inputs, game);
         newScores[userName] = { total: newTotal, cardScores: cardScores, categoryScores: categoryScores };
     }
     return newScores;
@@ -63,6 +64,7 @@ function calculateTotal(
     cards: Card[],
     input: Input,
     inputs: Inputs,
+    game: Game,
 ): [Record<number, number>, Record<string, number>, number] {
     let total = 0;
     const cardScores: Record<number, number> = {};
@@ -76,11 +78,29 @@ function calculateTotal(
         total += score;
     }
 
-    const grotScore = input.grotCount;
+    const grotScore = calculateGrotScore(input, game, cards);
     categoryScores["Grot"] = grotScore;
     total += grotScore;
 
     return [cardScores, categoryScores, total];
+}
+
+function calculateGrotScore(input: Input, game: Game, cards: Card[]) {
+    if (game.spelVarianten.includes("Exploration")) {
+        if (input.grotCard == "Spaargrot") {
+            return input.grotCount * 2;
+        } else if (input.grotCard == "Vleermuizengrot") {
+            return input.grotCount + 3 * getSortCount(input, cards, "Vleermuis");
+        } else if (input.grotCard == "Verlaten grot") {
+            if (input.grotCount == 0) {
+                return 5;
+            } else {
+                return input.grotCount;
+            }
+        }
+    }
+
+    return input.grotCount;
 }
 
 function calculateCardScore(count: number, card: Card, cards: Card[], input: Input, inputs: Inputs) {

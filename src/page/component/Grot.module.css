@@ -4,3 +4,10 @@
     align-items: center;
     gap: 20px;
 }
+
+.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}

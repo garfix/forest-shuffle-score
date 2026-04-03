@@ -13,6 +13,7 @@ import Chip from "@mui/material/Chip";
 import React from "react";
 import { FormControl, MenuItem, NativeSelect, Select } from "@mui/material";
 import Grot from "./component/Grot";
+import type { Game } from "../entity/game";
 
 type Props = {
     setPage: (page: string) => void;
@@ -24,9 +25,20 @@ type Props = {
     inputs: Inputs;
     scores: Scores;
     setUserInput: (inputs: Inputs) => void;
+    game: Game;
 };
 
-export default function SortPage({ setPage, setCategory, user, scores, category, cards, inputs, setUserInput }: Props) {
+export default function SortPage({
+    setPage,
+    setCategory,
+    user,
+    scores,
+    category,
+    cards,
+    inputs,
+    setUserInput,
+    game,
+}: Props) {
     const getCount = (card: Card) => {
         return inputs[user.name].cardCount[card.id] ?? 0;
     };
@@ -74,7 +86,7 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
             </div>
             <div className={styles.cards}>
                 {category.name == "Grot" ? (
-                    <Grot user={user} inputs={inputs} setUserInput={setUserInput} scores={scores} />
+                    <Grot user={user} inputs={inputs} setUserInput={setUserInput} scores={scores} game={game} />
                 ) : (
                     categoryCards.map((card) => (
                         <React.Fragment key={card.id}>

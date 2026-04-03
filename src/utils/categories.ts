@@ -16,6 +16,9 @@ export const categories = [
     {
         name: "Naast",
     },
+    {
+        name: "Grot",
+    },
 ];
 
 export function getNextCategory(category: Category) {

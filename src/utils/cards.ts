@@ -45,6 +45,9 @@ export function getCountsByCategory(cards: Card[], input: Input) {
             counts[card.category] = counts[card.category] ? counts[card.category] + cardCount : cardCount;
         }
     }
+
+    counts["Grot"] = input.grotCount;
+
     return counts;
 }
 

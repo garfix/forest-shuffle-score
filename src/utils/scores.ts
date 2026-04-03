@@ -6,7 +6,7 @@ import type { Input, Inputs } from "../entity/input";
 export function initInputs(users: User[]) {
     const inputs: Inputs = {};
     for (const user of users) {
-        inputs[user.name] = { cardCount: {}, cardSubCount: {} };
+        inputs[user.name] = { cardCount: {}, cardSubCount: {}, grotCount: 0 };
     }
     return inputs;
 }
@@ -49,9 +49,14 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Goudvink: ["sort-count-x", "Insect", 2],
     "Grote bonte specht": ["count-x", 10],
     Havik: ["sort-count-x", "Vogel", 3],
-    Vink: ["count-x-op", "Beuk", 5],
+    Vink: ["sub-x", 5],
     "Vlaamse gaai": ["count-x", 3],
     Ekster: ["count-x", 3],
+    Kerkuil: ["sort-count-x", "Vleermuis", 3],
+    Nachtegaal: ["sub-x", 5],
+    "Rode kardinaal": ["count-x", 5],
+    Roodborstje: ["sort-count-x", "Insect", 1],
+    Lammergier: ["grot-x", 1],
 };
 
 function calculateTotal(
@@ -70,6 +75,10 @@ function calculateTotal(
         categoryScores[card.category] = categoryScores[card.category] ? categoryScores[card.category] + score : score;
         total += score;
     }
+
+    const grotScore = input.grotCount;
+    categoryScores["Grot"] = grotScore;
+    total += grotScore;
 
     return [cardScores, categoryScores, total];
 }
@@ -111,12 +120,15 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             if (typeof scoreFunc[2] == "number") {
                 score = getSortCount(input, cards, scoreFunc[1] as string) * scoreFunc[2] * count;
             }
-        } else if (predicate == "count-x-op") {
+        } else if (predicate == "sub-x") {
             const cardsOp = input.cardSubCount[card.id] ?? 0;
             const totalCount = Math.min(count, cardsOp);
-            if (typeof scoreFunc[2] == "number") {
-                score = scoreFunc[2] * totalCount;
+            if (typeof scoreFunc[1] == "number") {
+                score = scoreFunc[1] * totalCount;
             }
+        } else if (predicate == "grot-x") {
+            const m = input.grotCount;
+            score = (scoreFunc[1] as number) * m * count;
         }
     }
     return score;

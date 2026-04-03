@@ -33,6 +33,10 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
         return inputs[user.name].cardSubCount[card.id] ?? 0;
     };
 
+    const getGrotCount = () => {
+        return inputs[user.name].grotCount ?? 0;
+    };
+
     const setCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
         newInputs[user.name] = { ...inputs[user.name] };
@@ -46,6 +50,13 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
         newInputs[user.name] = { ...inputs[user.name] };
         newInputs[user.name].cardSubCount = { ...inputs[user.name].cardSubCount };
         newInputs[user.name].cardSubCount[card.id] = count;
+        setUserInput(newInputs);
+    };
+
+    const setGrotCount = (count: number) => {
+        const newInputs: Inputs = { ...inputs };
+        newInputs[user.name] = { ...inputs[user.name] };
+        newInputs[user.name].grotCount = count;
         setUserInput(newInputs);
     };
 
@@ -71,33 +82,47 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
                 <Link onClick={() => setPage("category")}>{user.name}</Link> &nbsp;/&nbsp; <span>{category.name}</span>
             </div>
             <div className={styles.cards}>
-                {categoryCards.map((card) => (
-                    <React.Fragment key={card.id}>
+                {category.name == "Grot" ? (
+                    <>
                         <div className={styles.card}>
-                            <div className={styles.name}>{card.name}</div>
-                            <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
+                            <div className={styles.name}>Kaarten in de grot</div>
+                            <Amount value={getGrotCount()} setValue={(count) => setGrotCount(count)} />
                             <Chip
                                 className={styles.chip}
-                                label={scores[user.name].cardScores[card.id]}
+                                label={scores[user.name].categoryScores["Grot"]}
                                 color="success"
                             ></Chip>
                         </div>
-                        {card.sub_question && !!getCount(card) && (
+                    </>
+                ) : (
+                    categoryCards.map((card) => (
+                        <React.Fragment key={card.id}>
                             <div className={styles.card}>
-                                <div className={styles.name}>
-                                    <b>&nbsp;&nbsp;&gt; {card.sub_question}</b>
-                                </div>
-                                <Amount
-                                    buttonColor="info"
-                                    valueColor="error"
-                                    value={getSubCount(card)}
-                                    setValue={(count) => setSubCount(card, count)}
-                                />
-                                <div></div>
+                                <div className={styles.name}>{card.name}</div>
+                                <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
+                                <Chip
+                                    className={styles.chip}
+                                    label={scores[user.name].cardScores[card.id]}
+                                    color="success"
+                                ></Chip>
                             </div>
-                        )}
-                    </React.Fragment>
-                ))}
+                            {card.sub_question && !!getCount(card) && (
+                                <div className={styles.card}>
+                                    <div className={styles.name}>
+                                        <b>&nbsp;&nbsp;&gt; {card.sub_question}</b>
+                                    </div>
+                                    <Amount
+                                        buttonColor="info"
+                                        valueColor="error"
+                                        value={getSubCount(card)}
+                                        setValue={(count) => setSubCount(card, count)}
+                                    />
+                                    <div></div>
+                                </div>
+                            )}
+                        </React.Fragment>
+                    ))
+                )}
             </div>
             {nextCategory ? <Link onClick={next}>Volgende</Link> : <Link onClick={done}>Einde, naar overzicht</Link>}
         </>

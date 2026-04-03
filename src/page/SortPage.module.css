@@ -11,6 +11,13 @@
     gap: 20px;
 }
 
+.grot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
 .name {
     overflow: hidden;
     text-overflow: ellipsis;

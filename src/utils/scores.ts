@@ -6,7 +6,7 @@ import type { Input, Inputs } from "../entity/input";
 export function initInputs(users: User[]) {
     const inputs: Inputs = {};
     for (const user of users) {
-        inputs[user.name] = { cardCount: {}, cardSubCount: {}, grotCount: 0 };
+        inputs[user.name] = { cardCount: {}, cardSubCount: {}, grotCount: 0, grotCard: "" };
     }
     return inputs;
 }

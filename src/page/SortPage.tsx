@@ -11,6 +11,7 @@ import { getNextCategory } from "../utils/categories";
 import type { Inputs } from "../entity/input";
 import Chip from "@mui/material/Chip";
 import React from "react";
+import { NativeSelect } from "@mui/material";
 
 type Props = {
     setPage: (page: string) => void;
@@ -37,6 +38,10 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
         return inputs[user.name].grotCount ?? 0;
     };
 
+    const getGrotCard = () => {
+        return inputs[user.name].grotCard;
+    };
+
     const setCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
         newInputs[user.name] = { ...inputs[user.name] };
@@ -57,6 +62,13 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
         const newInputs: Inputs = { ...inputs };
         newInputs[user.name] = { ...inputs[user.name] };
         newInputs[user.name].grotCount = count;
+        setUserInput(newInputs);
+    };
+
+    const setGrotCard = (cardName: string) => {
+        const newInputs: Inputs = { ...inputs };
+        newInputs[user.name] = { ...inputs[user.name] };
+        newInputs[user.name].grotCard = cardName;
         setUserInput(newInputs);
     };
 
@@ -84,6 +96,19 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
             <div className={styles.cards}>
                 {category.name == "Grot" ? (
                     <>
+                        <div className={styles.grot}>
+                            <div className={styles.name}>Grotkaart</div>
+                            <NativeSelect
+                                defaultValue={getGrotCard()}
+                                onChange={(event) => setGrotCard(event.target.value)}
+                            >
+                                <option value="Smokkelgrot">Smokkelgrot</option>
+                                <option value="Opslaggrot">Opslaggrot</option>
+                                <option value="Verlaten grot">Verlaten grot</option>
+                                <option value="Vleermuizengrot">Vleermuizengrot</option>
+                                <option value="Spaargrot">Spaargrot</option>
+                            </NativeSelect>
+                        </div>
                         <div className={styles.card}>
                             <div className={styles.name}>Kaarten in de grot</div>
                             <Amount value={getGrotCount()} setValue={(count) => setGrotCount(count)} />

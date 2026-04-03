@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import type { Scores } from "./entity/score";
 import { calculateScores, initScores, initInputs } from "./utils/scores";
 import type { Inputs } from "./entity/input";
+import { defaultUsers } from "./utils/users";
 
 const theme = createTheme({
     palette: {
@@ -29,7 +30,7 @@ const theme = createTheme({
 });
 
 function App() {
-    const [users] = useState<User[]>([{ name: "Patrick" }, { name: "Katja" }]);
+    const [users] = useState<User[]>(defaultUsers);
     const [page, setPage] = useState("home");
     const [user, setUser] = useState<User>(users[0]);
     const [category, setCategory] = useState<Category | null>(null);

@@ -11,7 +11,8 @@ import { getNextCategory } from "../utils/categories";
 import type { Inputs } from "../entity/input";
 import Chip from "@mui/material/Chip";
 import React from "react";
-import { NativeSelect } from "@mui/material";
+import { FormControl, MenuItem, NativeSelect, Select } from "@mui/material";
+import Grot from "./component/Grot";
 
 type Props = {
     setPage: (page: string) => void;
@@ -34,14 +35,6 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
         return inputs[user.name].cardSubCount[card.id] ?? 0;
     };
 
-    const getGrotCount = () => {
-        return inputs[user.name].grotCount ?? 0;
-    };
-
-    const getGrotCard = () => {
-        return inputs[user.name].grotCard;
-    };
-
     const setCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
         newInputs[user.name] = { ...inputs[user.name] };
@@ -55,20 +48,6 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
         newInputs[user.name] = { ...inputs[user.name] };
         newInputs[user.name].cardSubCount = { ...inputs[user.name].cardSubCount };
         newInputs[user.name].cardSubCount[card.id] = count;
-        setUserInput(newInputs);
-    };
-
-    const setGrotCount = (count: number) => {
-        const newInputs: Inputs = { ...inputs };
-        newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].grotCount = count;
-        setUserInput(newInputs);
-    };
-
-    const setGrotCard = (cardName: string) => {
-        const newInputs: Inputs = { ...inputs };
-        newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].grotCard = cardName;
         setUserInput(newInputs);
     };
 
@@ -95,30 +74,7 @@ export default function SortPage({ setPage, setCategory, user, scores, category,
             </div>
             <div className={styles.cards}>
                 {category.name == "Grot" ? (
-                    <>
-                        <div className={styles.grot}>
-                            <div className={styles.name}>Grotkaart</div>
-                            <NativeSelect
-                                defaultValue={getGrotCard()}
-                                onChange={(event) => setGrotCard(event.target.value)}
-                            >
-                                <option value="Smokkelgrot">Smokkelgrot</option>
-                                <option value="Opslaggrot">Opslaggrot</option>
-                                <option value="Verlaten grot">Verlaten grot</option>
-                                <option value="Vleermuizengrot">Vleermuizengrot</option>
-                                <option value="Spaargrot">Spaargrot</option>
-                            </NativeSelect>
-                        </div>
-                        <div className={styles.card}>
-                            <div className={styles.name}>Kaarten in de grot</div>
-                            <Amount value={getGrotCount()} setValue={(count) => setGrotCount(count)} />
-                            <Chip
-                                className={styles.chip}
-                                label={scores[user.name].categoryScores["Grot"]}
-                                color="success"
-                            ></Chip>
-                        </div>
-                    </>
+                    <Grot user={user} inputs={inputs} setUserInput={setUserInput} scores={scores} />
                 ) : (
                     categoryCards.map((card) => (
                         <React.Fragment key={card.id}>

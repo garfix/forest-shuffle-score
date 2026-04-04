@@ -96,7 +96,7 @@ export default function SortPage({
                     categoryCards.map((card) => (
                         <React.Fragment key={card.id}>
                             <div className={styles.card}>
-                                <div className={styles.name}>{card.name}</div>
+                                <div className={styles.name}>{card.display_name}</div>
                                 <Amount
                                     value={getCount(card)}
                                     setValue={(count) => setCount(card, count)}

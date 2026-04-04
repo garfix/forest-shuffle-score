@@ -4,6 +4,7 @@ export type Card = {
     category: string;
     sort: string[];
     name: string;
+    display_name: string;
     amount: number;
     score: string;
     condition: string;

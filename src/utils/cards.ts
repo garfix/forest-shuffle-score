@@ -16,22 +16,33 @@ export function loadCards(): Card[] {
         if (row["Spelvariant"] == "") {
             continue;
         }
-        if (byName[row["Naam"]]) {
-            const card = byName[row["Naam"]];
-            card.amount += parseInt(row["Hoeveel"]);
+
+        const variant = row["Variant van"];
+        const canonicalName = variant ? variant : row["Naam"];
+        const treatAsSame = row["Als 1 kaart behandelen"] == "ja";
+        const amount = parseInt(row["Hoeveel"]);
+        const displayName = row["Naam"];
+
+        if (byName[canonicalName] && treatAsSame) {
+            const card = byName[canonicalName];
+            card.amount += amount;
+            if (card.display_name != displayName) {
+                card.display_name += " / " + displayName;
+            }
         } else {
             const card: Card = {
                 id,
                 name: row["Naam"],
+                display_name: displayName,
                 score: row["Score"],
                 game_variant: row["Spelvariant"],
                 category: row["Categorie"],
                 sort: row["Soort"].split(",").map((s) => s.trim()),
-                amount: parseInt(row["Hoeveel"]),
+                amount: amount,
                 condition: row["Voorwaarde"],
                 sub_question: row["Subvraag"],
-                belongs_to: row["Valt onder"],
-                canonical_name: row["Valt onder"] ? row["Valt onder"] : row["Naam"],
+                belongs_to: variant,
+                canonical_name: canonicalName,
                 sub_question_max: row["Naam"] == "Bosmier" ? "unlimited" : "card",
             };
             byName[card.name] = card;

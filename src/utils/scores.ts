@@ -84,7 +84,7 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Gentiaan: ["sort-count-x", "Vlinder", 3],
     Bostulp: ["count-x", 3],
     Wateraardbei: ["wateraardbei-telling"],
-    Boomkikker: ["other-card-count-x", "Mug", 5],
+    Boomkikker: ["canonical-name-card-count-x", "Mug", 5],
     "Gewone pad": ["sub-x", 5],
     Moerasschildpad: ["count-x", 5],
     Vuursalamander: ["vuursalamander-telling"],
@@ -93,6 +93,9 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     "Vliegend hert": ["sort-count-x", "Pootdier", 1],
     Vuurvliegjes: ["vuurvliegjes-telling"],
     Egel: ["sort-count-x", "Vlinder", 2],
+    // Naast
+    "Europese das": ["count-x", 2],
+    "Europese haas": ["count^2", 1],
 };
 
 function calculateTotal(
@@ -160,6 +163,8 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             if (totalCount >= Number(scoreFunc[2])) {
                 score = Number(scoreFunc[1]) * totalCount;
             }
+        } else if (predicate == "count^2") {
+            score = count * count;
         } else if (predicate == "count^2-max-houtbij") {
             const houtbij = input.cardSubCount[card.id] ?? 0;
             const totalCount = count + houtbij;
@@ -171,7 +176,7 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             const m = getMaxCardCount(card, inputs, true);
             score = (totalCount == m ? 3 : 1) * totalCount;
         } else if (predicate == "count-x-8trees") {
-            const m = getDifferentSortCount(input, cards, "Boom");
+            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Boom");
             if (m >= 8) {
                 score = Number(scoreFunc[1]) * count;
             }
@@ -180,12 +185,15 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             score = cardsAround * 2;
         } else if (predicate == "trees-x") {
             score = getSortCount(input, cards, "Boom") * count;
-        } else if (predicate == "other-card-count-x") {
-            score = getCardCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
+        } else if (predicate == "canonical-name-card-count") {
+            score = getCanonicalNameCardCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "sort-count-x") {
             score = getSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "unique-sort-count-x") {
-            score = getDifferentSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
+            score =
+                getDifferentCanonicalNamesOfSortCount(input, cards, scoreFunc[1] as string) *
+                Number(scoreFunc[2]) *
+                count;
         } else if (predicate == "2-sort-count-x") {
             score =
                 (getSortCount(input, cards, scoreFunc[1] as string) +
@@ -206,7 +214,7 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
                 }
             }
         } else if (predicate == "vingerhoedskruid-telling") {
-            const m = getDifferentSortCount(input, cards, "Plant");
+            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Plant");
             score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
         } else if (predicate == "wateraardbei-telling") {
             const m = getSortCount(input, cards, "Boom");
@@ -214,7 +222,7 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
                 getIndexedScore(m, { 0: 15, 1: 15, 2: 15, 3: 15, 4: 15, 5: 15, 6: 10, 7: 10, 8: 10, 9: 10, 11: 3 }) *
                 count;
         } else if (predicate == "vuursalamander-telling") {
-            const m = getCardCount(input, cards, "Vuursalamander");
+            const m = getCanonicalNameCardCount(input, cards, "Vuursalamander");
             score = getIndexedScore(m, { 0: 0, 1: 5, 2: 15, 3: 25 });
         } else if (predicate == "vuurvliegjes-telling") {
             score = getIndexedScore(count, { 0: 0, 1: 0, 2: 10, 3: 15, 4: 20 });
@@ -243,11 +251,11 @@ function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
     return max;
 }
 
-function getCardCount(input: Input, cards: Card[], cardName: string) {
+function getCanonicalNameCardCount(input: Input, cards: Card[], cardName: string) {
     let count = 0;
     // NB: multiple cards can have the same name
     for (const card of cards) {
-        if (card.name === cardName) {
+        if (card.canonical_name === cardName) {
             if (input.cardCount[card.id] && input.cardCount[card.id] > 0) {
                 count += input.cardCount[card.id];
             }
@@ -268,7 +276,7 @@ function getSortCount(input: Input, cards: Card[], sort: string) {
     return count;
 }
 
-function getDifferentSortCount(input: Input, cards: Card[], sort: string) {
+function getDifferentCanonicalNamesOfSortCount(input: Input, cards: Card[], sort: string) {
     const items = new Set<string>();
     for (const card of cards) {
         if (card.sort.includes(sort)) {
@@ -282,9 +290,9 @@ function getDifferentSortCount(input: Input, cards: Card[], sort: string) {
 
 function getVlinderStats(input: Input, cards: Card[]): VlinderStats {
     const cardCounts: Record<number, number> = {};
-    const kleineAppoloVlinder = getCardScoreByName(cards, "Kleine Apollovlinder", input);
-    const landKaartje = getCardScoreByName(cards, "Landkaartje", input);
-    const citroenvlinder = getCardScoreByName(cards, "Citroenvlinder", input);
+    const kleineAppoloVlinder = getCardScoreByCanonicalName(cards, "Kleine Apollovlinder", input);
+    const landKaartje = getCardScoreByCanonicalName(cards, "Landkaartje", input);
+    const citroenvlinder = getCardScoreByCanonicalName(cards, "Citroenvlinder", input);
 
     for (const card of cards) {
         if (card.sort.includes("Vlinder")) {
@@ -326,8 +334,8 @@ function getVlinderStats(input: Input, cards: Card[]): VlinderStats {
     };
 }
 
-function getCardScoreByName(cards: Card[], cardName: string, input: Input) {
-    const card = getCardByName(cardName, cards);
+function getCardScoreByCanonicalName(cards: Card[], cardName: string, input: Input) {
+    const card = getCardByCanonicalName(cardName, cards);
     if (card) {
         return getCardScore(card.id, input);
     } else {
@@ -343,9 +351,9 @@ function getCardScore(cardId: number, input: Input) {
     }
 }
 
-function getCardByName(cardName: string, cards: Card[]) {
+function getCardByCanonicalName(cardName: string, cards: Card[]) {
     for (const card of cards) {
-        if (card.name == cardName) {
+        if (card.canonical_name == cardName) {
             return card;
         }
     }

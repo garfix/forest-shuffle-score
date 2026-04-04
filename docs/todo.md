@@ -1,1 +1,2 @@
-- Het amount bij een kaartje mag niet hoger zijn dan het totaal van dat kaartje
+- Icoontje voor snelkoppeling
+- opslaan en ophalen local storage

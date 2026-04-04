@@ -110,9 +110,7 @@ export default function SortPage({
                             </div>
                             {card.sub_question && !!getCount(card) && (
                                 <div className={styles.card}>
-                                    <div className={styles.name}>
-                                        <b>&nbsp;&nbsp;&gt; {card.sub_question}</b>
-                                    </div>
+                                    <div className={styles.sub_question}>{card.sub_question}</div>
                                     <Amount
                                         buttonColor="info"
                                         valueColor="error"

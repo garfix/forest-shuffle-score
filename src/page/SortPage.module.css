@@ -18,6 +18,12 @@
     text-align: left;
 }
 
+.sub_question {
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+}
+
 .chip {
     width: 40px;
 }

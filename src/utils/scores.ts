@@ -90,6 +90,9 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Vuursalamander: ["vuursalamander-telling"],
     Alpenwatersalamander: ["sort-count-x", "Insect", 2],
     Bosmier: ["sub-x", 2],
+    "Vliegend hert": ["sort-count-x", "Pootdier", 1],
+    Vuurvliegjes: ["vuurvliegjes-telling"],
+    Egel: ["sort-count-x", "Vlinder", 2],
 };
 
 function calculateTotal(
@@ -213,6 +216,8 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         } else if (predicate == "vuursalamander-telling") {
             const m = getCardCount(input, cards, "Vuursalamander");
             score = getIndexedScore(m, { 0: 0, 1: 5, 2: 15, 3: 25 });
+        } else if (predicate == "vuurvliegjes-telling") {
+            score = getIndexedScore(count, { 0: 0, 1: 0, 2: 10, 3: 15, 4: 20 });
         }
     }
     return score;

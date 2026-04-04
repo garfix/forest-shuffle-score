@@ -70,6 +70,8 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Landkaartje: ["vlinder-telling"],
     "Kleine Apollovlinder": ["vlinder-telling"],
     Citroenvlinder: ["vlinder-telling"],
+    "Rode eekhoorn": ["sub-x", 5],
+    Maretak: ["sort-count-x", "Plant", 1],
 };
 
 function calculateTotal(
@@ -305,7 +307,6 @@ export function getScoreLabel(score: number) {
         return "";
     }
 
-    console.log(score, score - Math.floor(score));
     // score may be 61.000000001 due to floating point arithmetic
     if (score - Math.floor(score) < 0.01) {
         return Math.floor(score);

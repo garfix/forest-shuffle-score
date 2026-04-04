@@ -51,8 +51,6 @@ export function loadCards(): Card[] {
         }
     }
 
-    console.log(cards);
-
     return cards;
 }
 

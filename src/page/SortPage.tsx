@@ -11,7 +11,6 @@ import { getNextCategory } from "../utils/categories";
 import type { Inputs } from "../entity/input";
 import Chip from "@mui/material/Chip";
 import React from "react";
-import { FormControl, MenuItem, NativeSelect, Select } from "@mui/material";
 import Grot from "./component/Grot";
 import type { Game } from "../entity/game";
 import { getScoreLabel } from "../utils/scores";

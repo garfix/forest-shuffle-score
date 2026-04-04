@@ -32,6 +32,7 @@ const theme = createTheme({
 });
 
 function App() {
+    const [loading, setLoading] = useState<boolean>(true);
     const cards = useMemo(() => loadCards(), []);
     const [game] = useState<Game>(defaultGame);
     const [users] = useState<User[]>(defaultUsers);
@@ -40,6 +41,18 @@ function App() {
     const [category, setCategory] = useState<Category | null>(null);
     const [inputs, setInputs] = useState<Inputs>(initInputs(users));
     const [scores, setScores] = useState<Scores>(initScores(users));
+
+    useEffect(() => {
+        if (loading) {
+            const s = localStorage.getItem("inputs");
+            if (s) {
+                setInputs(JSON.parse(s));
+            }
+            setLoading(false);
+        } else {
+            localStorage.setItem("inputs", JSON.stringify(inputs));
+        }
+    }, [inputs]);
 
     useEffect(() => {
         setScores(calculateScores(inputs, cards, game));

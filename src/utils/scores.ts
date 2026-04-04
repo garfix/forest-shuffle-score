@@ -110,6 +110,26 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Trol: ["sort-count-x", "Boom", 1],
     Damhert: ["sort-count-x", "Evenhoevig dier", 3],
     Edelhert: ["2-sort-count-x", "Boom", "Plant", 1],
+
+    // Ree: []
+
+    Wildzwijn: ["count-x", 10],
+    Zwijnenbig: ["count-x", 1],
+    "Wild zwijn (zeug)": ["canonical-name-card-count-x", "Zwijnenbig", 10],
+
+    // Wisent: ["2-canonical-name-card-count-x", "Beuk", "Eik", 2],
+
+    "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
+    "Bruine grootoorvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
+    "Grote hoefijzerneus": ["count-x-min", 5, 3, "Vleermuis"],
+    Mopsvleermuis: ["count-x-min", 5, 3, "Vleermuis"],
+    "Gewone dwergvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
+    "Savi's dwergvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
+    Mug: ["sort-count-x", "Vleermuis", 1],
+    "Vliegende hooiwagen": ["sort-count-x", "Vleermuis", 1],
+    "Zwerm honingbijen": ["sort-count-x", "Plant", 1],
+    Auerhoen: ["sort-count-x", "Plant", 1],
+    Ooievaar: ["2-sort-count-x", "Insect", "Amfibie", 1],
 };
 
 function calculateTotal(
@@ -171,6 +191,11 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         const predicate = scoreFunc[0];
         if (predicate == "count-x") {
             score = (scoreFunc[1] as number) * count;
+        } else if (predicate == "count-x-min") {
+            //  ["count-x-min", 5, 3, "Vleermuis"],
+            if (getDifferentCanonicalNamesOfSortCount(input, cards, String(scoreFunc[3])) >= Number(scoreFunc[2])) {
+                score = Number(scoreFunc[1]) * count;
+            }
         } else if (predicate == "count-x-min-houtbij") {
             const houtbij = input.cardSubCount[card.id] ?? 0;
             const totalCount = count + houtbij;

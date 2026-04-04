@@ -22,7 +22,13 @@ export default function Amount({ value, setValue, valueColor = "primary", button
 
     return (
         <div className={styles.buttons}>
-            <Button variant="contained" onClick={dec} className={styles.button} color={valueColor}>
+            <Button
+                variant="contained"
+                onClick={dec}
+                className={styles.button}
+                color={valueColor}
+                disabled={value <= 0}
+            >
                 -1
             </Button>
             <Chip className={styles.chip} label={value} color={buttonColor} />

@@ -72,6 +72,14 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Citroenvlinder: ["vlinder-telling"],
     "Rode eekhoorn": ["sub-x", 5],
     Maretak: ["sort-count-x", "Plant", 1],
+    // Onder
+    Boomvarens: ["sort-count-x", "Amfibie", 6],
+    Bramen: ["sort-count-x", "Plant", 2],
+    Mos: ["count-x", 10],
+    "Wilde aardbeien": ["count-x-8trees", 10],
+    "Grote brandnetel": ["sort-count-x", "Vlinder", 2],
+    Vingerhoedskruid: ["vingerhoedskruid-telling"],
+    "Blauwe bes": ["unique-sort-count-x", "Vogel", 2],
 };
 
 function calculateTotal(
@@ -136,8 +144,8 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         } else if (predicate == "count-x-min-houtbij") {
             const houtbij = input.cardSubCount[card.id] ?? 0;
             const totalCount = count + houtbij;
-            if (typeof scoreFunc[2] == "number" && totalCount >= scoreFunc[2]) {
-                score = (scoreFunc[1] as number) * totalCount;
+            if (totalCount >= Number(scoreFunc[2])) {
+                score = Number(scoreFunc[1]) * totalCount;
             }
         } else if (predicate == "count^2-max-houtbij") {
             const houtbij = input.cardSubCount[card.id] ?? 0;
@@ -150,9 +158,9 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             const m = getMaxCardCount(card, inputs, true);
             score = (totalCount == m ? 3 : 1) * totalCount;
         } else if (predicate == "count-x-8trees") {
-            const m = getCountDifferentTrees(input, cards);
-            if (typeof scoreFunc[1] == "number" && m >= 8) {
-                score = scoreFunc[1] * count;
+            const m = getDifferentSortCount(input, cards, "Boom");
+            if (m >= 8) {
+                score = Number(scoreFunc[1]) * count;
             }
         } else if (predicate == "cards-around") {
             const cardsAround = input.cardSubCount[card.id] ?? 0;
@@ -160,22 +168,19 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         } else if (predicate == "trees-x") {
             score = getSortCount(input, cards, "Boom") * count;
         } else if (predicate == "sort-count-x") {
-            if (typeof scoreFunc[2] == "number") {
-                score = getSortCount(input, cards, scoreFunc[1] as string) * scoreFunc[2] * count;
-            }
+            score = getSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
+        } else if (predicate == "unique-sort-count-x") {
+            score = getDifferentSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "2-sort-count-x") {
-            if (typeof scoreFunc[3] == "number") {
-                score =
-                    (((getSortCount(input, cards, scoreFunc[1] as string) +
-                        getSortCount(input, cards, scoreFunc[2] as string)) *
-                        scoreFunc[3]) as number) * count;
-            }
+            score =
+                (getSortCount(input, cards, scoreFunc[1] as string) +
+                    getSortCount(input, cards, scoreFunc[2] as string)) *
+                Number(scoreFunc[3]) *
+                count;
         } else if (predicate == "sub-x") {
             const cardsOp = input.cardSubCount[card.id] ?? 0;
             const totalCount = Math.min(count, cardsOp);
-            if (typeof scoreFunc[1] == "number") {
-                score = scoreFunc[1] * totalCount;
-            }
+            score = Number(scoreFunc[1]) * totalCount;
         } else if (predicate == "grot-x") {
             const m = input.grotCount;
             score = (scoreFunc[1] as number) * m * count;
@@ -186,9 +191,21 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
                     score += vlinderStats.scorePerLayer[layer] / vlinderStats.cardsPerLayer[layer].length;
                 }
             }
+        } else if (predicate == "vingerhoedskruid-telling") {
+            const m = getDifferentSortCount(input, cards, "Plant");
+            score = getIndexedScore(m, { 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
         }
     }
     return score;
+}
+
+function getIndexedScore(count: number, lookup: Record<number, number>) {
+    if (count === 0) {
+        return 0;
+    }
+    const n = Math.max(...Object.keys(lookup).map(Number));
+    const d = Math.min(n, count);
+    return lookup[d];
 }
 
 function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
@@ -217,16 +234,16 @@ function getSortCount(input: Input, cards: Card[], sort: string) {
     return count;
 }
 
-function getCountDifferentTrees(input: Input, cards: Card[]) {
-    const trees = new Set<string>();
+function getDifferentSortCount(input: Input, cards: Card[], sort: string) {
+    const items = new Set<string>();
     for (const card of cards) {
-        if (card.sort.includes("Boom")) {
+        if (card.sort.includes(sort)) {
             if (input.cardCount[card.id] && input.cardCount[card.id] > 0) {
-                trees.add(card.canonical_name);
+                items.add(card.canonical_name);
             }
         }
     }
-    return trees.size;
+    return items.size;
 }
 
 function getVlinderStats(input: Input, cards: Card[]): VlinderStats {

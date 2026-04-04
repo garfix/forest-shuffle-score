@@ -1,0 +1,1 @@
+- Het amount bij een kaartje mag niet hoger zijn dan het totaal van dat kaartje

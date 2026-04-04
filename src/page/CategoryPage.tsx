@@ -10,6 +10,7 @@ import type { Card } from "../entity/card";
 import { categories } from "../utils/categories";
 import type { Inputs } from "../entity/input";
 import type { Scores } from "../entity/score";
+import { getScoreLabel } from "../utils/scores";
 
 type Props = {
     setPage: (page: string) => void;
@@ -44,7 +45,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                         <Chip className={styles.chip} label={counts[category.name]} color="info"></Chip>
                         <Chip
                             className={styles.chip}
-                            label={scores[user.name].categoryScores[category.name]}
+                            label={getScoreLabel(scores[user.name].categoryScores[category.name])}
                             color="success"
                         ></Chip>
                         <Button onClick={() => select(category)}>Bewerk</Button>

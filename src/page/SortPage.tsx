@@ -14,6 +14,7 @@ import React from "react";
 import { FormControl, MenuItem, NativeSelect, Select } from "@mui/material";
 import Grot from "./component/Grot";
 import type { Game } from "../entity/game";
+import { getScoreLabel } from "../utils/scores";
 
 type Props = {
     setPage: (page: string) => void;
@@ -95,7 +96,7 @@ export default function SortPage({
                                 <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
                                 <Chip
                                     className={styles.chip}
-                                    label={scores[user.name].cardScores[card.id]}
+                                    label={getScoreLabel(scores[user.name].cardScores[card.id])}
                                     color="success"
                                 ></Chip>
                             </div>

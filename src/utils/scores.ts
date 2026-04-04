@@ -58,6 +58,18 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     "Rode kardinaal": ["count-x", 5],
     Roodborstje: ["sort-count-x", "Insect", 1],
     Lammergier: ["grot-x", 1],
+    Raaf: ["count-x", 5],
+    Steenarend: ["2-sort-count-x", "Pootdier", "Amfibie", 1],
+    Koekoek: ["count-x", 7],
+    Paapje: ["sort-count-x", "Plant", 1],
+    Dagpauwoog: ["vlinder-telling"],
+    "Grote vos": ["vlinder-telling"],
+    "Grote weerschijnvlinder": ["vlinder-telling"],
+    Keizersmantel: ["vlinder-telling"],
+    Rouwmantel: ["vlinder-telling"],
+    Landkaartje: ["vlinder-telling"],
+    "Kleine Apollovlinder": ["vlinder-telling"],
+    Citroenvlinder: ["vlinder-telling"],
 };
 
 function calculateTotal(
@@ -103,9 +115,18 @@ function calculateGrotScore(input: Input, game: Game, cards: Card[]) {
     return input.grotCount;
 }
 
+type VlinderStats = {
+    ["cardsPerLayer"]: number[][];
+    ["scorePerLayer"]: number[];
+    ["layerCount"]: number;
+};
+
 function calculateCardScore(count: number, card: Card, cards: Card[], input: Input, inputs: Inputs) {
-    let score = 0;
     const scoreFunc = scoreFuncs[card.name];
+
+    const vlinderStats: VlinderStats = getVlinderStats(input, cards);
+
+    let score = 0;
     if (scoreFunc) {
         const predicate = scoreFunc[0];
         if (predicate == "count-x") {
@@ -140,6 +161,13 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             if (typeof scoreFunc[2] == "number") {
                 score = getSortCount(input, cards, scoreFunc[1] as string) * scoreFunc[2] * count;
             }
+        } else if (predicate == "2-sort-count-x") {
+            if (typeof scoreFunc[3] == "number") {
+                score =
+                    (((getSortCount(input, cards, scoreFunc[1] as string) +
+                        getSortCount(input, cards, scoreFunc[2] as string)) *
+                        scoreFunc[3]) as number) * count;
+            }
         } else if (predicate == "sub-x") {
             const cardsOp = input.cardSubCount[card.id] ?? 0;
             const totalCount = Math.min(count, cardsOp);
@@ -149,6 +177,13 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         } else if (predicate == "grot-x") {
             const m = input.grotCount;
             score = (scoreFunc[1] as number) * m * count;
+        } else if (predicate == "vlinder-telling") {
+            score = 0;
+            for (let layer = 0; layer < vlinderStats.layerCount; layer++) {
+                if (vlinderStats.cardsPerLayer[layer].includes(card.id)) {
+                    score += vlinderStats.scorePerLayer[layer] / vlinderStats.cardsPerLayer[layer].length;
+                }
+            }
         }
     }
     return score;
@@ -190,4 +225,91 @@ function getCountDifferentTrees(input: Input, cards: Card[]) {
         }
     }
     return trees.size;
+}
+
+function getVlinderStats(input: Input, cards: Card[]): VlinderStats {
+    const cardCounts: Record<number, number> = {};
+    const kleineAppoloVlinder = getCardScoreByName(cards, "Kleine Apollovlinder", input);
+    const landKaartje = getCardScoreByName(cards, "Landkaartje", input);
+    const citroenvlinder = getCardScoreByName(cards, "Citroenvlinder", input);
+
+    for (const card of cards) {
+        if (card.sort.includes("Vlinder")) {
+            if (input.cardCount[card.id]) {
+                cardCounts[card.id] = input.cardCount[card.id];
+            }
+        }
+    }
+
+    const scorePerLayer: number[] = [];
+    const cardsPerLayer: number[][] = [];
+    const layerCount = 4;
+    for (let layer = 0; layer < layerCount; layer++) {
+        let cardsInLayer: number[] = [];
+        for (const [cardId, cardCount] of Object.entries(cardCounts)) {
+            if (cardCount > layer) {
+                cardsInLayer.push(Number(cardId));
+            }
+        }
+        let count = cardsInLayer.length;
+        if (citroenvlinder) {
+            count = Math.min(count, 8);
+        } else if (landKaartje) {
+            count = Math.min(count, 7);
+        } else if (kleineAppoloVlinder) {
+            count = Math.min(count, 6);
+        } else {
+            count = Math.min(count, 5);
+        }
+
+        cardsPerLayer.push(cardsInLayer.slice(0, count));
+        scorePerLayer[layer] = { 0: 0, 1: 0, 2: 3, 3: 6, 4: 12, 5: 20, 6: 35, 7: 55, 8: 80 }[count]!;
+    }
+
+    return {
+        layerCount,
+        cardsPerLayer,
+        scorePerLayer,
+    };
+}
+
+function getCardScoreByName(cards: Card[], cardName: string, input: Input) {
+    const card = getCardByName(cardName, cards);
+    if (card) {
+        return getCardScore(card.id, input);
+    } else {
+        return 0;
+    }
+}
+
+function getCardScore(cardId: number, input: Input) {
+    if (input.cardCount[cardId]) {
+        return input.cardCount[cardId];
+    } else {
+        return 0;
+    }
+}
+
+function getCardByName(cardName: string, cards: Card[]) {
+    for (const card of cards) {
+        if (card.name == cardName) {
+            return card;
+        }
+    }
+
+    return null;
+}
+
+export function getScoreLabel(score: number) {
+    if (!score) {
+        return "";
+    }
+
+    console.log(score, score - Math.floor(score));
+    // score may be 61.000000001 due to floating point arithmetic
+    if (score - Math.floor(score) < 0.01) {
+        return Math.floor(score);
+    } else {
+        return Math.floor(score) + "+";
+    }
 }

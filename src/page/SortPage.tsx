@@ -93,7 +93,11 @@ export default function SortPage({
                         <React.Fragment key={card.id}>
                             <div className={styles.card}>
                                 <div className={styles.name}>{card.name}</div>
-                                <Amount value={getCount(card)} setValue={(count) => setCount(card, count)} />
+                                <Amount
+                                    value={getCount(card)}
+                                    setValue={(count) => setCount(card, count)}
+                                    max={card.amount}
+                                />
                                 <Chip
                                     className={styles.chip}
                                     label={getScoreLabel(scores[user.name].cardScores[card.id])}
@@ -110,6 +114,7 @@ export default function SortPage({
                                         valueColor="error"
                                         value={getSubCount(card)}
                                         setValue={(count) => setSubCount(card, count)}
+                                        max={getCount(card)}
                                     />
                                     <div></div>
                                 </div>

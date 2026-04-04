@@ -7,13 +7,13 @@ import { Chip } from "@mui/material";
 import Link from "./component/Link";
 import { getCountsByCategory } from "../utils/cards";
 import type { Card } from "../entity/card";
-import { categories } from "../utils/categories";
 import type { Inputs } from "../entity/input";
 import type { Scores } from "../entity/score";
 import { getScoreLabel } from "../utils/scores";
 
 type Props = {
     setPage: (page: string) => void;
+    categories: Category[];
     setCategory: (category: Category) => void;
     user: User;
     cards: Card[];
@@ -21,7 +21,7 @@ type Props = {
     scores: Scores;
 };
 
-export default function CategoryPage({ setPage, setCategory, user, cards, inputs, scores }: Props) {
+export default function CategoryPage({ setPage, setCategory, user, cards, inputs, scores, categories }: Props) {
     function select(category: Category) {
         setCategory(category);
         setPage("sort");

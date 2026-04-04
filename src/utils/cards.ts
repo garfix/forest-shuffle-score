@@ -3,8 +3,9 @@ import csv from "../assets/Forest shuffle features - Sheet1.csv?raw";
 import { parseCSV } from "./parseCsv";
 import type { Category } from "../entity/category";
 import type { Input, Inputs } from "../entity/input";
+import type { Game } from "../entity/game";
 
-export function loadCards(): Card[] {
+export function loadCards(game: Game): Card[] {
     const rows = parseCSV(csv);
 
     const cards: Card[] = [];
@@ -14,6 +15,10 @@ export function loadCards(): Card[] {
 
     for (const row of rows) {
         if (row["Spelvariant"] == "") {
+            continue;
+        }
+
+        if (!game.spelVarianten.includes(row["Spelvariant"])) {
             continue;
         }
 

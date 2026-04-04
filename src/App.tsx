@@ -19,6 +19,7 @@ import type { Inputs } from "./entity/input";
 import { defaultUsers } from "./utils/users";
 import type { Game } from "./entity/game";
 import { defaultGame } from "./utils/game";
+import { getCategories } from "./utils/categories";
 
 const theme = createTheme({
     palette: {
@@ -33,14 +34,15 @@ const theme = createTheme({
 
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
-    const cards = useMemo(() => loadCards(), []);
     const [game] = useState<Game>(defaultGame);
+    const cards = useMemo(() => loadCards(game), [game]);
     const [users] = useState<User[]>(defaultUsers);
     const [page, setPage] = useState("home");
     const [user, setUser] = useState<User>(users[0]);
     const [category, setCategory] = useState<Category | null>(null);
     const [inputs, setInputs] = useState<Inputs>(initInputs(users));
     const [scores, setScores] = useState<Scores>(initScores(users));
+    const categories = useMemo(() => getCategories(game), [game]);
 
     useEffect(() => {
         if (loading) {
@@ -75,6 +77,7 @@ function App() {
                     {page == "category" && (
                         <CategoryPage
                             setPage={setPage}
+                            categories={categories}
                             setCategory={setCategory}
                             user={user!}
                             cards={cards}

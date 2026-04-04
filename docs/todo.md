@@ -1,2 +1,2 @@
 - Icoontje voor snelkoppeling
-- opslaan en ophalen local storage
+- Ree, Wisent

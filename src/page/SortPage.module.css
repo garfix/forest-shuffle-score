@@ -22,5 +22,5 @@
 }
 
 .chip {
-    width: 40px;
+    min-width: 50px;
 }

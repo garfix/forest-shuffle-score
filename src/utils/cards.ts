@@ -43,13 +43,15 @@ export function loadCards(): Card[] {
                 sub_question: row["Subvraag"],
                 belongs_to: variant,
                 canonical_name: canonicalName,
-                sub_question_max: row["Naam"] == "Bosmier" ? "unlimited" : "card",
+                sub_question_max: ["Bosmier", "Steenmarter"].includes(row["Naam"]) ? "unlimited" : "card",
             };
             byName[card.name] = card;
             cards.push(card);
             id++;
         }
     }
+
+    console.log(cards);
 
     return cards;
 }

@@ -84,7 +84,7 @@ Basisspel,Naast,Pootdier,Europese haas,11,(Aantal plus Sneeuwhaas) in kwadraat,,
 Basisspel,Naast,Pootdier,Lynx,6,Aantal keer 10,min. 1 Ree,,,
 Basisspel,Naast,Pootdier,Relmuis,4,Samen met vleermuis keer 15,,Samen met Vleermuis?,,
 Basisspel,Naast,Pootdier,Rode vos,5,(Europese haas plus Sneeuwhaas) keer 2,,,,
-Basisspel,Naast,Pootdier,Steenmarter,5,Aantal keer Volledig bewoonde boom keer 5,,Volledig bewoonde boom?,,
+Basisspel,Naast,Pootdier,Steenmarter,5,Aantal keer Volledig bewoonde boom keer 5,,Volledig bewoonde bomen,,
 Basisspel,Naast,Pootdier,Wasbeer,4,,,,,
 Basisspel,Naast,Pootdier,Wolf,4,Aantal keer Hert keer 5,,,,
 Woodland edge,Naast,"Pootdier, Woodland edge",Bunzing,3,Aantal keer Enige bij boom of struik keer 10,,Enige bij boom of struik,,
@@ -93,7 +93,7 @@ Alpine,Naast,"Pootdier, Alpine",Alpenmarmot,4,Aantal keer unieke Plant keer 3,,,
 Alpine,Naast,"Pootdier, Alpine",Sneeuwhaas,3,(Aantal plus Europese haas) in kwadraat,,,Europese haas,ja
 Exploration,Naast,Pootdier,Civetkat,1,Aantal keer 5,,,,
 Exploration,Naast,Pootdier,Europese das,1,Aantal keer 2,,,Europese das,ja
-Exploration,Naast,Pootdier,Poolvos,1,(Europese haas plus Sneeuwhaas) keer 2,,,,
+Exploration,Naast,Pootdier,Poolvos,1,(Europese haas plus Sneeuwhaas) keer 2,,,Rode vos,ja
 Exploration,Naast,Pootdier,Rode panda,1,Aantal keer 2,,,,
 Exploration,Naast,Pootdier,Sabelmarter,1,Aantal keer Pootdier keer 3,,,,
 Exploration,Naast,Pootdier,Trol,1,Aantal keer Boom keer 1,,,,

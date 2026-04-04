@@ -96,6 +96,20 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     // Naast
     "Europese das": ["count-x", 2],
     "Europese haas": ["count^2", 1],
+    Lynx: ["count-x", 10],
+    Relmuis: ["sub-x", 15],
+    "Rode vos": ["canonical-name-card-count-x", "Europese haas", 2],
+    Steenmarter: ["sub-x", 5],
+    Wolf: ["sort-count-x", "Hert", 5],
+    Bunzing: ["sub-x", 10],
+    "Wilde kat": ["sort-count-x", "Woodland edge", 1],
+    Alpenmarmot: ["unique-sort-count-x", "Plant", 3],
+    Civetkat: ["count-x", 5],
+    "Rode panda": ["count-x", 2],
+    Sabelmarter: ["sort-count-x", "Pootdier", 3],
+    Trol: ["sort-count-x", "Boom", 1],
+    Damhert: ["sort-count-x", "Evenhoevig dier", 3],
+    Edelhert: ["2-sort-count-x", "Boom", "Plant", 1],
 };
 
 function calculateTotal(
@@ -185,7 +199,7 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             score = cardsAround * 2;
         } else if (predicate == "trees-x") {
             score = getSortCount(input, cards, "Boom") * count;
-        } else if (predicate == "canonical-name-card-count") {
+        } else if (predicate == "canonical-name-card-count-x") {
             score = getCanonicalNameCardCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "sort-count-x") {
             score = getSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
@@ -253,7 +267,6 @@ function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
 
 function getCanonicalNameCardCount(input: Input, cards: Card[], cardName: string) {
     let count = 0;
-    // NB: multiple cards can have the same name
     for (const card of cards) {
         if (card.canonical_name === cardName) {
             if (input.cardCount[card.id] && input.cardCount[card.id] > 0) {

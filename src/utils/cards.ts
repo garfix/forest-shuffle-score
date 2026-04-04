@@ -8,26 +8,35 @@ export function loadCards(): Card[] {
     const rows = parseCSV(csv);
 
     const cards: Card[] = [];
+
     let id = 0;
+    const byName: Record<string, Card> = {};
+
     for (const row of rows) {
         if (row["Spelvariant"] == "") {
             continue;
         }
-        const card: Card = {
-            id,
-            name: row["Naam"],
-            score: row["Score"],
-            game_variant: row["Spelvariant"],
-            category: row["Categorie"],
-            sort: row["Soort"].split(",").map((s) => s.trim()),
-            amount: parseInt(row["Hoeveel"]),
-            condition: row["Voorwaarde"],
-            sub_question: row["Subvraag"],
-            belongs_to: row["Valt onder"],
-            canonical_name: row["Valt onder"] ? row["Valt onder"] : row["Naam"],
-        };
-        cards.push(card);
-        id++;
+        if (byName[row["Naam"]]) {
+            const card = byName[row["Naam"]];
+            card.amount += parseInt(row["Hoeveel"]);
+        } else {
+            const card: Card = {
+                id,
+                name: row["Naam"],
+                score: row["Score"],
+                game_variant: row["Spelvariant"],
+                category: row["Categorie"],
+                sort: row["Soort"].split(",").map((s) => s.trim()),
+                amount: parseInt(row["Hoeveel"]),
+                condition: row["Voorwaarde"],
+                sub_question: row["Subvraag"],
+                belongs_to: row["Valt onder"],
+                canonical_name: row["Valt onder"] ? row["Valt onder"] : row["Naam"],
+            };
+            byName[card.name] = card;
+            cards.push(card);
+            id++;
+        }
     }
 
     return cards;

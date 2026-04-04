@@ -80,6 +80,14 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     "Grote brandnetel": ["sort-count-x", "Vlinder", 2],
     Vingerhoedskruid: ["vingerhoedskruid-telling"],
     "Blauwe bes": ["unique-sort-count-x", "Vogel", 2],
+    Edelweiss: ["count-x", 3],
+    Gentiaan: ["sort-count-x", "Vlinder", 3],
+    Bostulp: ["count-x", 3],
+    Wateraardbei: ["wateraardbei-telling"],
+    Boomkikker: ["other-card-count-x", "Mug", 5],
+    "Gewone pad": ["sub-x", 5],
+    Moerasschildpad: ["count-x", 5],
+    Vuursalamander: ["vuursalamander-telling"],
 };
 
 function calculateTotal(
@@ -167,6 +175,8 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             score = cardsAround * 2;
         } else if (predicate == "trees-x") {
             score = getSortCount(input, cards, "Boom") * count;
+        } else if (predicate == "other-card-count-x") {
+            score = getCardCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "sort-count-x") {
             score = getSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "unique-sort-count-x") {
@@ -193,16 +203,21 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             }
         } else if (predicate == "vingerhoedskruid-telling") {
             const m = getDifferentSortCount(input, cards, "Plant");
-            score = getIndexedScore(m, { 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
+            score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
+        } else if (predicate == "wateraardbei-telling") {
+            const m = getSortCount(input, cards, "Boom");
+            score =
+                getIndexedScore(m, { 0: 15, 1: 15, 2: 15, 3: 15, 4: 15, 5: 15, 6: 10, 7: 10, 8: 10, 9: 10, 11: 3 }) *
+                count;
+        } else if (predicate == "vuursalamander-telling") {
+            const m = getCardCount(input, cards, "Vuursalamander");
+            score = getIndexedScore(m, { 0: 0, 1: 5, 2: 15, 3: 25 });
         }
     }
     return score;
 }
 
 function getIndexedScore(count: number, lookup: Record<number, number>) {
-    if (count === 0) {
-        return 0;
-    }
     const n = Math.max(...Object.keys(lookup).map(Number));
     const d = Math.min(n, count);
     return lookup[d];
@@ -220,6 +235,19 @@ function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
         }
     }
     return max;
+}
+
+function getCardCount(input: Input, cards: Card[], cardName: string) {
+    let count = 0;
+    // NB: multiple cards can have the same name
+    for (const card of cards) {
+        if (card.name === cardName) {
+            if (input.cardCount[card.id] && input.cardCount[card.id] > 0) {
+                count += input.cardCount[card.id];
+            }
+        }
+    }
+    return count;
 }
 
 function getSortCount(input: Input, cards: Card[], sort: string) {

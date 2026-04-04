@@ -8,6 +8,7 @@ export type Card = {
     score: string;
     condition: string;
     sub_question: string;
+    sub_question_max: string;
     belongs_to: string;
     canonical_name: string; // belongs_to ?? name
 };

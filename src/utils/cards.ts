@@ -32,6 +32,7 @@ export function loadCards(): Card[] {
                 sub_question: row["Subvraag"],
                 belongs_to: row["Valt onder"],
                 canonical_name: row["Valt onder"] ? row["Valt onder"] : row["Naam"],
+                sub_question_max: row["Naam"] == "Bosmier" ? "unlimited" : "card",
             };
             byName[card.name] = card;
             cards.push(card);

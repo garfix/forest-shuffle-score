@@ -48,6 +48,10 @@ export default function SortPage({
         return inputs[user.name].cardSubCount[card.id] ?? 0;
     };
 
+    const getSubCountMax = (card: Card) => {
+        return card.sub_question_max == "card" ? inputs[user.name].cardCount[card.id] : undefined;
+    };
+
     const setCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
         newInputs[user.name] = { ...inputs[user.name] };
@@ -114,7 +118,7 @@ export default function SortPage({
                                         valueColor="error"
                                         value={getSubCount(card)}
                                         setValue={(count) => setSubCount(card, count)}
-                                        max={getCount(card)}
+                                        max={getSubCountMax(card)}
                                     />
                                     <div></div>
                                 </div>

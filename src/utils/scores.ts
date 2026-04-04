@@ -88,6 +88,8 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     "Gewone pad": ["sub-x", 5],
     Moerasschildpad: ["count-x", 5],
     Vuursalamander: ["vuursalamander-telling"],
+    Alpenwatersalamander: ["sort-count-x", "Insect", 2],
+    Bosmier: ["sub-x", 2],
 };
 
 function calculateTotal(
@@ -188,9 +190,8 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
                 Number(scoreFunc[3]) *
                 count;
         } else if (predicate == "sub-x") {
-            const cardsOp = input.cardSubCount[card.id] ?? 0;
-            const totalCount = Math.min(count, cardsOp);
-            score = Number(scoreFunc[1]) * totalCount;
+            const subCount = input.cardSubCount[card.id] ?? 0;
+            score = Number(scoreFunc[1]) * subCount;
         } else if (predicate == "grot-x") {
             const m = input.grotCount;
             score = (scoreFunc[1] as number) * m * count;

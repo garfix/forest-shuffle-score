@@ -1,4 +1,4 @@
-import { Chip, FormControl, MenuItem, Select } from "@mui/material";
+import { Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import type { Inputs } from "../../entity/input";
 import type { User } from "../../entity/user";
 import Amount from "./Amount";
@@ -41,7 +41,8 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
             {game.spelVarianten.includes("Exploration") && (
                 <div className={styles.card}>
                     <div className={styles.name}>Grotkaart</div>
-                    <FormControl size="small">
+                    <FormControl size="small" variant="outlined">
+                        <InputLabel>Selecteer</InputLabel>
                         <Select value={getGrotCard()} onChange={(event) => setGrotCard(event.target.value)}>
                             <MenuItem value="">Geen</MenuItem>
                             <MenuItem value="Smokkelgrot">Smokkelgrot</MenuItem>

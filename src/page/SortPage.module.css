@@ -6,13 +6,16 @@
 
 .card {
     display: grid;
-    grid-template-columns: 1fr 130px 50px;
+    grid-template-columns: calc(100% - 220px) 130px 50px;
     align-items: center;
     gap: 20px;
 }
 
 .name {
     text-align: left;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sub_question {

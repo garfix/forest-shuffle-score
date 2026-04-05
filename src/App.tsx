@@ -20,9 +20,11 @@ import { defaultUsers } from "./utils/users";
 import type { Game } from "./entity/game";
 import { defaultGame } from "./utils/game";
 import { getCategories } from "./utils/categories";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const theme = createTheme({
     palette: {
+        mode: "light",
         primary: {
             main: "#63d219", // required
             light: "#7cda3e", // optional, auto-derived if omitted
@@ -63,6 +65,7 @@ function App() {
     return (
         <>
             <ThemeProvider theme={theme}>
+                <CssBaseline />
                 <section id="center">
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
                     {page == "user" && (

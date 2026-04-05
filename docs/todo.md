@@ -1,4 +1,3 @@
 - Bouw een delay in bij opslaan local storage
 - Ree, Wisent
-- Select grot kaart niet zichtbaar in dark mode
-- te weinig ruimte voor sort pagina (hor)
+- check alle voorwaarden; kloppen niet allemaal

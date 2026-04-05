@@ -48,7 +48,7 @@ export default function SortPage({
     };
 
     const getSubCountMax = (card: Card) => {
-        return card.sub_question_max == "card" ? inputs[user.name].cardCount[card.id] : undefined;
+        return card.sub_question_max == "overnemen" ? inputs[user.name].cardCount[card.id] : undefined;
     };
 
     const setCount = (card: Card, count: number) => {

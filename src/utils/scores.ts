@@ -119,6 +119,10 @@ const scoreFuncs: Record<string, (string | number)[]> = {
 
     // Wisent: ["2-canonical-name-card-count-x", "Beuk", "Eik", 2],
 
+    Alpensteenbok: [],
+    Gems: [],
+    Eland: [],
+
     "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Bruine grootoorvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Grote hoefijzerneus": ["count-x-min", 5, 3, "Vleermuis"],

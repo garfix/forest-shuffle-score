@@ -48,7 +48,7 @@ export function loadCards(game: Game): Card[] {
                 sub_question: row["Subvraag"],
                 belongs_to: variant,
                 canonical_name: canonicalName,
-                sub_question_max: ["Bosmier", "Steenmarter"].includes(row["Naam"]) ? "unlimited" : "card",
+                sub_question_max: row["Subvraag max"],
             };
             byName[card.name] = card;
             cards.push(card);

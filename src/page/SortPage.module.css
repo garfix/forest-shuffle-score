@@ -6,7 +6,7 @@
 
 .card {
     display: grid;
-    grid-template-columns: 1fr 1fr 40px;
+    grid-template-columns: 1fr 130px 50px;
     align-items: center;
     gap: 20px;
 }

@@ -59,7 +59,12 @@ function App() {
     }, [inputs]);
 
     useEffect(() => {
-        setScores(calculateScores(inputs, cards, game));
+        const timer = setTimeout(() => {
+            console.log("write");
+            setScores(calculateScores(inputs, cards, game));
+        }, 3000);
+
+        return () => clearTimeout(timer);
     }, [inputs]);
 
     return (

@@ -117,17 +117,13 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Trol: ["sort-count-x", "Boom", 1],
     Damhert: ["sort-count-x", "Evenhoevig dier", 3],
     Edelhert: ["2-sort-count-x", "Boom", "Plant", 1],
-
     Ree: ["color-card-counts-checked", ["darkblue", "yellow", "lightgreen", "darkgreen", "orange"], 3],
-
     Wildzwijn: ["count-x", 10],
     Zwijnenbig: ["count-x", 1],
     "Wild zwijn (zeug)": ["canonical-name-card-count-x", "Zwijnenbig", 10],
     Wisent: ["color-card-counts-x", ["darkgreen", "brown"], 2],
     Alpensteenbok: ["count-x", 10],
-
     Gems: ["color-card-counts-checked", ["lightblue", "pink", "purple"], 3],
-
     Eland: ["color-card-counts-x", ["sapling", "lightblue", "lightgreen"], 2],
     "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Bruine grootoorvleermuis": ["count-x-min", 5, 3, "Vleermuis"],

@@ -1,3 +1,3 @@
-- Bouw een delay in bij opslaan local storage
-- check alle voorwaarden; kloppen niet allemaal
-- Gems: idem als Ree
+- Grote bonte specht: meer bomen dan elk ander bos
+- Lynx: min 1 ree
+- Wild zwijn: min 1 zwijnenbig

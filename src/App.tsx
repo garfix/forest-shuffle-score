@@ -54,17 +54,16 @@ function App() {
             }
             setLoading(false);
         } else {
-            localStorage.setItem("inputs", JSON.stringify(inputs));
+            const timer = setTimeout(() => {
+                localStorage.setItem("inputs", JSON.stringify(inputs));
+            }, 3000);
+
+            return () => clearTimeout(timer);
         }
     }, [inputs]);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            console.log("write");
-            setScores(calculateScores(inputs, cards, game));
-        }, 3000);
-
-        return () => clearTimeout(timer);
+        setScores(calculateScores(inputs, cards, game));
     }, [inputs]);
 
     return (

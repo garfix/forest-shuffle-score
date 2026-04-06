@@ -52,10 +52,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Moseik: ["sort-count-x", "Evenhoevig dier", 1],
     Palmboom: ["sort-count-x", "Vogel", 1],
     "Zachte berk": ["count-x", 1],
+
     // Boven
     Bosuil: ["count-x", 5],
     Goudvink: ["sort-count-x", "Insect", 2],
-    "Grote bonte specht": ["count-x", 10],
+    "Grote bonte specht": ["count-x-most-sort", 10, "Boom"],
     Havik: ["sort-count-x", "Vogel", 3],
     Vink: ["sub-x", 5],
     "Vlaamse gaai": ["count-x", 3],
@@ -79,6 +80,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Citroenvlinder: ["vlinder-telling"],
     "Rode eekhoorn": ["sub-x", 5],
     Maretak: ["sort-count-x", "Plant", 1],
+
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
     Bramen: ["sort-count-x", "Plant", 2],
@@ -100,6 +102,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Vliegend hert": ["sort-count-x", "Pootdier", 1],
     Vuurvliegjes: ["vuurvliegjes-telling"],
     Egel: ["sort-count-x", "Vlinder", 2],
+
     // Naast
     "Europese das": ["count-x", 2],
     "Europese haas": ["count^2", 1],
@@ -147,10 +150,11 @@ function calculateTotal(
     let total = 0;
     const cardScores: Record<number, number> = {};
     const categoryScores: Record<string, number> = {};
+    const vlinderStats: VlinderStats = getVlinderStats(input, cards);
 
     for (const [cardId, count] of Object.entries(input.cardCount)) {
         const card = cards[Number(cardId)];
-        const score = calculateCardScore(count, card, cards, input, inputs);
+        const score = calculateCardScore(count, card, cards, input, inputs, vlinderStats);
         cardScores[Number(cardId)] = score;
         categoryScores[card.category] = categoryScores[card.category] ? categoryScores[card.category] + score : score;
         total += score;
@@ -187,10 +191,19 @@ type VlinderStats = {
     ["layerCount"]: number;
 };
 
-function calculateCardScore(count: number, card: Card, cards: Card[], input: Input, inputs: Inputs) {
-    const scoreFunc = scoreFuncs[card.name];
+function calculateCardScore(
+    count: number,
+    card: Card,
+    cards: Card[],
+    input: Input,
+    inputs: Inputs,
+    vlinderStats: VlinderStats,
+) {
+    if (count == 0) {
+        return 0;
+    }
 
-    const vlinderStats: VlinderStats = getVlinderStats(input, cards);
+    const scoreFunc = scoreFuncs[card.name];
 
     let score = 0;
     if (scoreFunc) {
@@ -219,6 +232,12 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             const totalCount = count + houtbij;
             const m = getMaxCardCount(card, inputs, true);
             score = (totalCount == m ? 3 : 1) * totalCount;
+        } else if (predicate == "count-x-most-sort") {
+            const sort = scoreFunc[2] as string;
+            const [max, maxUsers] = getMaxSortCount(cards, inputs, sort);
+            if (maxUsers.length === 1 && getSortCount(input, cards, sort) === max) {
+                score = Number(scoreFunc[1]) * count;
+            }
         } else if (predicate == "count-x-8trees") {
             const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Boom");
             if (m >= 8) {
@@ -305,6 +324,25 @@ function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
         }
     }
     return max;
+}
+
+function getMaxSortCount(cards: Card[], inputs: Inputs, sort: string): [number, string[]] {
+    let max = 0;
+    const maxUsers = [];
+    for (const [user, input] of Object.entries(inputs)) {
+        let count = 0;
+        for (const card of cards) {
+            if (card.sort.includes(sort)) {
+                count += input.cardCount[card.id] ?? 0;
+            }
+        }
+
+        if (count > max) {
+            max = Math.max(max, count);
+            maxUsers.push(user);
+        }
+    }
+    return [max, maxUsers];
 }
 
 function getCanonicalNameCardCount(input: Input, cards: Card[], cardName: string) {

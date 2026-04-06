@@ -121,7 +121,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Damhert: ["sort-count-x", "Evenhoevig dier", 3],
     Edelhert: ["2-sort-count-x", "Boom", "Plant", 1],
     Ree: ["color-card-counts-checked", ["darkblue", "yellow", "lightgreen", "darkgreen", "orange"], 3],
-    Wildzwijn: ["count-x", 10],
+    Wildzwijn: ["count-x-min-card", 10, 1, "Zwijnenbig"],
     Zwijnenbig: ["count-x", 1],
     "Wild zwijn (zeug)": ["canonical-name-card-count-x", "Zwijnenbig", 10],
     Wisent: ["color-card-counts-x", ["darkgreen", "brown"], 2],

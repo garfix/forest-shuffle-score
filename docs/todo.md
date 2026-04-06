@@ -1,1 +1,0 @@
-- Wild zwijn: min 1 zwijnenbig

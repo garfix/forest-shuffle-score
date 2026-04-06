@@ -29,7 +29,7 @@ export function calculateScores(inputs: Inputs, cards: Card[], game: Game) {
     return newScores;
 }
 
-const scoreFuncs: Record<string, (string | number)[]> = {
+const scoreFuncs: Record<string, (string | number | string[])[]> = {
     // Bomen
     Paardenkastanje: ["count^2-max-houtbij", 7],
     Berk: ["count-x", 1],
@@ -111,19 +111,17 @@ const scoreFuncs: Record<string, (string | number)[]> = {
     Damhert: ["sort-count-x", "Evenhoevig dier", 3],
     Edelhert: ["2-sort-count-x", "Boom", "Plant", 1],
 
-    // Ree: []
+    // Ree: ["color-card-counts-x", ["darkblue", "yellow", "lightgreen", "darkgreen", "orange"], 3],
 
     Wildzwijn: ["count-x", 10],
     Zwijnenbig: ["count-x", 1],
     "Wild zwijn (zeug)": ["canonical-name-card-count-x", "Zwijnenbig", 10],
-
-    // Wisent: ["2-canonical-name-card-count-x", "Beuk", "Eik", 2],
-
+    Wisent: ["color-card-counts-x", ["darkgreen", "brown"], 2],
     Alpensteenbok: ["count-x", 10],
 
-    // Gems: [],
-    // Eland: [],
+    // Gems: ["color-card-counts-x", ["lightblue", "pink", "purple"], 3],
 
+    Eland: ["color-card-counts-x", ["sapling", "lightblue", "lightgreen"], 2],
     "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Bruine grootoorvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Grote hoefijzerneus": ["count-x-min", 5, 3, "Vleermuis"],
@@ -249,6 +247,12 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         } else if (predicate == "grot-x") {
             const m = input.grotCount;
             score = (scoreFunc[1] as number) * m * count;
+        } else if (predicate == "color-card-counts-x") {
+            score = 0;
+            for (const color of scoreFunc[1] as string[]) {
+                score += (input.colorCardCount[color] ?? 0) * Number(scoreFunc[2]) * count;
+            }
+            console.log(predicate, score);
         } else if (predicate == "vlinder-telling") {
             score = 0;
             for (let layer = 0; layer < vlinderStats.layerCount; layer++) {

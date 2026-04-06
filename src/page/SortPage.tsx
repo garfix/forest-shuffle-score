@@ -109,7 +109,12 @@ export default function SortPage({
                                 ></Chip>
                             </div>
                             {card.name == "Gems" && getCount(card) > 0 && (
-                                <ColorCardTable inputs={inputs} user={user} setInputs={setInputs} colors={["pink"]} />
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["lightblue", "pink", "purple"]}
+                                />
                             )}
                             {card.name == "Wisent" && getCount(card) > 0 && (
                                 <ColorCardTable
@@ -124,7 +129,7 @@ export default function SortPage({
                                     inputs={inputs}
                                     user={user}
                                     setInputs={setInputs}
-                                    colors={["youngtree", "lightblue", "lightgreen"]}
+                                    colors={["sapling", "lightblue", "lightgreen"]}
                                 />
                             )}
                             {card.name == "Ree" && getCount(card) > 0 && (

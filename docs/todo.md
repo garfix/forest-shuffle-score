@@ -1,3 +1,3 @@
 - Bouw een delay in bij opslaan local storage
-- Ree, Wisent
 - check alle voorwaarden; kloppen niet allemaal
+- Gems: idem als Ree

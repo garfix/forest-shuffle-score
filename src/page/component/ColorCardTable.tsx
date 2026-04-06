@@ -8,6 +8,8 @@ import orange from "./icons/orange.png";
 import yellow from "./icons/yellow.png";
 import purple from "./icons/purple.png";
 import brown from "./icons/brown.png";
+import pink from "./icons/pink.png";
+import sapling from "./icons/sapling.png";
 import Amount from "./Amount";
 import type { User } from "../../entity/user";
 
@@ -28,7 +30,9 @@ const colorImages: Record<string, string> = {
     lightblue: lightblue,
     darkblue: darkblue,
     brown: brown,
-    youngtree: purple,
+    purple: purple,
+    pink: pink,
+    sapling: sapling,
 };
 
 export default function ColorCardTable({ inputs, user, setInputs, maxChecks, colors }: Props) {
@@ -40,7 +44,6 @@ export default function ColorCardTable({ inputs, user, setInputs, maxChecks, col
         newInputs[user.name] = { ...inputs[user.name] };
         newInputs[user.name].colorCardCount = { ...inputs[user.name].colorCardCount };
         newInputs[user.name].colorCardCount[color] = count;
-        console.log(newInputs[user.name].colorCardCount);
 
         setInputs(newInputs);
     };
@@ -57,6 +60,7 @@ export default function ColorCardTable({ inputs, user, setInputs, maxChecks, col
                             setColorCardCount(color, count);
                         }}
                     />
+                    <div></div>
                 </div>
             ))}
         </>

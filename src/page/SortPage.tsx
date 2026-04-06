@@ -108,20 +108,13 @@ export default function SortPage({
                                     color="success"
                                 ></Chip>
                             </div>
-                            {card.name == "Gems" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["lightblue", "pink", "purple"]}
-                                />
-                            )}
                             {card.name == "Wisent" && getCount(card) > 0 && (
                                 <ColorCardTable
                                     inputs={inputs}
                                     user={user}
                                     setInputs={setInputs}
                                     colors={["darkgreen", "brown"]}
+                                    card={card}
                                 />
                             )}
                             {card.name == "Eland" && getCount(card) > 0 && (
@@ -130,6 +123,7 @@ export default function SortPage({
                                     user={user}
                                     setInputs={setInputs}
                                     colors={["sapling", "lightblue", "lightgreen"]}
+                                    card={card}
                                 />
                             )}
                             {card.name == "Ree" && getCount(card) > 0 && (
@@ -138,6 +132,18 @@ export default function SortPage({
                                     user={user}
                                     setInputs={setInputs}
                                     colors={["darkblue", "yellow", "lightgreen", "darkgreen", "orange"]}
+                                    card={card}
+                                    maxChecks={getCount(card)}
+                                />
+                            )}
+                            {card.name == "Gems" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["lightblue", "pink", "purple"]}
+                                    card={card}
+                                    maxChecks={getCount(card)}
                                 />
                             )}
                             {card.sub_question && !!getCount(card) && (

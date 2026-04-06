@@ -7,7 +7,14 @@ import type { Game } from "../entity/game";
 export function initInputs(users: User[]) {
     const inputs: Inputs = {};
     for (const user of users) {
-        inputs[user.name] = { cardCount: {}, cardSubCount: {}, grotCount: 0, grotCard: "", colorCardCount: {} };
+        inputs[user.name] = {
+            cardCount: {},
+            cardSubCount: {},
+            grotCount: 0,
+            grotCard: "",
+            colorCardCount: {},
+            colorCardChecks: {},
+        };
     }
     return inputs;
 }
@@ -111,7 +118,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Damhert: ["sort-count-x", "Evenhoevig dier", 3],
     Edelhert: ["2-sort-count-x", "Boom", "Plant", 1],
 
-    // Ree: ["color-card-counts-x", ["darkblue", "yellow", "lightgreen", "darkgreen", "orange"], 3],
+    Ree: ["color-card-counts-checked", ["darkblue", "yellow", "lightgreen", "darkgreen", "orange"], 3],
 
     Wildzwijn: ["count-x", 10],
     Zwijnenbig: ["count-x", 1],
@@ -119,7 +126,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Wisent: ["color-card-counts-x", ["darkgreen", "brown"], 2],
     Alpensteenbok: ["count-x", 10],
 
-    // Gems: ["color-card-counts-x", ["lightblue", "pink", "purple"], 3],
+    Gems: ["color-card-counts-checked", ["lightblue", "pink", "purple"], 3],
 
     Eland: ["color-card-counts-x", ["sapling", "lightblue", "lightgreen"], 2],
     "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
@@ -252,7 +259,13 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
             for (const color of scoreFunc[1] as string[]) {
                 score += (input.colorCardCount[color] ?? 0) * Number(scoreFunc[2]) * count;
             }
-            console.log(predicate, score);
+        } else if (predicate == "color-card-counts-checked") {
+            score = 0;
+            for (const color of scoreFunc[1] as string[]) {
+                if (input.colorCardChecks[card.id] && input.colorCardChecks[card.id].includes(color)) {
+                    score += (input.colorCardCount[color] ?? 0) * Number(scoreFunc[2]);
+                }
+            }
         } else if (predicate == "vlinder-telling") {
             score = 0;
             for (let layer = 0; layer < vlinderStats.layerCount; layer++) {

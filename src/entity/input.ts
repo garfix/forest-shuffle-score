@@ -4,6 +4,7 @@ export type Input = {
     grotCard: string;
     grotCount: number;
     colorCardCount: Record<string, number>;
+    colorCardChecks: Record<number, string[]>;
 };
 
 export type Inputs = Record<string, Input>;

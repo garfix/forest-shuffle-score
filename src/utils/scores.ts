@@ -119,9 +119,10 @@ const scoreFuncs: Record<string, (string | number)[]> = {
 
     // Wisent: ["2-canonical-name-card-count-x", "Beuk", "Eik", 2],
 
-    Alpensteenbok: ["count-x", 10],,
-    Gems: [],
-    Eland: [],
+    Alpensteenbok: ["count-x", 10],
+
+    // Gems: [],
+    // Eland: [],
 
     "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Bruine grootoorvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
@@ -196,7 +197,6 @@ function calculateCardScore(count: number, card: Card, cards: Card[], input: Inp
         if (predicate == "count-x") {
             score = (scoreFunc[1] as number) * count;
         } else if (predicate == "count-x-min") {
-            //  ["count-x-min", 5, 3, "Vleermuis"],
             if (getDifferentCanonicalNamesOfSortCount(input, cards, String(scoreFunc[3])) >= Number(scoreFunc[2])) {
                 score = Number(scoreFunc[1]) * count;
             }

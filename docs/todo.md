@@ -1,3 +1,1 @@
-- Grote bonte specht: meer bomen dan elk ander bos
-- Lynx: min 1 ree
 - Wild zwijn: min 1 zwijnenbig

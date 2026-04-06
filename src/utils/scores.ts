@@ -106,7 +106,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     // Naast
     "Europese das": ["count-x", 2],
     "Europese haas": ["count^2", 1],
-    Lynx: ["count-x", 10],
+    Lynx: ["count-x-min-card", 10, 1, "Ree"],
     Relmuis: ["sub-x", 15],
     "Rode vos": ["canonical-name-card-count-x", "Europese haas", 2],
     Steenmarter: ["sub-x", 5],
@@ -212,6 +212,11 @@ function calculateCardScore(
             score = (scoreFunc[1] as number) * count;
         } else if (predicate == "count-x-min") {
             if (getDifferentCanonicalNamesOfSortCount(input, cards, String(scoreFunc[3])) >= Number(scoreFunc[2])) {
+                score = Number(scoreFunc[1]) * count;
+            }
+        } else if (predicate == "count-x-min-card") {
+            const c = getCardByCanonicalName(scoreFunc[3] as string, cards)!;
+            if (input.cardCount[c.id] && input.cardCount[card.id] >= Number(scoreFunc[2])) {
                 score = Number(scoreFunc[1]) * count;
             }
         } else if (predicate == "count-x-min-houtbij") {

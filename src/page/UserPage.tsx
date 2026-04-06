@@ -6,6 +6,7 @@ import type { Scores } from "../entity/score";
 import Chip from "@mui/material/Chip";
 import { getCountsByUser } from "../utils/cards";
 import type { Inputs } from "../entity/input";
+import { initInputs } from "../utils/scores";
 
 type Props = {
     users: User[];
@@ -13,15 +14,20 @@ type Props = {
     setPage: (page: string) => void;
     setUser: (user: User) => void;
     inputs: Inputs;
+    setInputs: (inputs: Inputs) => void;
 };
 
-export default function UserPage({ users, setUser, scores, setPage, inputs }: Props) {
+export default function UserPage({ users, setUser, scores, setPage, inputs, setInputs }: Props) {
     const select = (user: User) => {
         setUser(user);
         setPage("category");
     };
 
     const counts = getCountsByUser(inputs);
+
+    const newGame = () => {
+        setInputs(initInputs(users));
+    };
 
     return (
         <>
@@ -40,6 +46,11 @@ export default function UserPage({ users, setUser, scores, setPage, inputs }: Pr
                         </Button>
                     </React.Fragment>
                 ))}
+            </div>
+            <div>
+                <Button variant="contained" color="warning" onClick={newGame}>
+                    New game
+                </Button>
             </div>
         </>
     );

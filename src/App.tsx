@@ -75,6 +75,7 @@ function App() {
                             setPage={setPage}
                             setUser={setUser}
                             inputs={inputs}
+                            setInputs={setInputs}
                         ></UserPage>
                     )}
                     {page == "category" && (
@@ -97,7 +98,7 @@ function App() {
                             category={category!}
                             cards={cards}
                             inputs={inputs}
-                            setUserInput={setInputs}
+                            setInputs={setInputs}
                             scores={scores}
                             game={game}
                         ></SortPage>

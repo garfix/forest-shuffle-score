@@ -14,6 +14,7 @@ import React from "react";
 import Grot from "./component/Grot";
 import type { Game } from "../entity/game";
 import { getScoreLabel } from "../utils/scores";
+import ColorCardTable from "./component/ColorCardTable";
 
 type Props = {
     setPage: (page: string) => void;
@@ -24,7 +25,7 @@ type Props = {
     cards: Card[];
     inputs: Inputs;
     scores: Scores;
-    setUserInput: (inputs: Inputs) => void;
+    setInputs: (inputs: Inputs) => void;
     game: Game;
 };
 
@@ -36,7 +37,7 @@ export default function SortPage({
     category,
     cards,
     inputs,
-    setUserInput,
+    setInputs,
     game,
 }: Props) {
     const getCount = (card: Card) => {
@@ -56,7 +57,7 @@ export default function SortPage({
         newInputs[user.name] = { ...inputs[user.name] };
         newInputs[user.name].cardCount = { ...inputs[user.name].cardCount };
         newInputs[user.name].cardCount[card.id] = count;
-        setUserInput(newInputs);
+        setInputs(newInputs);
     };
 
     const setSubCount = (card: Card, count: number) => {
@@ -64,7 +65,7 @@ export default function SortPage({
         newInputs[user.name] = { ...inputs[user.name] };
         newInputs[user.name].cardSubCount = { ...inputs[user.name].cardSubCount };
         newInputs[user.name].cardSubCount[card.id] = count;
-        setUserInput(newInputs);
+        setInputs(newInputs);
     };
 
     const nextCategory = getNextCategory(category);
@@ -90,7 +91,7 @@ export default function SortPage({
             </div>
             <div className={styles.cards}>
                 {category.name == "Grot" ? (
-                    <Grot user={user} inputs={inputs} setUserInput={setUserInput} scores={scores} game={game} />
+                    <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
                 ) : (
                     categoryCards.map((card) => (
                         <React.Fragment key={card.id}>
@@ -107,6 +108,33 @@ export default function SortPage({
                                     color="success"
                                 ></Chip>
                             </div>
+                            {card.name == "Gems" && getCount(card) > 0 && (
+                                <ColorCardTable inputs={inputs} user={user} setInputs={setInputs} colors={["pink"]} />
+                            )}
+                            {card.name == "Wisent" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["darkgreen", "brown"]}
+                                />
+                            )}
+                            {card.name == "Eland" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["youngtree", "lightblue", "lightgreen"]}
+                                />
+                            )}
+                            {card.name == "Ree" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["darkblue", "yellow", "lightgreen", "darkgreen", "orange"]}
+                                />
+                            )}
                             {card.sub_question && !!getCount(card) && (
                                 <div className={styles.card}>
                                     <div className={styles.sub_question}>{card.sub_question}</div>

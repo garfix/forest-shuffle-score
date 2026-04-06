@@ -49,7 +49,7 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
             </div>
             <div className={styles.below}>
                 <Button variant="contained" color="warning" onClick={newGame}>
-                    New game
+                    Nieuw spel
                 </Button>
             </div>
         </>

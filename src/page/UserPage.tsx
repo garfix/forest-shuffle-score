@@ -47,7 +47,7 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
                     </React.Fragment>
                 ))}
             </div>
-            <div>
+            <div className={styles.below}>
                 <Button variant="contained" color="warning" onClick={newGame}>
                     New game
                 </Button>

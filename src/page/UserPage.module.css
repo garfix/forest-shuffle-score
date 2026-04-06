@@ -16,3 +16,8 @@
 .chip {
     min-width: 50px;
 }
+
+.below {
+    position: fixed;
+    bottom: 20px;
+}

@@ -94,7 +94,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Bostulp: ["count-x", 3],
     Wateraardbei: ["wateraardbei-telling"],
     Boomkikker: ["canonical-name-card-count-x", "Mug", 5],
-    "Gewone pad": ["sub-x", 5],
+    "Gewone pad": ["pair-x", 10],
     Moerasschildpad: ["count-x", 5],
     Vuursalamander: ["vuursalamander-telling"],
     Alpenwatersalamander: ["sort-count-x", "Insect", 2],
@@ -271,6 +271,9 @@ function calculateCardScore(
         } else if (predicate == "sub-x") {
             const subCount = input.cardSubCount[card.id] ?? 0;
             score = subCount * Number(scoreFunc[1]) * count;
+        } else if (predicate == "pair-x") {
+            const subCount = input.cardSubCount[card.id] ?? 0;
+            score = subCount * Number(scoreFunc[1]);
         } else if (predicate == "grot-x") {
             const m = input.grotCount;
             score = (scoreFunc[1] as number) * m * count;

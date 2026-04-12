@@ -127,7 +127,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Wisent: ["color-card-counts-x", ["darkgreen", "brown"], 2],
     Alpensteenbok: ["count-x", 10],
     Gems: ["color-card-counts-checked", ["lightblue", "pink", "purple"], 3],
-    Eland: ["color-card-counts-x", ["sapling", "lightblue", "lightgreen"], 2],
+    Eland: ["card-plus-color-card-counts-x", "Jong boompje", ["lightblue", "lightgreen"], 2],
     "Bechsteins vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Bruine grootoorvleermuis": ["count-x-min", 5, 3, "Vleermuis"],
     "Grote hoefijzerneus": ["count-x-min", 5, 3, "Vleermuis"],
@@ -286,6 +286,13 @@ function calculateCardScore(
                     score += (input.colorCardCount[color] ?? 0) * Number(scoreFunc[2]);
                 }
             }
+        } else if (predicate == "card-plus-color-card-counts-x") {
+            const aCard = getCardByCanonicalName(scoreFunc[1] as string, cards);
+            let cardCount = getCardScore(aCard!.id, input);
+            for (const color of scoreFunc[2] as string[]) {
+                cardCount += input.colorCardCount[color] ?? 0;
+            }
+            score = cardCount * Number(scoreFunc[3]) * count;
         } else if (predicate == "vlinder-telling") {
             score = 0;
             for (let layer = 0; layer < vlinderStats.layerCount; layer++) {

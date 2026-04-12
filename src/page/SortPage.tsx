@@ -122,7 +122,7 @@ export default function SortPage({
                                     inputs={inputs}
                                     user={user}
                                     setInputs={setInputs}
-                                    colors={["sapling", "lightblue", "lightgreen"]}
+                                    colors={["lightblue", "lightgreen"]}
                                     card={card}
                                 />
                             )}

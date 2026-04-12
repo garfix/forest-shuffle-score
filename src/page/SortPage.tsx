@@ -84,7 +84,7 @@ export default function SortPage({
     };
 
     const done = () => {
-        setPage("category");
+        setPage("scores");
     };
 
     const categoryCards: Card[] = useMemo(() => getCategoryCards(cards, category), [category]);
@@ -169,7 +169,7 @@ export default function SortPage({
                     ))
                 )}
             </div>
-            {nextCategory ? <Link onClick={next}>Volgende</Link> : <Link onClick={done}>Einde, naar overzicht</Link>}
+            {nextCategory ? <Link onClick={next}>Volgende</Link> : <Link onClick={done}>Einde, naar scores</Link>}
         </>
     );
 }

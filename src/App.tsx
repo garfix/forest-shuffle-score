@@ -21,6 +21,7 @@ import type { Game } from "./entity/game";
 import { defaultGame } from "./utils/game";
 import { getCategories } from "./utils/categories";
 import CssBaseline from "@mui/material/CssBaseline";
+import ScorePage from "./page/ScorePage";
 
 const theme = createTheme({
     palette: {
@@ -72,6 +73,9 @@ function App() {
                 <CssBaseline />
                 <section id="center">
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
+                    {page == "scores" && (
+                        <ScorePage setPage={setPage} users={users} game={game} scores={scores}></ScorePage>
+                    )}
                     {page == "user" && (
                         <UserPage
                             users={users}

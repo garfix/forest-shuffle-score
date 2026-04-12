@@ -23,6 +23,10 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
         setPage("category");
     };
 
+    const toScores = () => {
+        setPage("scores");
+    };
+
     const counts = getCountsByUser(inputs);
 
     const newGame = () => {
@@ -46,6 +50,11 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
                         </Button>
                     </React.Fragment>
                 ))}
+            </div>
+            <div>
+                <Button variant="contained" className={styles.button} onClick={() => toScores()}>
+                    Score overzicht
+                </Button>
             </div>
             <div className={styles.below}>
                 <Button variant="contained" color="warning" onClick={newGame}>

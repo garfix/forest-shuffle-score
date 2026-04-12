@@ -1,3 +1,1 @@
-- padden: per paar opgeven
-- scoreoverzicht: overzicht van beide gebruikers op 1 pagina
 - groeperen / sorteren van sort pagina

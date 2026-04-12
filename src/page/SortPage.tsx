@@ -6,7 +6,6 @@ import type { Card } from "../entity/card";
 import { getCategoryCards } from "../utils/cards";
 import Amount from "./component/Amount";
 import type { Scores } from "../entity/score";
-import Link from "./component/Link";
 import { getNextCategory } from "../utils/categories";
 import type { Inputs } from "../entity/input";
 import Chip from "@mui/material/Chip";
@@ -16,6 +15,7 @@ import type { Game } from "../entity/game";
 import { getScoreLabel } from "../utils/scores";
 import ColorCardTable from "./component/ColorCardTable";
 import SortColor from "./component/SortColor";
+import { Button, Link } from "@mui/material";
 
 type Props = {
     setPage: (page: string) => void;
@@ -93,8 +93,14 @@ export default function SortPage({
     return (
         <>
             <div>
-                <Link onClick={() => setPage("user")}>Start</Link> &nbsp;/&nbsp;
-                <Link onClick={() => setPage("category")}>{user.name}</Link> &nbsp;/&nbsp; <span>{category.name}</span>
+                <Button variant="outlined" onClick={() => setPage("user")}>
+                    Start
+                </Button>{" "}
+                &nbsp;/&nbsp;
+                <Button variant="outlined" onClick={() => setPage("category")}>
+                    {user.name}
+                </Button>{" "}
+                &nbsp;/&nbsp; <span>{category.name}</span>
             </div>
             <div className={styles.cards}>
                 {category.name == "Grot" ? (

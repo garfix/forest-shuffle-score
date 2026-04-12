@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import { type Category } from "../entity/category";
 import React from "react";
 import { Chip } from "@mui/material";
-import Link from "./component/Link";
 import { getCountsByCategory } from "../utils/cards";
 import type { Card } from "../entity/card";
 import type { Inputs } from "../entity/input";
@@ -32,7 +31,10 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
     return (
         <>
             <div>
-                <Link onClick={() => setPage("user")}>Start</Link> &nbsp;/&nbsp; <span>{user.name}</span>
+                <Button variant="outlined" onClick={() => setPage("user")}>
+                    Start
+                </Button>{" "}
+                &nbsp;/&nbsp; <span>{user.name}</span>
             </div>
             <div className={styles.categories}>
                 <div></div>
@@ -48,7 +50,9 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                             label={getScoreLabel(scores[user.name].categoryScores[category.name])}
                             color="success"
                         ></Chip>
-                        <Button onClick={() => select(category)}>Bewerk</Button>
+                        <Button variant="outlined" onClick={() => select(category)}>
+                            Bewerk
+                        </Button>
                     </React.Fragment>
                 ))}
             </div>

@@ -45,14 +45,14 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
                         <div className={styles.label}>{user.name}</div>
                         <Chip className={styles.chip} label={counts[user.name]} color="info" />
                         <Chip className={styles.chip} color="success" label={getScoreLabel(scores[user.name].total)} />
-                        <Button className={styles.button} onClick={() => select(user)}>
+                        <Button variant="outlined" className={styles.button} onClick={() => select(user)}>
                             Bewerk
                         </Button>
                     </React.Fragment>
                 ))}
             </div>
             <div>
-                <Button variant="contained" className={styles.button} onClick={() => toScores()}>
+                <Button variant="outlined" className={styles.button} onClick={() => toScores()}>
                     Score overzicht
                 </Button>
             </div>

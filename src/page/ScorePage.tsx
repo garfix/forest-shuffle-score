@@ -1,4 +1,4 @@
-import { Chip, Link } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import styles from "./ScorePage.module.css";
 import type { User } from "../entity/user";
 import { getCategories } from "../utils/categories";
@@ -15,7 +15,9 @@ export default function Home({ setPage, users, game, scores }: Props) {
     return (
         <>
             <div>
-                <Link onClick={() => setPage("user")}>Start</Link>
+                <Button variant="outlined" onClick={() => setPage("user")}>
+                    Start
+                </Button>
             </div>
             <div className={styles.scores}>
                 <div></div>

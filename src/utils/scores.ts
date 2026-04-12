@@ -224,7 +224,7 @@ function calculateCardScore(
             const houtbij = input.cardSubCount[card.id] ?? 0;
             const totalCount = count + houtbij;
             if (totalCount >= Number(scoreFunc[2])) {
-                score = Number(scoreFunc[1]) * totalCount;
+                score = Number(scoreFunc[1]) * count;
             }
         } else if (predicate == "count^2") {
             score = count * count;
@@ -237,7 +237,7 @@ function calculateCardScore(
             const houtbij = input.cardSubCount[card.id] ?? 0;
             const totalCount = count + houtbij;
             const m = getMaxCardCount(card, inputs, true);
-            score = (totalCount == m ? 3 : 1) * totalCount;
+            score = (totalCount == m ? 3 : 1) * count;
         } else if (predicate == "count-x-most-sort") {
             const sort = scoreFunc[2] as string;
             if (getSortCount(input, cards, sort) === getMaxSortCount(cards, inputs, sort)) {

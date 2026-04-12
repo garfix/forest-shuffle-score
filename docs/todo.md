@@ -1,6 +1,5 @@
-- scoreoverzicht: overzicht van beide gebruikers op 1 pagina
-- grote bonte specht: geen bos met meer bomen
 - grote groene sabelsprinkhaan: geen score
 - groeperen / sorteren van sort pagina
 - steenmarter: score x 2
 - padden: per paar opgeven
+- scoreoverzicht: overzicht van beide gebruikers op 1 pagina

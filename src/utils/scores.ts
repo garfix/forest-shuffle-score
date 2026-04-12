@@ -239,8 +239,7 @@ function calculateCardScore(
             score = (totalCount == m ? 3 : 1) * totalCount;
         } else if (predicate == "count-x-most-sort") {
             const sort = scoreFunc[2] as string;
-            const [max, maxUsers] = getMaxSortCount(cards, inputs, sort);
-            if (maxUsers.length === 1 && getSortCount(input, cards, sort) === max) {
+            if (getSortCount(input, cards, sort) === getMaxSortCount(cards, inputs, sort)) {
                 score = Number(scoreFunc[1]) * count;
             }
         } else if (predicate == "count-x-8trees") {
@@ -338,10 +337,9 @@ function getMaxCardCount(card: Card, inputs: Inputs, houtbij: boolean) {
     return max;
 }
 
-function getMaxSortCount(cards: Card[], inputs: Inputs, sort: string): [number, string[]] {
+function getMaxSortCount(cards: Card[], inputs: Inputs, sort: string): number {
     let max = 0;
-    const maxUsers = [];
-    for (const [user, input] of Object.entries(inputs)) {
+    for (const [_, input] of Object.entries(inputs)) {
         let count = 0;
         for (const card of cards) {
             if (card.sort.includes(sort)) {
@@ -349,12 +347,9 @@ function getMaxSortCount(cards: Card[], inputs: Inputs, sort: string): [number, 
             }
         }
 
-        if (count > max) {
-            max = Math.max(max, count);
-            maxUsers.push(user);
-        }
+        max = Math.max(max, count);
     }
-    return [max, maxUsers];
+    return max;
 }
 
 function getCanonicalNameCardCount(input: Input, cards: Card[], cardName: string) {

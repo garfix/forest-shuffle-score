@@ -1,1 +1,2 @@
-- groeperen / sorteren van sort pagina
+- gebruikers beheren en selecteren voor spel
+- spelvarianten selecteren voor spel

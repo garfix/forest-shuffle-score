@@ -15,6 +15,7 @@ import Grot from "./component/Grot";
 import type { Game } from "../entity/game";
 import { getScoreLabel } from "../utils/scores";
 import ColorCardTable from "./component/ColorCardTable";
+import SortColor from "./component/SortColor";
 
 type Props = {
     setPage: (page: string) => void;
@@ -102,6 +103,7 @@ export default function SortPage({
                     categoryCards.map((card) => (
                         <React.Fragment key={card.id}>
                             <div className={styles.card}>
+                                <SortColor sort={card.sort[0]} />
                                 <div className={styles.name}>{card.display_name}</div>
                                 <Amount
                                     value={getCount(card)}
@@ -154,6 +156,7 @@ export default function SortPage({
                             )}
                             {card.sub_question && !!getCount(card) && (
                                 <div className={styles.card}>
+                                    <div></div>
                                     <div className={styles.sub_question}>{card.sub_question}</div>
                                     <Amount
                                         buttonColor="info"

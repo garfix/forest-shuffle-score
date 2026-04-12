@@ -6,7 +6,7 @@
 
 .card {
     display: grid;
-    grid-template-columns: calc(100% - 220px) 130px 50px;
+    grid-template-columns: 10px calc(100% - 250px) 130px 50px;
     align-items: center;
     gap: 20px;
 }
@@ -15,7 +15,7 @@
     text-align: left;
     width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
 }
 
 .sub_question {

@@ -58,11 +58,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Goudvink: ["sort-count-x", "Insect", 2],
     "Grote bonte specht": ["count-x-most-sort", 10, "Boom"],
     Havik: ["sort-count-x", "Vogel", 3],
-    Vink: ["sub-x", 5],
+    Vink: ["sub", 5],
     "Vlaamse gaai": ["count-x", 3],
     Ekster: ["count-x", 3],
     Kerkuil: ["sort-count-x", "Vleermuis", 3],
-    Nachtegaal: ["sub-x", 5],
+    Nachtegaal: ["sub", 5],
     "Rode kardinaal": ["count-x", 5],
     Roodborstje: ["sort-count-x", "Insect", 1],
     Lammergier: ["grot-x", 1],
@@ -78,7 +78,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Landkaartje: ["vlinder-telling"],
     "Kleine Apollovlinder": ["vlinder-telling"],
     Citroenvlinder: ["vlinder-telling"],
-    "Rode eekhoorn": ["sub-x", 5],
+    "Rode eekhoorn": ["sub", 5],
     Maretak: ["sort-count-x", "Plant", 1],
 
     // Onder
@@ -108,11 +108,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Europese das": ["count-x", 2],
     "Europese haas": ["count^2", 1],
     Lynx: ["count-x-min-card", 10, 1, "Ree"],
-    Relmuis: ["sub-x", 15],
+    Relmuis: ["sub", 15],
     "Rode vos": ["canonical-name-card-count-x", "Europese haas", 2],
     Steenmarter: ["sub-x", 5],
     Wolf: ["sort-count-x", "Hert", 5],
-    Bunzing: ["sub-x", 10],
+    Bunzing: ["sub", 10],
     "Wilde kat": ["sort-count-x", "Woodland edge", 1],
     Alpenmarmot: ["unique-sort-count-x", "Plant", 3],
     Civetkat: ["count-x", 5],
@@ -268,6 +268,9 @@ function calculateCardScore(
                     getSortCount(input, cards, scoreFunc[2] as string)) *
                 Number(scoreFunc[3]) *
                 count;
+        } else if (predicate == "sub") {
+            const subCount = input.cardSubCount[card.id] ?? 0;
+            score = subCount * Number(scoreFunc[1]);
         } else if (predicate == "sub-x") {
             const subCount = input.cardSubCount[card.id] ?? 0;
             score = subCount * Number(scoreFunc[1]) * count;

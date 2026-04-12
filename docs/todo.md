@@ -1,5 +1,3 @@
-- grote groene sabelsprinkhaan: geen score
-- groeperen / sorteren van sort pagina
-- steenmarter: score x 2
 - padden: per paar opgeven
 - scoreoverzicht: overzicht van beide gebruikers op 1 pagina
+- groeperen / sorteren van sort pagina

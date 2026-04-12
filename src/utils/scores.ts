@@ -270,7 +270,7 @@ function calculateCardScore(
                 count;
         } else if (predicate == "sub-x") {
             const subCount = input.cardSubCount[card.id] ?? 0;
-            score = Number(scoreFunc[1]) * subCount;
+            score = subCount * Number(scoreFunc[1]) * count;
         } else if (predicate == "grot-x") {
             const m = input.grotCount;
             score = (scoreFunc[1] as number) * m * count;

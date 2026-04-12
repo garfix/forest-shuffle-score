@@ -15,7 +15,7 @@ import type { Game } from "../entity/game";
 import { getScoreLabel } from "../utils/scores";
 import ColorCardTable from "./component/ColorCardTable";
 import SortColor from "./component/SortColor";
-import { Button, Link } from "@mui/material";
+import { Button } from "@mui/material";
 
 type Props = {
     setPage: (page: string) => void;
@@ -178,7 +178,15 @@ export default function SortPage({
                     ))
                 )}
             </div>
-            {nextCategory ? <Link onClick={next}>Volgende</Link> : <Link onClick={done}>Einde, naar scores</Link>}
+            {nextCategory ? (
+                <Button variant="outlined" onClick={next}>
+                    Volgende
+                </Button>
+            ) : (
+                <Button variant="outlined" onClick={done}>
+                    Einde, naar scores
+                </Button>
+            )}
         </>
     );
 }

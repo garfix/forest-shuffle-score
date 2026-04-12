@@ -6,7 +6,7 @@ import type { Scores } from "../entity/score";
 import Chip from "@mui/material/Chip";
 import { getCountsByUser } from "../utils/cards";
 import type { Inputs } from "../entity/input";
-import { initInputs } from "../utils/scores";
+import { getScoreLabel, initInputs } from "../utils/scores";
 
 type Props = {
     users: User[];
@@ -44,7 +44,7 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
                     <React.Fragment key={user.name}>
                         <div className={styles.label}>{user.name}</div>
                         <Chip className={styles.chip} label={counts[user.name]} color="info" />
-                        <Chip className={styles.chip} color="success" label={scores[user.name].total} />
+                        <Chip className={styles.chip} color="success" label={getScoreLabel(scores[user.name].total)} />
                         <Button className={styles.button} onClick={() => select(user)}>
                             Bewerk
                         </Button>

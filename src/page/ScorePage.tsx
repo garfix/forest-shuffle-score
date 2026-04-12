@@ -5,6 +5,7 @@ import { getCategories } from "../utils/categories";
 import type { Game } from "../entity/game";
 import React from "react";
 import type { Scores } from "../entity/score";
+import { getScoreLabel } from "../utils/scores";
 
 type Props = { setPage: (page: string) => void; users: User[]; game: Game; scores: Scores };
 
@@ -28,7 +29,7 @@ export default function Home({ setPage, users, game, scores }: Props) {
                             <Chip
                                 className={styles.chip}
                                 color="success"
-                                label={scores[user.name].categoryScores[category.name]}
+                                label={getScoreLabel(scores[user.name].categoryScores[category.name])}
                             />
                         ))}
                     </React.Fragment>
@@ -36,7 +37,7 @@ export default function Home({ setPage, users, game, scores }: Props) {
                 <React.Fragment key={"total"}>
                     <div className={styles.label}>Totaal</div>
                     {users.map((user) => (
-                        <Chip className={styles.chip} color="warning" label={scores[user.name].total} />
+                        <Chip className={styles.chip} color="warning" label={getScoreLabel(scores[user.name].total)} />
                     ))}
                 </React.Fragment>
             </div>

@@ -5,6 +5,7 @@ import Amount from "./Amount";
 import type { Scores } from "../../entity/score";
 import styles from "./Grot.module.css";
 import type { Game } from "../../entity/game";
+import { getScoreLabel } from "../../utils/scores";
 
 type Props = {
     user: User;
@@ -58,7 +59,11 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
             <div className={styles.card}>
                 <div className={styles.name}>Kaarten in de grot</div>
                 <Amount value={getGrotCount()} setValue={(count) => setGrotCount(count)} />
-                <Chip className={styles.chip} label={scores[user.name].categoryScores["Grot"]} color="success"></Chip>
+                <Chip
+                    className={styles.chip}
+                    label={getScoreLabel(scores[user.name].categoryScores["Grot"])}
+                    color="success"
+                ></Chip>
             </div>
         </>
     );

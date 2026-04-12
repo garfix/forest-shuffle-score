@@ -101,6 +101,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Bosmier: ["sub-x", 2],
     "Vliegend hert": ["sort-count-x", "Pootdier", 1],
     Vuurvliegjes: ["vuurvliegjes-telling"],
+    "Grote groene sabelsprinkhaan": ["sort-count-x", "Insect", 1],
     Egel: ["sort-count-x", "Vlinder", 2],
 
     // Naast

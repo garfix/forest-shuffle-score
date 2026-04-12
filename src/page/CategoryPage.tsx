@@ -33,8 +33,8 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
             <div>
                 <Button variant="outlined" onClick={() => setPage("user")}>
                     Start
-                </Button>{" "}
-                &nbsp;/&nbsp; <span>{user.name}</span>
+                </Button>
+                &nbsp;&nbsp;/&nbsp;&nbsp;<span>{user.name}</span>
             </div>
             <div className={styles.categories}>
                 <div></div>

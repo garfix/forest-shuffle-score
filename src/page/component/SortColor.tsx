@@ -5,7 +5,7 @@ const colors: Record<string, string> = {
     Vlinder: "#8d4f92",
     Pootdier: "#aa6338",
     Struiken: "#478754",
-    Amfibie: "#9f9e99",
+    Amfibie: "#ccc",
     Plant: "#478754",
     "Evenhoevig dier": "#7d6447",
     Insect: "#5e9a84",

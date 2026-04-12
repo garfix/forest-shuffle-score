@@ -60,7 +60,20 @@ export function loadCards(game: Game): Card[] {
 }
 
 export function getCategoryCards(cards: Card[], category: Category): Card[] {
-    return cards.filter((card) => card.category == category.name);
+    const filtered = cards.filter((card) => card.category == category.name);
+    return filtered.sort((c1: Card, c2: Card) => {
+        if (c1.sort[0] < c2.sort[0]) {
+            return -1;
+        } else if (c1.sort[0] > c2.sort[0]) {
+            return 1;
+        }
+        if (c1.display_name < c2.display_name) {
+            return -1;
+        } else if (c1.display_name > c2.display_name) {
+            return 1;
+        }
+        return 0;
+    });
 }
 
 export function getCountsByCategory(cards: Card[], input: Input) {

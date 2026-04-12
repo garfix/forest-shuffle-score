@@ -1,2 +1,3 @@
 - gebruikers beheren en selecteren voor spel
 - spelvarianten selecteren voor spel
+- maak card id stabieler (ipv index)

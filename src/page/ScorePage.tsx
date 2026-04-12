@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import { Chip, Link } from "@mui/material";
 import styles from "./ScorePage.module.css";
 import type { User } from "../entity/user";

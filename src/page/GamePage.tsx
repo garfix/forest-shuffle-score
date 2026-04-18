@@ -4,7 +4,7 @@ import type { User } from "../entity/user";
 import React from "react";
 import type { Inputs } from "../entity/input";
 import { initInputs } from "../utils/scores";
-import { Checkbox, FormControlLabel, FormGroup, MenuItem, Select, TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
 import type { Game } from "../entity/game";
 import { variants } from "../utils/game";
 

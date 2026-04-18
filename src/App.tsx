@@ -38,10 +38,11 @@ const theme = createTheme({
 
 const INPUTS = "inputs_v2";
 const USERS = "users_v1";
+const GAME = "game_v1";
 
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
-    const [game] = useState<Game>(defaultGame);
+    const [game, setGame] = useState<Game>(defaultGame);
     const cards = useMemo(() => loadCards(game), [game]);
     const [users, setUsers] = useState<User[]>(defaultUsers);
     const [page, setPage] = useState("home");
@@ -55,26 +56,33 @@ function App() {
         if (loading) {
             const s = localStorage.getItem(INPUTS);
             const u = localStorage.getItem(USERS);
+            const g = localStorage.getItem(GAME);
             if (s) {
                 setInputs(JSON.parse(s));
             }
             if (u) {
                 setUsers(JSON.parse(u));
             }
+            if (g) {
+                setGame(JSON.parse(g));
+            }
             setLoading(false);
         } else {
             const timer = setTimeout(() => {
                 localStorage.setItem(INPUTS, JSON.stringify(inputs));
                 localStorage.setItem(USERS, JSON.stringify(users));
+                localStorage.setItem(GAME, JSON.stringify(game));
             }, 3000);
 
             return () => clearTimeout(timer);
         }
-    }, [inputs, users]);
+    }, [inputs, users, game]);
 
     useEffect(() => {
         setScores(calculateScores(inputs, cards, game));
     }, [inputs]);
+
+    console.log(game);
 
     return (
         <>
@@ -85,11 +93,11 @@ function App() {
                     {page == "game" && (
                         <GamePage
                             users={users}
-                            scores={scores}
                             setPage={setPage}
                             setUsers={setUsers}
-                            inputs={inputs}
                             setInputs={setInputs}
+                            game={game}
+                            setGame={setGame}
                         ></GamePage>
                     )}
                     {page == "scores" && (

@@ -2,21 +2,22 @@ import Button from "@mui/material/Button";
 import styles from "./GamePage.module.css";
 import type { User } from "../entity/user";
 import React from "react";
-import type { Scores } from "../entity/score";
 import type { Inputs } from "../entity/input";
 import { initInputs } from "../utils/scores";
-import { TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, MenuItem, Select, TextField } from "@mui/material";
+import type { Game } from "../entity/game";
+import { variants } from "../utils/game";
 
 type Props = {
     users: User[];
-    scores: Scores;
     setPage: (page: string) => void;
     setUsers: (user: User[]) => void;
-    inputs: Inputs;
     setInputs: (inputs: Inputs) => void;
+    game: Game;
+    setGame: (game: Game) => void;
 };
 
-export default function GamePage({ users, setUsers, scores, setPage, inputs, setInputs }: Props) {
+export default function GamePage({ users, setUsers, setPage, setInputs, game, setGame }: Props) {
     const updateUserName = function (index: number, name: string) {
         const newUsers: User[] = users.slice(0);
         newUsers[index] = { ...users[index] };
@@ -31,6 +32,12 @@ export default function GamePage({ users, setUsers, scores, setPage, inputs, set
 
     const back = () => {
         setPage("user");
+    };
+
+    const setSpelVarianten = function (spelVarianten: string[]) {
+        const newGame = { ...game };
+        newGame.spelVarianten = spelVarianten;
+        setGame(newGame);
     };
 
     return (
@@ -50,6 +57,28 @@ export default function GamePage({ users, setUsers, scores, setPage, inputs, set
                         </div>
                     </React.Fragment>
                 ))}
+            </div>
+            <h2>Varianten</h2>
+            <div>
+                <FormGroup>
+                    {variants.map((variant) => (
+                        <FormControlLabel
+                            key={variant}
+                            control={
+                                <Checkbox
+                                    checked={game.spelVarianten.includes(variant)}
+                                    onChange={(e) => {
+                                        const updated = e.target.checked
+                                            ? [...game.spelVarianten, variant]
+                                            : game.spelVarianten.filter((v) => v !== variant);
+                                        setSpelVarianten(updated);
+                                    }}
+                                />
+                            }
+                            label={variant}
+                        />
+                    ))}
+                </FormGroup>
             </div>
             <div className={styles.below}>
                 <Button onClick={back}>Terug</Button>

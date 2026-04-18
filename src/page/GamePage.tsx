@@ -42,6 +42,11 @@ export default function GamePage({ users, setUsers, setPage, setInputs, game, se
 
     return (
         <>
+            <div className={styles.below}>
+                <Button variant="outlined" onClick={back}>
+                    Terug
+                </Button>
+            </div>
             <h2>Spelers</h2>
             <div>
                 {users.map((user, index) => (
@@ -81,7 +86,6 @@ export default function GamePage({ users, setUsers, setPage, setInputs, game, se
                 </FormGroup>
             </div>
             <div className={styles.below}>
-                <Button onClick={back}>Terug</Button>
                 <Button variant="contained" color="warning" onClick={newGame}>
                     Start
                 </Button>

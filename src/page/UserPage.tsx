@@ -6,7 +6,8 @@ import type { Scores } from "../entity/score";
 import Chip from "@mui/material/Chip";
 import { getCountsByUser } from "../utils/cards";
 import type { Inputs } from "../entity/input";
-import { getScoreLabel, initInputs } from "../utils/scores";
+import { getScoreLabel } from "../utils/scores";
+import { activeUsers } from "../utils/users";
 
 type Props = {
     users: User[];
@@ -17,7 +18,7 @@ type Props = {
     setInputs: (inputs: Inputs) => void;
 };
 
-export default function UserPage({ users, setUser, scores, setPage, inputs, setInputs }: Props) {
+export default function UserPage({ users, setUser, scores, setPage, inputs }: Props) {
     const select = (user: User) => {
         setUser(user);
         setPage("category");
@@ -30,7 +31,7 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
     const counts = getCountsByUser(inputs);
 
     const newGame = () => {
-        setInputs(initInputs(users));
+        setPage("game");
     };
 
     return (
@@ -40,11 +41,11 @@ export default function UserPage({ users, setUser, scores, setPage, inputs, setI
                 <div>Kaarten</div>
                 <div>Score</div>
                 <div></div>
-                {users.map((user) => (
-                    <React.Fragment key={user.name}>
+                {activeUsers(users).map((user) => (
+                    <React.Fragment key={user.id}>
                         <div className={styles.label}>{user.name}</div>
-                        <Chip className={styles.chip} label={counts[user.name]} color="info" />
-                        <Chip className={styles.chip} color="success" label={getScoreLabel(scores[user.name].total)} />
+                        <Chip className={styles.chip} label={counts[user.id]} color="info" />
+                        <Chip className={styles.chip} color="success" label={getScoreLabel(scores[user.id].total)} />
                         <Button variant="outlined" className={styles.button} onClick={() => select(user)}>
                             Bewerk
                         </Button>

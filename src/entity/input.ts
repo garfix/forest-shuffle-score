@@ -7,4 +7,4 @@ export type Input = {
     colorCardChecks: Record<number, string[]>;
 };
 
-export type Inputs = Record<string, Input>;
+export type Inputs = Record<number, Input>;

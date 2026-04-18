@@ -17,24 +17,24 @@ type Props = {
 
 export default function Grot({ user, inputs, setUserInput, scores, game }: Props) {
     const getGrotCount = () => {
-        return inputs[user.name].grotCount ?? 0;
+        return inputs[user.id].grotCount ?? 0;
     };
 
     const getGrotCard = () => {
-        return inputs[user.name].grotCard ?? "";
+        return inputs[user.id].grotCard ?? "";
     };
 
     const setGrotCount = (count: number) => {
         const newInputs: Inputs = { ...inputs };
-        newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].grotCount = count;
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].grotCount = count;
         setUserInput(newInputs);
     };
 
     const setGrotCard = (cardName: string) => {
         const newInputs: Inputs = { ...inputs };
-        newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].grotCard = cardName;
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].grotCard = cardName;
         setUserInput(newInputs);
     };
     return (
@@ -61,7 +61,7 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
                 <Amount value={getGrotCount()} setValue={(count) => setGrotCount(count)} />
                 <Chip
                     className={styles.chip}
-                    label={getScoreLabel(scores[user.name].categoryScores["Grot"])}
+                    label={getScoreLabel(scores[user.id].categoryScores["Grot"])}
                     color="success"
                 ></Chip>
             </div>

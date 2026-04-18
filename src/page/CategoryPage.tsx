@@ -26,7 +26,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
         setPage("sort");
     }
 
-    const counts = getCountsByCategory(cards, inputs[user.name]);
+    const counts = getCountsByCategory(cards, inputs[user.id]);
 
     return (
         <>
@@ -47,7 +47,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                         <Chip className={styles.chip} label={counts[category.name]} color="info"></Chip>
                         <Chip
                             className={styles.chip}
-                            label={getScoreLabel(scores[user.name].categoryScores[category.name])}
+                            label={getScoreLabel(scores[user.id].categoryScores[category.name])}
                             color="success"
                         ></Chip>
                         <Button variant="outlined" onClick={() => select(category)}>

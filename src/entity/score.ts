@@ -4,4 +4,4 @@ export type Score = {
     categoryScores: Record<string, number>; // category name, score
 };
 
-export type Scores = Record<string, Score>;
+export type Scores = Record<number, Score>;

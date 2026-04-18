@@ -42,18 +42,18 @@ export default function SortPage({
     game,
 }: Props) {
     const getCount = (card: Card) => {
-        return inputs[user.name].cardCount[card.id] ?? 0;
+        return inputs[user.id].cardCount[card.id] ?? 0;
     };
 
     const getSubCount = (card: Card) => {
-        return inputs[user.name].cardSubCount[card.id] ?? 0;
+        return inputs[user.id].cardSubCount[card.id] ?? 0;
     };
 
     const getSubCountMax = (card: Card) => {
         if (card.sub_question_max == "overnemen") {
-            return inputs[user.name].cardCount[card.id];
+            return inputs[user.id].cardCount[card.id];
         } else if (card.sub_question_max == "overnemen-paar") {
-            return Math.floor(inputs[user.name].cardCount[card.id] / 2);
+            return Math.floor(inputs[user.id].cardCount[card.id] / 2);
         } else {
             return undefined;
         }
@@ -61,17 +61,17 @@ export default function SortPage({
 
     const setCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
-        newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].cardCount = { ...inputs[user.name].cardCount };
-        newInputs[user.name].cardCount[card.id] = count;
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].cardCount = { ...inputs[user.id].cardCount };
+        newInputs[user.id].cardCount[card.id] = count;
         setInputs(newInputs);
     };
 
     const setSubCount = (card: Card, count: number) => {
         const newInputs: Inputs = { ...inputs };
-        newInputs[user.name] = { ...inputs[user.name] };
-        newInputs[user.name].cardSubCount = { ...inputs[user.name].cardSubCount };
-        newInputs[user.name].cardSubCount[card.id] = count;
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].cardSubCount = { ...inputs[user.id].cardSubCount };
+        newInputs[user.id].cardSubCount[card.id] = count;
         setInputs(newInputs);
     };
 
@@ -118,7 +118,7 @@ export default function SortPage({
                                 />
                                 <Chip
                                     className={styles.chip}
-                                    label={getScoreLabel(scores[user.name].cardScores[card.id])}
+                                    label={getScoreLabel(scores[user.id].cardScores[card.id])}
                                     color="success"
                                 ></Chip>
                             </div>

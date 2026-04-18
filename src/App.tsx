@@ -22,6 +22,7 @@ import { defaultGame } from "./utils/game";
 import { getCategories } from "./utils/categories";
 import CssBaseline from "@mui/material/CssBaseline";
 import ScorePage from "./page/ScorePage";
+import GamePage from "./page/GamePage";
 
 const theme = createTheme({
     palette: {
@@ -35,11 +36,13 @@ const theme = createTheme({
     },
 });
 
+const INPUTS = "inputs_v2";
+
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const [game] = useState<Game>(defaultGame);
     const cards = useMemo(() => loadCards(game), [game]);
-    const [users] = useState<User[]>(defaultUsers);
+    const [users, setUsers] = useState<User[]>(defaultUsers);
     const [page, setPage] = useState("home");
     const [user, setUser] = useState<User>(users[0]);
     const [category, setCategory] = useState<Category | null>(null);
@@ -49,14 +52,14 @@ function App() {
 
     useEffect(() => {
         if (loading) {
-            const s = localStorage.getItem("inputs");
+            const s = localStorage.getItem(INPUTS);
             if (s) {
                 setInputs(JSON.parse(s));
             }
             setLoading(false);
         } else {
             const timer = setTimeout(() => {
-                localStorage.setItem("inputs", JSON.stringify(inputs));
+                localStorage.setItem(INPUTS, JSON.stringify(inputs));
             }, 3000);
 
             return () => clearTimeout(timer);
@@ -73,6 +76,16 @@ function App() {
                 <CssBaseline />
                 <section id="center">
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
+                    {page == "game" && (
+                        <GamePage
+                            users={users}
+                            scores={scores}
+                            setPage={setPage}
+                            setUsers={setUsers}
+                            inputs={inputs}
+                            setInputs={setInputs}
+                        ></GamePage>
+                    )}
                     {page == "scores" && (
                         <ScorePage setPage={setPage} users={users} game={game} scores={scores}></ScorePage>
                     )}

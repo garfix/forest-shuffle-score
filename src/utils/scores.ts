@@ -7,7 +7,7 @@ import type { Game } from "../entity/game";
 export function initInputs(users: User[]) {
     const inputs: Inputs = {};
     for (const user of users) {
-        inputs[user.name] = {
+        inputs[user.id] = {
             cardCount: {},
             cardSubCount: {},
             grotCount: 0,
@@ -22,16 +22,16 @@ export function initInputs(users: User[]) {
 export function initScores(users: User[]) {
     const scores: Scores = {};
     for (const user of users) {
-        scores[user.name] = { total: 0, cardScores: {}, categoryScores: {} };
+        scores[user.id] = { total: 0, cardScores: {}, categoryScores: {} };
     }
     return scores;
 }
 
 export function calculateScores(inputs: Inputs, cards: Card[], game: Game) {
     const newScores: Scores = {};
-    for (const [userName, input] of Object.entries(inputs)) {
+    for (const [userId, input] of Object.entries(inputs)) {
         const [cardScores, categoryScores, newTotal] = calculateTotal(cards, input, inputs, game);
-        newScores[userName] = { total: newTotal, cardScores: cardScores, categoryScores: categoryScores };
+        newScores[Number(userId)] = { total: newTotal, cardScores: cardScores, categoryScores: categoryScores };
     }
     return newScores;
 }

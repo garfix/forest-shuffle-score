@@ -1,19 +1,26 @@
-The code voor de mobiele web app (alleen in het nederlands) [Forest Shuffle Score](https://patrickvanbergen.com/forest-shuffle-score/) die helpt bij het berekenen van de score in Forest Shuffle.
+De code voor de mobiele web app (alleen in het nederlands) [Forest Shuffle Score](https://patrickvanbergen.com/forest-shuffle-score/) die helpt bij het berekenen van de score in Forest Shuffle.
 
-## Opmerkingen
+## Eerste opmerkingen
 
-- De score kan worden bijgehouden voor het basisspel, en eventueel de varianten Woodland Edge (bosrand), Alpine, en Exploration
+- Je voert het aantal kaarten van elk type in, en beantwoord enkele vragen over kaart-aantallen, en de app berekent de score.
+- De score kan worden bijgehouden voor het basisspel, en eventueel de varianten Woodland Edge (bosrand), Alpine, en Exploration.
 - Standaard begint het spel met de gebruikers Patrick en Katja. Je kunt deze aanpassen bij het begin van een nieuw spel.
+- Je input wordt bijgehouden in je browser (local storage).
+- De kaart-input wordt gewist aan het begin van elk nieuw spel. Er worden geen historische resultaten bijgehouden.
+
+## Web-app
+
+Je kunt de web-pagina als app installeren op je mobiel, door in het menu van je browser te kiezen voor "Toevoegen aan startscherm" (of vergelijkbaar), en dan "Als app installeren". Je krijgt er dan een icoontje op je startscherm bij.
 
 ## Startpagina
 
-Hiermee start de app op. Druk op Start.
+De app start op. Druk op Start.
 
 ![Home page](docs/img/home.png)
 
 ## Gebruikers-overzicht
 
-In het gebruikersoverzicht zie je de actieve gebruikers, met het aantal kaarten dat ze hebben ingevoerd, en hun totale score.
+In het gebruikersoverzicht zie je de actieve gebruikers, met het aantal kaarten dat ze hebben ingevoerd, en hun totale score. Je kunt de namen van de gebruikers aanpassen op de volgende pagina.
 
 Ook kun je hier een nieuw spel beginnen en naar het score-overzicht.
 
@@ -41,7 +48,7 @@ Op de soorten-pagina voer je voor een gebruiker in hoeveel kaarten van elk type 
 
 Druk meermaals op `+1` of `-1` om het juiste aantal kaarten te krijgen. Het getal in het midden (oranje) toont het aantal kaarten en het getal rechts (donkergroen) de score voor dit type kaart.
 
-De score is gebaseerd op de gegevens die het programma tot nu toe heeft van de gebruiker, en wordt **steeds opnieuw bijgewerkt** als er nieuwe aantallen bijkomen. De eik krijgt bijvoorbeeld nog geen punten bij het invoeren van het aantal kaarten van de eik, maar pas als de gebruiker 8 verschillende typen boom heeft, krijgt de eik punten.
+De score is gebaseerd op de gegevens die het programma tot nu toe heeft van de gebruiker, en wordt **steeds opnieuw bijgewerkt** als er nieuwe aantallen bijkomen. De eik krijgt bijvoorbeeld nog geen punten bij het invoeren van het aantal kaarten, maar pas als de gebruiker 8 verschillende typen boom heeft, krijgt de eik punten.
 
 Iedere kaart heeft een eigen score-berekening en allemaal worden ze steeds opnieuw berekend bij iedere wijziging aan de aantallen.
 

@@ -82,8 +82,6 @@ function App() {
         setScores(calculateScores(inputs, cards, game));
     }, [inputs]);
 
-    console.log(game);
-
     return (
         <>
             <ThemeProvider theme={theme}>

@@ -37,6 +37,7 @@ const theme = createTheme({
 });
 
 const INPUTS = "inputs_v2";
+const USERS = "users_v1";
 
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -53,18 +54,23 @@ function App() {
     useEffect(() => {
         if (loading) {
             const s = localStorage.getItem(INPUTS);
+            const u = localStorage.getItem(USERS);
             if (s) {
                 setInputs(JSON.parse(s));
+            }
+            if (u) {
+                setUsers(JSON.parse(u));
             }
             setLoading(false);
         } else {
             const timer = setTimeout(() => {
                 localStorage.setItem(INPUTS, JSON.stringify(inputs));
+                localStorage.setItem(USERS, JSON.stringify(users));
             }, 3000);
 
             return () => clearTimeout(timer);
         }
-    }, [inputs]);
+    }, [inputs, users]);
 
     useEffect(() => {
         setScores(calculateScores(inputs, cards, game));

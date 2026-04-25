@@ -116,11 +116,15 @@ export default function SortPage({
                                     setValue={(count) => setCount(card, count)}
                                     max={card.amount}
                                 />
-                                <Chip
-                                    className={styles.chip}
-                                    label={getScoreLabel(scores[user.id].cardScores[card.id])}
-                                    color="success"
-                                ></Chip>
+                                {inputs[user.id].cardCount[card.id] ? (
+                                    <Chip
+                                        className={styles.chip}
+                                        label={getScoreLabel(scores[user.id].cardScores[card.id])}
+                                        color="success"
+                                    ></Chip>
+                                ) : (
+                                    <div></div>
+                                )}
                             </div>
                             {card.name == "Wisent" && getCount(card) > 0 && (
                                 <ColorCardTable

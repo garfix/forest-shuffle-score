@@ -470,7 +470,7 @@ function getCardByCanonicalName(cardName: string, cards: Card[]) {
 
 export function getScoreLabel(score: number) {
     if (!score) {
-        return "";
+        return "0";
     }
 
     // score may be 61.000000001 due to floating point arithmetic

@@ -59,11 +59,15 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
             <div className={styles.card}>
                 <div className={styles.name}>Kaarten in de grot</div>
                 <Amount value={getGrotCount()} setValue={(count) => setGrotCount(count)} />
-                <Chip
-                    className={styles.chip}
-                    label={getScoreLabel(scores[user.id].categoryScores["Grot"])}
-                    color="success"
-                ></Chip>
+                {scores[user.id].categoryScores["Grot"] || inputs[user.id].grotCount ? (
+                    <Chip
+                        className={styles.chip}
+                        label={getScoreLabel(scores[user.id].categoryScores["Grot"])}
+                        color="success"
+                    ></Chip>
+                ) : (
+                    <div></div>
+                )}
             </div>
         </>
     );

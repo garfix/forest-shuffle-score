@@ -1,1 +1,4 @@
 - maak card id stabieler (ipv index)
+- sla de items apart op in local storage
+- de +1 knoppen moeten niet rood want dan denk je dat er iets fout is
+- nadat je een gebruiker klaar hebt, ga terug naar start, niet naar score, behalve misschien na de laatste speler

@@ -22,6 +22,7 @@ export default function Home({ setPage, users, game, scores }: Props) {
                 <Button variant="outlined" onClick={() => setPage("user")}>
                     Start
                 </Button>
+                &nbsp;&nbsp;/&nbsp;&nbsp;<span>Scores</span>
             </div>
             <div className={styles.scores} style={tableStyle}>
                 <div></div>
@@ -46,6 +47,11 @@ export default function Home({ setPage, users, game, scores }: Props) {
                         <Chip className={styles.chip} color="warning" label={getScoreLabel(scores[user.id].total)} />
                     ))}
                 </React.Fragment>
+            </div>
+            <div>
+                <Button variant="outlined" onClick={() => setPage("user")}>
+                    Naar start
+                </Button>
             </div>
         </>
     );

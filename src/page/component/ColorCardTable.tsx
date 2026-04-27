@@ -106,7 +106,7 @@ export default function ColorCardTable({ inputs, user, setInputs, card, maxCheck
                     {!maxChecks || isColorCardChecked(card, color) ? (
                         <Amount
                             buttonColor="info"
-                            valueColor="error"
+                            valueColor="secondary"
                             value={getColorCardCount(color)}
                             setValue={(count) => {
                                 setColorCardCount(color, count);

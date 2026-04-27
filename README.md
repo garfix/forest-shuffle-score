@@ -50,6 +50,8 @@ Druk meermaals op `+1` of `-1` om het juiste aantal kaarten te krijgen. Het geta
 
 De score is gebaseerd op de gegevens die het programma tot nu toe heeft van de gebruiker, en wordt **steeds opnieuw bijgewerkt** als er nieuwe aantallen bijkomen. De eik krijgt bijvoorbeeld nog geen punten bij het invoeren van het aantal kaarten, maar pas als de gebruiker 8 verschillende typen boom heeft, krijgt de eik punten.
 
+De score is meestal een geheel getal, maar het kan ook een fractie opleveren. Als een gebruiker bijvoorbeeld 2 verschillende vlinders heeft, leveren die samen 3 punten op. Omdat de punten over de vlinders verdeeld worden, krijgen beide 1.5 punt. Dit wordt genoteerd met `1+`.
+
 Iedere kaart heeft een eigen score-berekening en allemaal worden ze steeds opnieuw berekend bij iedere wijziging aan de aantallen.
 
 ![Soort-pagina](docs/img/sort.png)

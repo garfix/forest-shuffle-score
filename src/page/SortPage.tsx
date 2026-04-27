@@ -85,7 +85,7 @@ export default function SortPage({
     };
 
     const done = () => {
-        setPage("scores");
+        setPage("user");
     };
 
     const categoryCards: Card[] = useMemo(() => getCategoryCards(cards, category), [category]);
@@ -170,7 +170,7 @@ export default function SortPage({
                                     <div className={styles.sub_question}>{card.sub_question}</div>
                                     <Amount
                                         buttonColor="info"
-                                        valueColor="error"
+                                        valueColor="secondary"
                                         value={getSubCount(card)}
                                         setValue={(count) => setSubCount(card, count)}
                                         max={getSubCountMax(card)}
@@ -188,7 +188,7 @@ export default function SortPage({
                 </Button>
             ) : (
                 <Button variant="outlined" onClick={done}>
-                    Einde, naar scores
+                    Einde, naar overzicht
                 </Button>
             )}
         </>

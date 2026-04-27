@@ -5,12 +5,12 @@ import { Chip } from "@mui/material";
 type Props = {
     value: number;
     setValue: (value: number) => void;
-    valueColor?: "primary" | "error";
-    buttonColor?: "warning" | "info";
+    valueColor?: "primary" | "error" | "warning" | "info" | "secondary" | "success" | "default" | undefined;
+    buttonColor?: "primary" | "error" | "warning" | "info" | "inherit" | "secondary" | "success" | undefined;
     max?: number;
 };
 
-export default function Amount({ value, setValue, valueColor = "primary", buttonColor = "warning", max }: Props) {
+export default function Amount({ value, setValue, valueColor = "warning", buttonColor = "primary", max }: Props) {
     function inc() {
         setValue(value + 1);
     }
@@ -26,17 +26,17 @@ export default function Amount({ value, setValue, valueColor = "primary", button
                 variant="contained"
                 onClick={dec}
                 className={styles.button}
-                color={valueColor}
+                color={buttonColor}
                 disabled={value <= 0}
             >
                 -1
             </Button>
-            <Chip className={styles.chip} label={value} color={buttonColor} />
+            <Chip className={styles.chip} label={value} color={valueColor} />
             <Button
                 variant="contained"
                 onClick={inc}
                 className={styles.button}
-                color={valueColor}
+                color={buttonColor}
                 disabled={!!max && value >= max}
             >
                 +1

@@ -37,20 +37,29 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
         newInputs[user.id].grotCard = cardName;
         setUserInput(newInputs);
     };
+
+    const exploration = game.spelVarianten.includes("Exploration");
+    const dartmoor = game.spelVarianten.includes("Dartmoor");
+
     return (
         <>
-            {game.spelVarianten.includes("Exploration") && (
+            {(exploration || dartmoor) && (
                 <div className={styles.card}>
                     <div className={styles.name}>Grotkaart</div>
                     <FormControl size="small" variant="outlined">
                         <InputLabel>Selecteer</InputLabel>
                         <Select value={getGrotCard()} onChange={(event) => setGrotCard(event.target.value)}>
                             <MenuItem value="">Geen</MenuItem>
-                            <MenuItem value="Smokkelgrot">Smokkelgrot</MenuItem>
-                            <MenuItem value="Opslaggrot">Opslaggrot</MenuItem>
-                            <MenuItem value="Verlaten grot">Verlaten grot</MenuItem>
-                            <MenuItem value="Vleermuizengrot">Vleermuizengrot</MenuItem>
-                            <MenuItem value="Spaargrot">Spaargrot</MenuItem>
+                            {exploration && <MenuItem value="Smokkelgrot">Smokkelgrot</MenuItem>}
+                            {exploration && <MenuItem value="Opslaggrot">Opslaggrot</MenuItem>}
+                            {exploration && <MenuItem value="Verlaten grot">Verlaten grot</MenuItem>}
+                            {exploration && <MenuItem value="Vleermuizengrot">Vleermuizengrot</MenuItem>}
+                            {exploration && <MenuItem value="Spaargrot">Spaargrot</MenuItem>}
+                            {dartmoor && <MenuItem value="Grot 1">Grot 1</MenuItem>}
+                            {dartmoor && <MenuItem value="Grot 2">Grot 2</MenuItem>}
+                            {dartmoor && <MenuItem value="Grot 3">Grot 3</MenuItem>}
+                            {dartmoor && <MenuItem value="Grot 4">Grot 4</MenuItem>}
+                            {dartmoor && <MenuItem value="Grot 5">Grot 5</MenuItem>}
                         </Select>
                     </FormControl>
                     <div></div>

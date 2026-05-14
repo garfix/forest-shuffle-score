@@ -182,6 +182,11 @@ function calculateGrotScore(input: Input, game: Game, cards: Card[]) {
             }
         }
     }
+    if (game.spelVarianten.includes("Dartmoor")) {
+        if (input.grotCard == "Grot 4") {
+            return input.grotCount + 5;
+        }
+    }
 
     return input.grotCount;
 }

@@ -4,32 +4,38 @@ import type { Game } from "../entity/game";
 const categories: Category[] = [
     {
         name: "Boom",
-        spel_variant: "Basisspel",
+        spel_variant: [],
     },
     {
         name: "Struiken",
-        spel_variant: "Woodland edge",
+        spel_variant: ["Woodland edge", "Dartmoor"],
+    },
+    {
+        name: "Heide",
+        spel_variant: ["Dartmoor"],
     },
     {
         name: "Boven",
-        spel_variant: "Basisspel",
+        spel_variant: [],
     },
     {
         name: "Onder",
-        spel_variant: "Basisspel",
+        spel_variant: [],
     },
     {
         name: "Naast",
-        spel_variant: "Basisspel",
+        spel_variant: [],
     },
     {
         name: "Grot",
-        spel_variant: "Basisspel",
+        spel_variant: [],
     },
 ];
 
 export function getCategories(game: Game) {
-    return categories.filter((c) => game.spelVarianten.includes(c.spel_variant));
+    return categories.filter(
+        (c) => c.spel_variant.length === 0 || game.spelVarianten.filter((v) => c.spel_variant.includes(v)).length > 0,
+    );
 }
 
 export function getNextCategory(category: Category) {

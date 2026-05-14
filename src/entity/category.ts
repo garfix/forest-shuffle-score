@@ -1,4 +1,4 @@
 export type Category = {
     name: string;
-    spel_variant: string;
+    spel_variant: string[];
 };

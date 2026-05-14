@@ -1,7 +1,7 @@
 import type { Game } from "../entity/game";
 
-export const variants: string[] = ["Woodland edge", "Alpine", "Exploration"];
+export const variants: string[] = ["Basisspel", "Woodland edge", "Alpine", "Exploration", "Dartmoor"];
 
 export const defaultGame: Game = {
-    spelVarianten: ["Basisspel", ...variants],
+    spelVarianten: [...variants],
 };

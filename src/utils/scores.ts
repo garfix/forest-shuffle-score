@@ -128,6 +128,9 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Vuurvliegjes: ["vuurvliegjes-telling"],
     "Grote groene sabelsprinkhaan": ["sort-count-x", "Insect", 1],
     Egel: ["sort-count-x", "Vlinder", 2],
+    Addertong: ["count-x", 3],
+    Beenbreek: ["sort-count-x", "Heide", 1],
+    Bergnachtorchis: ["bergnachtorchis-score"],
 
     // Naast
     "Europese das": ["count-x", 2],
@@ -370,6 +373,9 @@ function calculateCardScore(
         } else if (predicate == "wulp-telling") {
             const m = getSortCount(input, cards, "Insect");
             score = m >= 5 ? 10 : 3;
+        } else if (predicate == "bergnachtorchis-score") {
+            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Plant");
+            score = m >= 5 ? 15 : 3;
         }
     }
     return score;

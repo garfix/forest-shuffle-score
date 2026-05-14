@@ -93,6 +93,9 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Citroenvlinder: ["vlinder-telling"],
     "Rode eekhoorn": ["sub", 5],
     Maretak: ["sort-count-x", "Plant", 1],
+    "Blauwe reiger": ["count-x", 8],
+    Buizerd: ["sort-count-x", "Muis", 2],
+    Graspieper: ["graspieper-telling"],
 
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
@@ -343,6 +346,9 @@ function calculateCardScore(
             score = getIndexedScore(m, { 0: 0, 1: 5, 2: 15, 3: 25 });
         } else if (predicate == "vuurvliegjes-telling") {
             score = getIndexedScore(count, { 0: 0, 1: 0, 2: 10, 3: 15, 4: 20 });
+        } else if (predicate == "graspieper-telling") {
+            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Vogel");
+            score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 3, 4: 6, 5: 6, 6: 10 }) * count;
         }
     }
     return score;

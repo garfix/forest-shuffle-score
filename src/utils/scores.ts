@@ -100,6 +100,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Tapuit: ["sub", 5],
     Waterhoen: ["sort-count-x", "Libel", 2],
     Wulp: ["wulp-telling"],
+    Beekoeverlibel: ["libel-telling"],
+    Bosbeekjuffer: ["libel-telling"],
+    "Gewone pantserjuffer": ["libel-telling"],
+    Koraaljuffer: ["libel-telling"],
+    Mercuurwaterjuffer: ["libel-telling"],
 
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
@@ -171,11 +176,12 @@ function calculateTotal(
     let total = 0;
     const cardScores: Record<number, number> = {};
     const categoryScores: Record<string, number> = {};
-    const vlinderStats: VlinderStats = getVlinderStats(input, cards);
+    const vlinderStats: SortStats = getVlinderStats(input, cards);
+    const libelStats: SortStats = getLibelStats(input, cards);
 
     for (const [cardId, count] of Object.entries(input.cardCount)) {
         const card = cards[Number(cardId)];
-        const score = calculateCardScore(count, card, cards, input, inputs, vlinderStats);
+        const score = calculateCardScore(count, card, cards, input, inputs, vlinderStats, libelStats);
         cardScores[Number(cardId)] = score;
         categoryScores[card.category] = categoryScores[card.category] ? categoryScores[card.category] + score : score;
         total += score;
@@ -211,7 +217,7 @@ function calculateGrotScore(input: Input, game: Game, cards: Card[]) {
     return input.grotCount;
 }
 
-type VlinderStats = {
+type SortStats = {
     ["cardsPerLayer"]: number[][];
     ["scorePerLayer"]: number[];
     ["layerCount"]: number;
@@ -223,7 +229,8 @@ function calculateCardScore(
     cards: Card[],
     input: Input,
     inputs: Inputs,
-    vlinderStats: VlinderStats,
+    vlinderStats: SortStats,
+    libelStats: SortStats,
 ) {
     if (count == 0) {
         return 0;
@@ -337,6 +344,13 @@ function calculateCardScore(
                     score += vlinderStats.scorePerLayer[layer] / vlinderStats.cardsPerLayer[layer].length;
                 }
             }
+        } else if (predicate == "libel-telling") {
+            score = 0;
+            for (let layer = 0; layer < libelStats.layerCount; layer++) {
+                if (libelStats.cardsPerLayer[layer].includes(card.id)) {
+                    score += libelStats.scorePerLayer[layer] / libelStats.cardsPerLayer[layer].length;
+                }
+            }
         } else if (predicate == "vingerhoedskruid-telling") {
             const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Plant");
             score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
@@ -432,7 +446,7 @@ function getDifferentCanonicalNamesOfSortCount(input: Input, cards: Card[], sort
     return items.size;
 }
 
-function getVlinderStats(input: Input, cards: Card[]): VlinderStats {
+function getVlinderStats(input: Input, cards: Card[]): SortStats {
     const cardCounts: Record<number, number> = {};
     const kleineAppoloVlinder = getCardScoreByCanonicalName(cards, "Kleine Apollovlinder", input);
     const landKaartje = getCardScoreByCanonicalName(cards, "Landkaartje", input);
@@ -469,6 +483,40 @@ function getVlinderStats(input: Input, cards: Card[]): VlinderStats {
 
         cardsPerLayer.push(cardsInLayer.slice(0, count));
         scorePerLayer[layer] = { 0: 0, 1: 0, 2: 3, 3: 6, 4: 12, 5: 20, 6: 35, 7: 55, 8: 80 }[count]!;
+    }
+
+    return {
+        layerCount,
+        cardsPerLayer,
+        scorePerLayer,
+    };
+}
+
+function getLibelStats(input: Input, cards: Card[]): SortStats {
+    const cardCounts: Record<number, number> = {};
+
+    for (const card of cards) {
+        if (card.sort.includes("Libel")) {
+            if (input.cardCount[card.id]) {
+                cardCounts[card.id] = input.cardCount[card.id];
+            }
+        }
+    }
+
+    const scorePerLayer: number[] = [];
+    const cardsPerLayer: number[][] = [];
+    const layerCount = 4;
+    for (let layer = 0; layer < layerCount; layer++) {
+        let cardsInLayer: number[] = [];
+        for (const [cardId, cardCount] of Object.entries(cardCounts)) {
+            if (cardCount > layer) {
+                cardsInLayer.push(Number(cardId));
+            }
+        }
+        let count = cardsInLayer.length;
+
+        cardsPerLayer.push(cardsInLayer.slice(0, count));
+        scorePerLayer[layer] = { 0: 0, 1: 0, 2: 5, 3: 10, 4: 15, 5: 30 }[count]!;
     }
 
     return {

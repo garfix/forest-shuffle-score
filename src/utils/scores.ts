@@ -54,6 +54,8 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Zachte berk": ["count-x", 1],
     Boswilg: ["sort-count-x", "Heide", 1],
     Es: ["sort-plus-color-card-counts-x", "Plant", ["darkblue"], 1],
+    "Wilde appelboom": ["sub", 8],
+    Wintereik: ["2-sort-count-x", "Boom", "Struiken", 1],
 
     // Boven
     Bosuil: ["count-x", 5],
@@ -90,7 +92,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Wilde aardbeien": ["count-x-8trees", 10],
     "Grote brandnetel": ["sort-count-x", "Vlinder", 2],
     Vingerhoedskruid: ["vingerhoedskruid-telling"],
-    "Blauwe bes": ["unique-sort-count-x", "Vogel", 2],
+    "Blauwe bosbes": ["unique-sort-count-x", "Vogel", 2],
     Edelweiss: ["count-x", 3],
     Gentiaan: ["sort-count-x", "Vlinder", 3],
     Bostulp: ["count-x", 3],

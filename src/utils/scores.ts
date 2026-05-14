@@ -96,6 +96,10 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Blauwe reiger": ["count-x", 8],
     Buizerd: ["sort-count-x", "Muis", 2],
     Graspieper: ["graspieper-telling"],
+    Grutto: ["count-x-most-sort", 10, "Heide"],
+    Tapuit: ["sub", 5],
+    Waterhoen: ["sort-count-x", "Libel", 2],
+    Wulp: ["wulp-telling"],
 
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
@@ -349,6 +353,9 @@ function calculateCardScore(
         } else if (predicate == "graspieper-telling") {
             const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Vogel");
             score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 3, 4: 6, 5: 6, 6: 10 }) * count;
+        } else if (predicate == "wulp-telling") {
+            const m = getSortCount(input, cards, "Insect");
+            score = m >= 5 ? 10 : 3;
         }
     }
     return score;

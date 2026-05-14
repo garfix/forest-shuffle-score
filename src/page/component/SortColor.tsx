@@ -13,6 +13,7 @@ const colors: Record<string, string> = {
     Vleermuis: "#15110e",
     Boom: "#bbd767",
     Paddenstoel: "#79391c",
+    Libel: "#b873b8",
 };
 
 export default function SortColot({ sort }: Props) {

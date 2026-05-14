@@ -51,11 +51,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "O, dennenboom": ["cards-around"],
     Moseik: ["sort-count-x", "Evenhoevig dier", 1],
     Palmboom: ["sort-count-x", "Vogel", 1],
-    "Zachte berk": ["count-x", 1],
     Boswilg: ["sort-count-x", "Heide", 1],
     Es: ["sort-plus-color-card-counts-x", "Plant", ["darkblue"], 1],
     "Wilde appelboom": ["sub", 8],
     Wintereik: ["2-sort-count-x", "Boom", "Struiken", 1],
+    "Zwarte els": ["count-x", 5],
 
     // Boven
     Bosuil: ["count-x", 5],

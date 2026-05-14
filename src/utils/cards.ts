@@ -31,7 +31,8 @@ export function loadCards(game: Game): Card[] {
         if (byName[canonicalName] && treatAsSame) {
             const card = byName[canonicalName];
             card.amount += amount;
-            if (card.display_name != displayName) {
+            const names = card.display_name.split(" / ");
+            if (!names.includes(displayName)) {
                 card.display_name += " / " + displayName;
             }
         } else {

@@ -171,7 +171,15 @@ export default function SortPage({
                                     setInputs={setInputs}
                                     colors={["darkblue"]}
                                     card={card}
-                                    maxChecks={getCount(card)}
+                                />
+                            )}
+                            {card.name == "Beek" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["darkyellow"]}
+                                    card={card}
                                 />
                             )}
                             {card.sub_question && !!getCount(card) && (

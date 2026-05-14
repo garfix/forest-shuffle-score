@@ -9,6 +9,7 @@ import yellow from "./icons/yellow.png";
 import purple from "./icons/purple.png";
 import brown from "./icons/brown.png";
 import pink from "./icons/pink.png";
+import darkyellow from "./icons/darkyellow.png";
 import Amount from "./Amount";
 import type { User } from "../../entity/user";
 import { Checkbox } from "@mui/material";
@@ -33,6 +34,7 @@ const colorImages: Record<string, string> = {
     brown: brown,
     purple: purple,
     pink: pink,
+    darkyellow: darkyellow,
 };
 
 export default function ColorCardTable({ inputs, user, setInputs, card, maxChecks, colors }: Props) {

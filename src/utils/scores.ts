@@ -59,6 +59,12 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
 
     // Heide
     Beek: ["color-card-counts-x", ["darkyellow"], 2],
+    Dalveen: ["sort-count-x", "Insect", 2],
+    Dekenveen: ["sub", 5],
+    Grasland: ["sort-count-x", "Evenhoevig dier", 2],
+    Konijnenhol: ["sort-count-x", "Pootdier", 2],
+    Laaglandheide: ["sort-count-x", "Amfibie", 2],
+    "Vochtig veen": ["sort-count-x", "Heide", 2],
 
     // Boven
     Bosuil: ["count-x", 5],

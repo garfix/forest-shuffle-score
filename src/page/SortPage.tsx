@@ -164,6 +164,16 @@ export default function SortPage({
                                     maxChecks={getCount(card)}
                                 />
                             )}
+                            {card.name == "Es" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["darkblue"]}
+                                    card={card}
+                                    maxChecks={getCount(card)}
+                                />
+                            )}
                             {card.sub_question && !!getCount(card) && (
                                 <div className={styles.card}>
                                     <div></div>

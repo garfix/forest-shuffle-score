@@ -52,6 +52,8 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Moseik: ["sort-count-x", "Evenhoevig dier", 1],
     Palmboom: ["sort-count-x", "Vogel", 1],
     "Zachte berk": ["count-x", 1],
+    Boswilg: ["sort-count-x", "Heide", 1],
+    Es: ["sort-plus-color-card-counts-x", "Plant", ["darkblue"], 1],
 
     // Boven
     Bosuil: ["count-x", 5],
@@ -300,6 +302,12 @@ function calculateCardScore(
         } else if (predicate == "card-plus-color-card-counts-x") {
             const aCard = getCardByCanonicalName(scoreFunc[1] as string, cards);
             let cardCount = getCardScore(aCard!.id, input);
+            for (const color of scoreFunc[2] as string[]) {
+                cardCount += input.colorCardCount[color] ?? 0;
+            }
+            score = cardCount * Number(scoreFunc[3]) * count;
+        } else if (predicate == "sort-plus-color-card-counts-x") {
+            let cardCount = getSortCount(input, cards, scoreFunc[1] as string);
             for (const color of scoreFunc[2] as string[]) {
                 cardCount += input.colorCardCount[color] ?? 0;
             }

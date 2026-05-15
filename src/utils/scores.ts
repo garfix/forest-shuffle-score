@@ -130,12 +130,19 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Egel: ["sort-count-x", "Vlinder", 2],
     Addertong: ["count-x", 3],
     Beenbreek: ["sort-count-x", "Heide", 1],
-    Bergnachtorchis: ["bergnachtorchis-score"],
+    Bergnachtorchis: ["bergnachtorchis-telling"],
     Koningsvaren: ["unique-sort-count-x", "Plant", 2],
     Krabbenscheer: ["sort-count-x", "Libel", 2],
     Moerasspirea: ["sub", 5],
     Struikhei: ["sort-count-x", "Insect", 1],
     Adder: ["2-sort-count-x", "Amfibie", "Muis", 1],
+    Heikikker: ["heikikker-telling"],
+    Kamsalamander: ["kamsalamander-telling"],
+    "Kleine hagedis": ["kleine-hagedis-telling"],
+    Ringslang: ["count-x", 5],
+    "Blauwe schallebijter": ["onder-kaarten-x"],
+    Bever: ["grot-x", 1],
+    Otter: ["sort-count-x", "Amfibie", 2],
 
     // Naast
     "Europese das": ["count-x", 2],
@@ -370,6 +377,9 @@ function calculateCardScore(
         } else if (predicate == "vuursalamander-telling") {
             const m = getCanonicalNameCardCount(input, cards, "Vuursalamander");
             score = getIndexedScore(m, { 0: 0, 1: 5, 2: 15, 3: 25 });
+        } else if (predicate == "kamsalamander-telling") {
+            const m = getCanonicalNameCardCount(input, cards, "Kamsalamander");
+            score = getIndexedScore(m, { 0: 0, 1: 5, 2: 15, 3: 25 });
         } else if (predicate == "vuurvliegjes-telling") {
             score = getIndexedScore(count, { 0: 0, 1: 0, 2: 10, 3: 15, 4: 20 });
         } else if (predicate == "graspieper-telling") {
@@ -378,12 +388,33 @@ function calculateCardScore(
         } else if (predicate == "wulp-telling") {
             const m = getSortCount(input, cards, "Insect");
             score = m >= 5 ? 10 : 3;
-        } else if (predicate == "bergnachtorchis-score") {
+        } else if (predicate == "bergnachtorchis-telling") {
             const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Plant");
             score = m >= 5 ? 15 : 3;
+        } else if (predicate == "kleine-hagedis-telling") {
+            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Amfibie");
+            score = m >= 3 ? 15 : 5;
+        } else if (predicate == "heikikker-telling") {
+            const m = getSortCount(input, cards, "Heide");
+            score = m >= 5 ? 8 : 0;
+        } else if (predicate == "onder-kaarten-x") {
+            const m = getBelowCardCount(cards, input);
+            score = m * count;
         }
     }
     return score;
+}
+
+function getBelowCardCount(cards: Card[], input: Input) {
+    let count = 0;
+    for (const card of cards) {
+        if (card.category == "Onder") {
+            if (input.cardCount[card.id]) {
+                count += input.cardCount[card.id];
+            }
+        }
+    }
+    return count;
 }
 
 function getIndexedScore(count: number, lookup: Record<number, number>) {

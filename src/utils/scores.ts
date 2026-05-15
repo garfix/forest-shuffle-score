@@ -131,6 +131,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Addertong: ["count-x", 3],
     Beenbreek: ["sort-count-x", "Heide", 1],
     Bergnachtorchis: ["bergnachtorchis-score"],
+    Koningsvaren: ["unique-sort-count-x", "Plant", 2],
+    Krabbenscheer: ["sort-count-x", "Libel", 2],
+    Moerasspirea: ["sub", 5],
+    Struikhei: ["sort-count-x", "Insect", 1],
+    Adder: ["2-sort-count-x", "Amfibie", "Muis", 1],
 
     // Naast
     "Europese das": ["count-x", 2],

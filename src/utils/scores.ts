@@ -180,6 +180,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Zwerm honingbijen": ["sort-count-x", "Plant", 1],
     Auerhoen: ["sort-count-x", "Plant", 1],
     Ooievaar: ["2-sort-count-x", "Insect", "Amfibie", 1],
+    Aardmuis: ["sort-count-x", "Muis", 1],
+    Bosmuis: ["sort-count-x", "Muis", 1],
+    Dartmoordas: ["sort-count-x", "Pootdier", 2],
+    Dartmoorkonijn: ["count^2", 1],
+    "Millers waterspitsmuis": ["count-x", 1],
 };
 
 function calculateTotal(

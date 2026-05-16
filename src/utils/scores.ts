@@ -185,6 +185,8 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Dartmoordas: ["sort-count-x", "Pootdier", 2],
     Dartmoorkonijn: ["count^2", 1],
     "Millers waterspitsmuis": ["count-x", 1],
+    Dartmoorpony: ["dartmoorpony-telling"],
+    Dartmoorschaap: ["sort-count-x", "Evenhoevig dier", 2],
 };
 
 function calculateTotal(
@@ -405,6 +407,13 @@ function calculateCardScore(
         } else if (predicate == "onder-kaarten-x") {
             const m = getBelowCardCount(cards, input);
             score = m * count;
+        } else if (predicate == "dartmoorpony-telling") {
+            const sort = "Heide";
+            if (getSortCount(input, cards, sort) === getMaxSortCount(cards, inputs, sort)) {
+                score = 15 * count;
+            } else {
+                score = 5 * count;
+            }
         }
     }
     return score;

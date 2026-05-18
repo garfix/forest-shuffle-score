@@ -154,6 +154,16 @@ export default function SortPage({
                                     maxChecks={getCount(card)}
                                 />
                             )}
+                            {card.name == "Ree (Dartmoor)" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["lightgreen", "darkblue2", "greyblue", "greyblue2", "oldpink"]}
+                                    card={card}
+                                    maxChecks={getCount(card)}
+                                />
+                            )}
                             {card.name == "Gems" && getCount(card) > 0 && (
                                 <ColorCardTable
                                     inputs={inputs}

@@ -188,6 +188,15 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Millers waterspitsmuis": ["count-x", 1],
     Dartmoorpony: ["dartmoorpony-telling"],
     Dartmoorschaap: ["sort-count-x", "Evenhoevig dier", 2],
+    "Brandts vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
+    Laatvlieger: ["count-x-min", 5, 3, "Vleermuis"],
+    Nimfvleermuis: ["count-x-min", 5, 3, "Vleermuis"],
+    "Rosse vleermuis": ["count-x-min", 5, 3, "Vleermuis"],
+    Watervleermuis: ["count-x-min", 5, 3, "Vleermuis"],
+    Dansmug: ["sort-count-x", "Vleermuis", 1],
+    Boomklever: ["sub", 10],
+    Fazant: ["2-sort-count-x", "Boom", "Struiken", 1],
+    Taigaboomkruiper: ["count-x", 5],
 };
 
 function calculateTotal(

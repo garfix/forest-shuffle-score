@@ -52,6 +52,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "O, dennenboom": ["cards-around"],
     Moseik: ["sort-count-x", "Evenhoevig dier", 1],
     Palmboom: ["sort-count-x", "Vogel", 1],
+    "Zachte berk": ["count-x", 1],
     Boswilg: ["sort-count-x", "Heide", 1],
     Es: ["sort-plus-color-card-counts-x", "Plant", ["darkblue"], 1],
     "Wilde appelboom": ["sub", 8],
@@ -414,7 +415,7 @@ function calculateCardScore(
             score = m >= 3 ? 15 : 5;
         } else if (predicate == "heikikker-telling") {
             const m = getSortCount(input, cards, "Heide");
-            score = m >= 5 ? 8 : 0;
+            score = m >= 5 ? 8 * count : 0;
         } else if (predicate == "onder-kaarten-x") {
             const m = getBelowCardCount(cards, input);
             score = m * count;

@@ -3,7 +3,7 @@ De code voor de mobiele web app (alleen in het nederlands) [Forest Shuffle Score
 ## Eerste opmerkingen
 
 - Je voert het aantal kaarten van elk type in, en beantwoord enkele vragen over kaart-aantallen, en de app berekent de score.
-- De score kan worden bijgehouden voor het basisspel, en eventueel de varianten Woodland Edge (bosrand), Alpine, en Exploration.
+- De score kan worden bijgehouden voor het basisspel, Dartmoor, en eventueel de varianten Woodland Edge (bosrand), Alpine, en Exploration.
 - Standaard begint het spel met de gebruikers Patrick en Katja. Je kunt deze aanpassen bij het begin van een nieuw spel.
 - Je input wordt bijgehouden in je browser (local storage).
 - De kaart-input wordt gewist aan het begin van elk nieuw spel. Er worden geen historische resultaten bijgehouden.

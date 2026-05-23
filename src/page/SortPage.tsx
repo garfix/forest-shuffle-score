@@ -12,7 +12,7 @@ import Chip from "@mui/material/Chip";
 import React from "react";
 import Grot from "./component/Grot";
 import type { Game } from "../entity/game";
-import { getScoreLabel } from "../utils/scores";
+import { getCardByCanonicalName, getScoreLabel } from "../utils/scores";
 import ColorCardTable from "./component/ColorCardTable";
 import SortColor from "./component/SortColor";
 import { Button } from "@mui/material";
@@ -49,6 +49,10 @@ export default function SortPage({
         return inputs[user.id].cardSubCount[card.id] ?? 0;
     };
 
+    const getDekenveenCount = (card: Card) => {
+        return inputs[user.id].dekenveenCount[card.id] ?? 0;
+    };
+
     const getSubCountMax = (card: Card) => {
         if (card.sub_question_max == "overnemen") {
             return inputs[user.id].cardCount[card.id];
@@ -57,6 +61,10 @@ export default function SortPage({
         } else {
             return undefined;
         }
+    };
+
+    const getDekenveenCountMax = (card: Card) => {
+        return inputs[user.id].cardCount[card.id];
     };
 
     const setCount = (card: Card, count: number) => {
@@ -75,6 +83,14 @@ export default function SortPage({
         setInputs(newInputs);
     };
 
+    const setDekenveenCount = (card: Card, count: number) => {
+        const newInputs: Inputs = { ...inputs };
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].dekenveenCount = { ...inputs[user.id].dekenveenCount };
+        newInputs[user.id].dekenveenCount[card.id] = count;
+        setInputs(newInputs);
+    };
+
     const nextCategory = getNextCategory(category);
 
     const next = () => {
@@ -89,6 +105,9 @@ export default function SortPage({
     };
 
     const categoryCards: Card[] = useMemo(() => getCategoryCards(cards, category), [category]);
+
+    const dekenveen = getCardByCanonicalName("Dekenveen", cards);
+    const userHasDekenveen = dekenveen && !!inputs[user.id].cardCount[dekenveen.id];
 
     return (
         <>
@@ -202,6 +221,20 @@ export default function SortPage({
                                         value={getSubCount(card)}
                                         setValue={(count) => setSubCount(card, count)}
                                         max={getSubCountMax(card)}
+                                    />
+                                    <div></div>
+                                </div>
+                            )}
+                            {card.sort.includes("Plant") && userHasDekenveen && !!getCount(card) && (
+                                <div className={styles.card}>
+                                    <div></div>
+                                    <div className={styles.sub_question}>Hoeveel onder een dekenveen</div>
+                                    <Amount
+                                        buttonColor="info"
+                                        valueColor="secondary"
+                                        value={getDekenveenCount(card)}
+                                        setValue={(count) => setDekenveenCount(card, count)}
+                                        max={getDekenveenCountMax(card)}
                                     />
                                     <div></div>
                                 </div>

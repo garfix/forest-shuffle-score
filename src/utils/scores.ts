@@ -10,6 +10,7 @@ export function initInputs(users: User[]) {
         inputs[user.id] = {
             cardCount: {},
             cardSubCount: {},
+            dekenveenCount: {},
             grotCount: 0,
             grotCard: "",
             colorCardCount: {},
@@ -426,6 +427,13 @@ function calculateCardScore(
             }
         }
     }
+
+    const dekenveenCount = input.dekenveenCount[card.id] ?? 0;
+    if (count > 0 && dekenveenCount > 0) {
+        const unitScore = score / count;
+        score = (count - dekenveenCount) * unitScore + dekenveenCount * unitScore * 2;
+    }
+
     return score;
 }
 
@@ -609,7 +617,7 @@ function getCardScore(cardId: number, input: Input) {
     }
 }
 
-function getCardByCanonicalName(cardName: string, cards: Card[]) {
+export function getCardByCanonicalName(cardName: string, cards: Card[]) {
     for (const card of cards) {
         if (card.canonical_name == cardName) {
             return card;

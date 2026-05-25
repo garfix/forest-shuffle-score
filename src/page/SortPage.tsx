@@ -198,7 +198,7 @@ export default function SortPage({
                                     inputs={inputs}
                                     user={user}
                                     setInputs={setInputs}
-                                    colors={["darkblue"]}
+                                    colors={["darkblue2"]}
                                     card={card}
                                 />
                             )}

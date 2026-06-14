@@ -8,6 +8,7 @@ import { getCountsByUser } from "../utils/cards";
 import type { Inputs } from "../entity/input";
 import { getScoreLabel } from "../utils/scores";
 import { activeUsers } from "../utils/users";
+import githubIcon from "../assets/github.svg?raw";
 
 type Props = {
     users: User[];
@@ -56,6 +57,13 @@ export default function UserPage({ users, setUser, scores, setPage, inputs }: Pr
                 <Button variant="outlined" className={styles.button} onClick={() => toScores()}>
                     Score overzicht
                 </Button>
+            </div>
+            <div className={styles.bottomRight}>
+                <a href="https://github.com/garfix/forest-shuffle-score" target="_blank">
+                    <span dangerouslySetInnerHTML={{ __html: githubIcon }} />
+                    <br />
+                    Homepage
+                </a>
             </div>
             <div className={styles.below}>
                 <Button variant="contained" color="warning" onClick={newGame}>

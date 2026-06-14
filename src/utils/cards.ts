@@ -102,3 +102,21 @@ export function getCountsByUser(inputs: Inputs) {
     }
     return counts;
 }
+
+// Returns the amount of cards the user may claim
+// Based on the amount of cards others have claimed
+export function getFreeCount(card: Card, inputs: Inputs, userId: number) {
+    let freeCount = card.amount;
+
+    if (!freeCount) {
+        return freeCount;
+    }
+
+    for (const [aUserId, input] of Object.entries(inputs)) {
+        if (userId !== Number(aUserId)) {
+            freeCount -= input.cardCount[card.id] ?? 0;
+        }
+    }
+
+    return freeCount;
+}

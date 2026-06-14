@@ -37,7 +37,7 @@ export default function Amount({ value, setValue, valueColor = "warning", button
                 onClick={inc}
                 className={styles.button}
                 color={buttonColor}
-                disabled={!!max && value >= max}
+                disabled={max !== undefined && value >= max}
             >
                 +1
             </Button>

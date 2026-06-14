@@ -3,7 +3,7 @@ import type { User } from "../entity/user";
 import { type Category } from "../entity/category";
 import { useMemo } from "react";
 import type { Card } from "../entity/card";
-import { getCategoryCards } from "../utils/cards";
+import { getCategoryCards, getFreeCount } from "../utils/cards";
 import Amount from "./component/Amount";
 import type { Scores } from "../entity/score";
 import { getNextCategory } from "../utils/categories";
@@ -41,6 +41,10 @@ export default function SortPage({
     setInputs,
     game,
 }: Props) {
+    const getMaxCount = (card: Card) => {
+        return getFreeCount(card, inputs, user.id);
+    };
+
     const getCount = (card: Card) => {
         return inputs[user.id].cardCount[card.id] ?? 0;
     };
@@ -133,7 +137,7 @@ export default function SortPage({
                                 <Amount
                                     value={getCount(card)}
                                     setValue={(count) => setCount(card, count)}
-                                    max={card.amount}
+                                    max={getMaxCount(card)}
                                 />
                                 {inputs[user.id].cardCount[card.id] ? (
                                     <Chip

@@ -40,6 +40,7 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
 
     const exploration = game.spelVarianten.includes("Exploration");
     const dartmoor = game.spelVarianten.includes("Dartmoor");
+    const exmoor = game.spelVarianten.includes("Exmoor");
 
     return (
         <>
@@ -60,6 +61,11 @@ export default function Grot({ user, inputs, setUserInput, scores, game }: Props
                             {dartmoor && <MenuItem value="Grot 3">Grot 3</MenuItem>}
                             {dartmoor && <MenuItem value="Grot 4">Grot 4</MenuItem>}
                             {dartmoor && <MenuItem value="Grot 5">Grot 5</MenuItem>}
+                            {exmoor && <MenuItem value="Grot 6">Grot 6</MenuItem>}
+                            {exmoor && <MenuItem value="Grot 7">Grot 7</MenuItem>}
+                            {exmoor && <MenuItem value="Grot 8">Grot 8</MenuItem>}
+                            {exmoor && <MenuItem value="Grot 9">Grot 9</MenuItem>}
+                            {exmoor && <MenuItem value="Grot 10">Grot 10</MenuItem>}
                         </Select>
                     </FormControl>
                     <div></div>

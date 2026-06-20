@@ -215,6 +215,15 @@ export default function SortPage({
                                     card={card}
                                 />
                             )}
+                            {card.name == "Gladde slang" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["lightgreen"]}
+                                    card={card}
+                                />
+                            )}
                             {card.sub_question && !!getCount(card) && (
                                 <div className={styles.card}>
                                     <div></div>

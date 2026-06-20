@@ -107,6 +107,9 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Gewone pantserjuffer": ["libel-telling"],
     Koraaljuffer: ["libel-telling"],
     Mercuurwaterjuffer: ["libel-telling"],
+    "Bonte vliegenvanger": ["count-x", 4],
+    "Grote gele kwikstaart": ["sort-count-x", "Exmoor", 1],
+    "Provençaalse grasmus": ["count-x", 1],
 
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
@@ -145,6 +148,9 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Blauwe schallebijter": ["onder-kaarten-x"],
     Bever: ["grot-x", 1],
     Otter: ["sort-count-x", "Amfibie", 2],
+    Tormentil: ["count-x", 5],
+    "Grote veldbies": ["count-x", 3],
+    "Gladde slang": ["color-card-counts-x", ["lightgreen"], 1],
 
     // Naast
     "Europese das": ["count-x", 2],

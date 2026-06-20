@@ -110,6 +110,8 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Bonte vliegenvanger": ["count-x", 4],
     "Grote gele kwikstaart": ["sort-count-x", "Exmoor", 1],
     "Provençaalse grasmus": ["count-x", 1],
+    Slechtvalk: ["sort-count-x", "Muis", 1],
+    "Gewone bronlibel": ["libel-telling"], // todo
 
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
@@ -151,6 +153,10 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Tormentil: ["count-x", 5],
     "Grote veldbies": ["count-x", 3],
     "Gladde slang": ["color-card-counts-x", ["lightgreen"], 1],
+    Dwergmuis: ["sort-count-x", "Vogel", 1],
+    Zonnedauw: ["sort-count-x", "Insect", 1],
+    Rugstreeppad: ["count-x", 1],
+    "Rosse woelmuis": ["count-x", 3],
 
     // Naast
     "Europese das": ["count-x", 2],

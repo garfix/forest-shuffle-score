@@ -1,5 +1,14 @@
 De code voor de mobiele web app (alleen in het nederlands) [Forest Shuffle Score](https://patrickvanbergen.com/forest-shuffle-score/) die helpt bij het berekenen van de score in Forest Shuffle.
 
+De volgende varianten zijn opgenomen:
+
+- Het basisspel
+    - Woodland edge
+    - Alpine
+    - Exploration
+- Dartmoor
+    - Exmoor
+
 ## Eerste opmerkingen
 
 - Je voert het aantal kaarten van elk type in, en beantwoord enkele vragen over kaart-aantallen, en de app berekent de score.

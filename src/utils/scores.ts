@@ -211,6 +211,11 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Boomklever: ["sub", 10],
     Fazant: ["2-sort-count-x", "Boom", "Struiken", 1],
     Taigaboomkruiper: ["count-x", 5],
+    "Devon rund": ["sort-count-x", "Plant", 1],
+    Exmoorponyveulen: ["count-x", 1],
+    Exmoorpony: ["canonical-card-count-x", "Pony", 10],
+    Baardvleermuis: ["count-x-min", 5, 3, "Vleermuis"],
+    Berghommel: ["sort-count-x", "Struiken", 2],
 };
 
 function calculateTotal(
@@ -581,6 +586,7 @@ function getVlinderStats(input: Input, cards: Card[]): SortStats {
 
 function getLibelStats(input: Input, cards: Card[]): SortStats {
     const cardCounts: Record<number, number> = {};
+    const gewoneBronlibel = getCardScoreByCanonicalName(cards, "Gewone bronlibel", input);
 
     for (const card of cards) {
         if (card.sort.includes("Libel")) {
@@ -601,9 +607,12 @@ function getLibelStats(input: Input, cards: Card[]): SortStats {
             }
         }
         let count = cardsInLayer.length;
+        if (gewoneBronlibel) {
+            count = Math.min(count, 6);
+        }
 
         cardsPerLayer.push(cardsInLayer.slice(0, count));
-        scorePerLayer[layer] = { 0: 0, 1: 0, 2: 5, 3: 10, 4: 15, 5: 30 }[count]!;
+        scorePerLayer[layer] = { 0: 0, 1: 0, 2: 5, 3: 10, 4: 15, 5: 30, 6: 50 }[count]!;
     }
 
     return {

@@ -213,7 +213,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Taigaboomkruiper: ["count-x", 5],
     "Devon rund": ["sort-count-x", "Plant", 1],
     Exmoorponyveulen: ["count-x", 1],
-    Exmoorpony: ["canonical-card-count-x", "Pony", 10],
+    Exmoorpony: ["multiple-canonical-name-card-count-x", ["Dartmoorpony", "Exmoorpony", "Exmoorponyveulen"], 10],
     Baardvleermuis: ["count-x-min", 5, 3, "Vleermuis"],
     Berghommel: ["sort-count-x", "Struiken", 2],
 };
@@ -338,6 +338,11 @@ function calculateCardScore(
             score = getSortCount(input, cards, "Boom") * count;
         } else if (predicate == "canonical-name-card-count-x") {
             score = getCanonicalNameCardCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
+        } else if (predicate == "multiple-canonical-name-card-count-x") {
+            score = 0;
+            for (const name of scoreFunc[1] as string[]) {
+                score += getCanonicalNameCardCount(input, cards, name) * Number(scoreFunc[2]);
+            }
         } else if (predicate == "sort-count-x") {
             score = getSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "unique-sort-count-x") {

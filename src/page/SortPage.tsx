@@ -57,6 +57,26 @@ export default function SortPage({
         return inputs[user.id].dekenveenCount[card.id] ?? 0;
     };
 
+    const setDekenveenCount = (card: Card, count: number) => {
+        const newInputs: Inputs = { ...inputs };
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].dekenveenCount = { ...inputs[user.id].dekenveenCount };
+        newInputs[user.id].dekenveenCount[card.id] = count;
+        setInputs(newInputs);
+    };
+
+    const getKustheideCount = (card: Card) => {
+        return inputs[user.id].kustheideCount[card.id] ?? 0;
+    };
+
+    const setKustheideCount = (card: Card, count: number) => {
+        const newInputs: Inputs = { ...inputs };
+        newInputs[user.id] = { ...inputs[user.id] };
+        newInputs[user.id].kustheideCount = { ...inputs[user.id].kustheideCount };
+        newInputs[user.id].kustheideCount[card.id] = count;
+        setInputs(newInputs);
+    };
+
     const getSubCountMax = (card: Card) => {
         if (card.sub_question_max == "overnemen") {
             return inputs[user.id].cardCount[card.id];
@@ -65,10 +85,6 @@ export default function SortPage({
         } else {
             return undefined;
         }
-    };
-
-    const getDekenveenCountMax = (card: Card) => {
-        return inputs[user.id].cardCount[card.id];
     };
 
     const setCount = (card: Card, count: number) => {
@@ -84,14 +100,6 @@ export default function SortPage({
         newInputs[user.id] = { ...inputs[user.id] };
         newInputs[user.id].cardSubCount = { ...inputs[user.id].cardSubCount };
         newInputs[user.id].cardSubCount[card.id] = count;
-        setInputs(newInputs);
-    };
-
-    const setDekenveenCount = (card: Card, count: number) => {
-        const newInputs: Inputs = { ...inputs };
-        newInputs[user.id] = { ...inputs[user.id] };
-        newInputs[user.id].dekenveenCount = { ...inputs[user.id].dekenveenCount };
-        newInputs[user.id].dekenveenCount[card.id] = count;
         setInputs(newInputs);
     };
 
@@ -112,6 +120,9 @@ export default function SortPage({
 
     const dekenveen = getCardByCanonicalName("Dekenveen", cards);
     const userHasDekenveen = dekenveen && !!inputs[user.id].cardCount[dekenveen.id];
+
+    const kustheide = getCardByCanonicalName("Kustheide", cards);
+    const userHasKustheide = kustheide && !!inputs[user.id].cardCount[kustheide.id];
 
     return (
         <>
@@ -241,13 +252,27 @@ export default function SortPage({
                             {card.sort.includes("Plant") && userHasDekenveen && !!getCount(card) && (
                                 <div className={styles.card}>
                                     <div></div>
-                                    <div className={styles.sub_question}>Hoeveel onder een dekenveen</div>
+                                    <div className={styles.sub_question}>Hoeveel onder een Dekenveen?</div>
                                     <Amount
                                         buttonColor="info"
                                         valueColor="secondary"
                                         value={getDekenveenCount(card)}
                                         setValue={(count) => setDekenveenCount(card, count)}
-                                        max={getDekenveenCountMax(card)}
+                                        max={getCount(card)}
+                                    />
+                                    <div></div>
+                                </div>
+                            )}
+                            {card.sort.includes("Vogel") && userHasKustheide && !!getCount(card) && (
+                                <div className={styles.card}>
+                                    <div></div>
+                                    <div className={styles.sub_question}>Hoeveel bij een Kustheide?</div>
+                                    <Amount
+                                        buttonColor="info"
+                                        valueColor="secondary"
+                                        value={getKustheideCount(card)}
+                                        setValue={(count) => setKustheideCount(card, count)}
+                                        max={getCount(card)}
                                     />
                                     <div></div>
                                 </div>

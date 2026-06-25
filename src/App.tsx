@@ -36,7 +36,8 @@ const theme = createTheme({
     },
 });
 
-const INPUTS = "inputs_v2";
+// NB increase these versions when their structure has changed (for example when a field was added)
+const INPUTS = "inputs_v3";
 const USERS = "users_v1";
 const GAME = "game_v1";
 

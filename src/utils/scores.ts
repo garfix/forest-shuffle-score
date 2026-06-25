@@ -11,6 +11,7 @@ export function initInputs(users: User[]) {
             cardCount: {},
             cardSubCount: {},
             dekenveenCount: {},
+            kustheideCount: {},
             grotCount: 0,
             grotCard: "",
             colorCardCount: {},
@@ -455,6 +456,12 @@ function calculateCardScore(
     if (count > 0 && dekenveenCount > 0) {
         const unitScore = score / count;
         score = (count - dekenveenCount) * unitScore + dekenveenCount * unitScore * 2;
+    }
+
+    const kustheideCount = input.kustheideCount[card.id] ?? 0;
+    if (count > 0 && kustheideCount > 0) {
+        const unitScore = score / count;
+        score = (count - kustheideCount) * unitScore + kustheideCount * unitScore * 2;
     }
 
     return score;

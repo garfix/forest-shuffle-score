@@ -28,7 +28,7 @@ export function loadCards(game: Game): Card[] {
         const amount = parseInt(row["Hoeveel"]);
         const displayName = row["Naam"];
 
-        if (byName[canonicalName] && treatAsSame) {
+        if (byName[canonicalName] && (canonicalName === displayName || treatAsSame)) {
             const card = byName[canonicalName];
             card.amount += amount;
             const names = card.display_name.split(" / ");

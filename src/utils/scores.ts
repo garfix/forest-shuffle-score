@@ -50,7 +50,6 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Esdoorn: ["trees-x"],
     "Europese lariks": ["count-x", 3],
     Alpenden: ["sort-count-x", "Alpine", 1],
-    "O, dennenboom": ["cards-around"],
     Moseik: ["sort-count-x", "Evenhoevig dier", 1],
     Palmboom: ["sort-count-x", "Vogel", 1],
     "Zachte berk": ["count-x", 1],
@@ -59,6 +58,14 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Wilde appelboom": ["sub", 8],
     Wintereik: ["2-sort-count-x", "Boom", "Struiken", 1],
     "Zwarte els": ["count-x", 5],
+    "Amerikaanse linde": ["sub", 2],
+    "Carolina-hemlockspar": ["count-x", 5],
+    Fraserspar: ["sort-count-x", "Boom", 1],
+    "Gele berk": ["count-x", 1],
+    "Gele pavia": ["color-card-counts-x", ["orange"], 1],
+    "Witte bitternoot": ["cards-around"],
+    Zilveresdoorn: ["zilveresdoorn-telling"],
+    "Zwarte tupeloboom": ["sort-count-x", "Rivier", 1],
 
     // Heide
     Beek: ["color-card-counts-x", ["darkyellow"], 2],
@@ -439,6 +446,9 @@ function calculateCardScore(
         } else if (predicate == "heikikker-telling") {
             const m = getSortCount(input, cards, "Heide");
             score = m >= 5 ? 8 * count : 0;
+        } else if (predicate == "zilveresdoorn-telling") {
+            const m = getCanonicalNameCardCount(input, cards, "Zilveresdoorn");
+            score = m >= 3 ? 5 * count : 0;
         } else if (predicate == "onder-kaarten-x") {
             const m = getBelowCardCount(cards, input);
             score = m * count;

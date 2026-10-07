@@ -1,6 +1,14 @@
 import type { Game } from "../entity/game";
 
-export const variants: string[] = ["Basisspel", "Woodland edge", "Alpine", "Exploration", "Dartmoor", "Exmoor"];
+export const variants: string[] = [
+    "Basisspel",
+    "Woodland edge",
+    "Alpine",
+    "Exploration",
+    "Dartmoor",
+    "Exmoor",
+    "Smoky mountains",
+];
 
 export const defaultGame: Game = {
     spelVarianten: [...variants],

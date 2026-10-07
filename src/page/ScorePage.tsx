@@ -34,6 +34,7 @@ export default function Home({ setPage, users, game, scores }: Props) {
                         <div className={styles.label}>{category.name}</div>
                         {theUsers.map((user) => (
                             <Chip
+                                key={user.id}
                                 className={styles.chip}
                                 color="success"
                                 label={getScoreLabel(scores[user.id].categoryScores[category.name])}
@@ -44,7 +45,12 @@ export default function Home({ setPage, users, game, scores }: Props) {
                 <React.Fragment key={"total"}>
                     <div className={styles.label}>Totaal</div>
                     {theUsers.map((user) => (
-                        <Chip className={styles.chip} color="warning" label={getScoreLabel(scores[user.id].total)} />
+                        <Chip
+                            key={user.id}
+                            className={styles.chip}
+                            color="warning"
+                            label={getScoreLabel(scores[user.id].total)}
+                        />
                     ))}
                 </React.Fragment>
             </div>

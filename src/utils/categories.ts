@@ -15,6 +15,10 @@ const categories: Category[] = [
         spel_variant: ["Dartmoor"],
     },
     {
+        name: "Rivier",
+        spel_variant: ["Smoky mountains"],
+    },
+    {
         name: "Boven",
         spel_variant: [],
     },

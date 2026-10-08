@@ -76,6 +76,9 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Laaglandheide: ["sort-count-x", "Amfibie", 2],
     "Vochtig veen": ["sort-count-x", "Heide", 2],
 
+    // Rivier
+    "Beek (Smoky mountains)": ["sort-count-x", "Vis", 1],
+
     // Boven
     Bosuil: ["count-x", 5],
     Goudvink: ["sort-count-x", "Insect", 2],
@@ -119,7 +122,19 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Grote gele kwikstaart": ["sort-count-x", "Exmoor", 1],
     "Provençaalse grasmus": ["count-x", 1],
     Slechtvalk: ["sort-count-x", "Muis", 1],
-    "Gewone bronlibel": ["libel-telling"], // todo
+    "Gewone bronlibel": ["libel-telling"],
+    "Amerikaanse blauwe reiger": ["sort-count-x", "Vis", 2],
+    "Amerikaanse zeearend": ["zeearend-telling"],
+    Ransuil: ["sort-count-x", "Muis", 2],
+    Robijnkeelkolibrie: ["2-sort-count-x", "Boom", "Plant", 1],
+    "Slechtvalk (Smoky mountains)": ["sort-count-x", "Vogel", 1],
+    Zwartvleugeltangare: ["count-x", 2],
+    Schietmot: ["count-x", 2],
+    Sneeuwboomkrekel: ["sort-count-x", "Insect", 1],
+    Sterrenkroos: ["2-sort-count-x", "Rivier", "Vis", 1],
+    Varen: ["sort-count-x", "Plant", 1],
+    "Zuidelijke vliegende eekhoorn": ["eekhoorn-telling"],
+    "Noord-Amerikaanse opossum": ["sub", 2],
 
     // Onder
     Boomvarens: ["sort-count-x", "Amfibie", 6],
@@ -418,6 +433,9 @@ function calculateCardScore(
         } else if (predicate == "vingerhoedskruid-telling") {
             const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Plant");
             score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
+        } else if (predicate == "eekhoorn-telling") {
+            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Eekhoorn");
+            score = getIndexedScore(m, { 0: 0, 1: 5, 2: 10, 3: 20, 4: 40 });
         } else if (predicate == "wateraardbei-telling") {
             const m = getSortCount(input, cards, "Boom");
             score =
@@ -446,6 +464,9 @@ function calculateCardScore(
         } else if (predicate == "heikikker-telling") {
             const m = getSortCount(input, cards, "Heide");
             score = m >= 5 ? 8 * count : 0;
+        } else if (predicate == "zeearend-telling") {
+            const m = getSortCount(input, cards, "Vis");
+            score = m >= 5 ? 30 * count : 10;
         } else if (predicate == "zilveresdoorn-telling") {
             const m = getCanonicalNameCardCount(input, cards, "Zilveresdoorn");
             score = m >= 3 ? 5 * count : 0;

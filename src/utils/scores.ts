@@ -180,6 +180,22 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Zonnedauw: ["sort-count-x", "Insect", 1],
     Rugstreeppad: ["count-x", 1],
     "Rosse woelmuis": ["count-x", 3],
+    Bergthee: ["sort-count-x", "Eekhoorn", 3],
+    "Blauwe mistbloem": ["count-x", 2],
+    Fonteinkruid: ["count-x", 2],
+    Salomonszegel: ["sort-count-x", "Amfibie", 6],
+    Beeksalamander: ["count-x-min", 10, 3, "Amfibie"],
+    Boskikker: ["sort-count-x", "Boom", 1],
+    "Carolina-doosschildpad": ["count-x", 5],
+    Modderduivel: ["sort-count-x", "Rivier", 2],
+    Rups: ["count-x-min", 10, 3, "Insect"],
+    Waterschorpioen: ["count-x", 2],
+    "Zesstippige zandloopkever": ["count-x", 5],
+    "Oostelijke wangzakeekhoorn": ["eekhoorn-telling"],
+    Bronforel: ["sub-x", 3],
+    "Gele baars": ["count-x", 2],
+    "Groene darter": ["sort-count-x", "Insect", 3],
+    Kleinbekbaars: ["unique-sort-count-x", "Vis", 3],
 
     // Naast
     "Europese das": ["count-x", 2],
@@ -318,6 +334,7 @@ function calculateCardScore(
         if (predicate == "count-x") {
             score = (scoreFunc[1] as number) * count;
         } else if (predicate == "count-x-min") {
+            // $1 punten bij $2 verschillende (soort) $3
             if (getDifferentCanonicalNamesOfSortCount(input, cards, String(scoreFunc[3])) >= Number(scoreFunc[2])) {
                 score = Number(scoreFunc[1]) * count;
             }
@@ -369,6 +386,7 @@ function calculateCardScore(
         } else if (predicate == "sort-count-x") {
             score = getSortCount(input, cards, scoreFunc[1] as string) * Number(scoreFunc[2]) * count;
         } else if (predicate == "unique-sort-count-x") {
+            // $2 punten per verschillende $1
             score =
                 getDifferentCanonicalNamesOfSortCount(input, cards, scoreFunc[1] as string) *
                 Number(scoreFunc[2]) *

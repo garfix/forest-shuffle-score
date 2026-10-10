@@ -103,7 +103,7 @@ export default function SortPage({
         setInputs(newInputs);
     };
 
-    const nextCategory = getNextCategory(category);
+    const nextCategory = getNextCategory(category, game);
 
     const next = () => {
         if (nextCategory) {

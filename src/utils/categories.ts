@@ -42,10 +42,11 @@ export function getCategories(game: Game) {
     );
 }
 
-export function getNextCategory(category: Category) {
-    const index = categories.indexOf(category);
-    if (index < categories.length - 1) {
-        return categories[index + 1];
+export function getNextCategory(category: Category, game: Game) {
+    const c = getCategories(game);
+    const index = c.indexOf(category);
+    if (index < c.length - 1) {
+        return c[index + 1];
     }
     return null;
 }

@@ -18,6 +18,7 @@ import darkblue2 from "./icons/darkblue2.png";
 import greyblue from "./icons/greyblue.png";
 import greyblue2 from "./icons/greyblue2.png";
 import oldpink from "./icons/oldpink.png";
+import red from "./icons/oldpink.png"; // todo: replace with red icon
 
 type Props = {
     inputs: Inputs;
@@ -43,6 +44,7 @@ const colorImages: Record<string, string> = {
     greyblue: greyblue,
     greyblue2: greyblue2,
     oldpink: oldpink,
+    red: red,
 };
 
 export default function ColorCardTable({ inputs, user, setInputs, card, maxChecks, colors }: Props) {

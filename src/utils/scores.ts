@@ -255,6 +255,30 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Exmoorpony: ["multiple-canonical-name-card-count-x", ["Dartmoorpony", "Exmoorpony", "Exmoorponyveulen"], 10],
     Baardvleermuis: ["count-x-min", 5, 3, "Vleermuis"],
     Berghommel: ["sort-count-x", "Struiken", 2],
+    "Amerikaanse nerts": ["count-x", 5],
+    "Amerikaanse gemaskerde spitsmuis": ["count-x", 3],
+    "Amerikaanse rode eekhoorn": ["eekhoorn-telling"],
+    "Grijze eekhoorn": ["eekhoorn-telling"],
+    Witvoetmuis: ["sort-count-x", "Muis", 1],
+    Wapiti: ["$1-or-$2-when-at-least-$3-of-sort-$4", 10, 30, 5, "Boom"],
+    "Amerikaanse zwarte beer": ["zwarte-beer-telling"],
+    "Canadese bever": ["grot-x", 1],
+    Coyote: ["$1-or-$2-when-at-least-$3-of-sort-$4", 10, 30, 6, "Pootdier"],
+    "Geelneus-woelmuis": ["2-sort-count-x", "Muis", "Insect", 1],
+    Graafwesp: ["$1-if-sub", 10],
+    "Grijze vos": ["sort-count-x", "Pootdier", 1],
+    "Kortstaart-spitsmuis": ["count-x", 5],
+    "Langstaart-wezel": ["$1-if-at-least-$2-of-sort-$3", 10, 3, "Muis"],
+    "Oostelijke gevlekte stinkdier": ["$1-if-sub", 10],
+    Rivierotter: ["3-sort-count-x", "Vis", "Insect", "Amfibie", 2],
+    "Rode lynx": ["$1-or-$2-when-at-least-$3-of-sort-$4", 10, 30, 5, "Vogel"],
+    Witstaarthert: ["sort-count-x", "Boom", 2],
+    Vuurvliegje: ["count^2", 3],
+    Geelbuiksapspecht: ["count-x", 2],
+    Kalkoen: ["color-card-counts-checked", ["lightgreen", "orange", "yellow", "red"], 2],
+    "Noord-Amerikaanse helmspecht": ["sort-count-x", "Vogel", 1],
+    Roestflankzanger: ["count-x", 5],
+    Bosrank: ["sort-count-x", "Vogel", 2],
 };
 
 function calculateTotal(
@@ -350,7 +374,7 @@ function calculateCardScore(
                 score = Number(scoreFunc[1]) * count;
             }
         } else if (predicate == "count^2") {
-            score = count * count;
+            score = (scoreFunc[1] as number) * count * count;
         } else if (predicate == "count^2-max-houtbij") {
             const houtbij = input.cardSubCount[card.id] ?? 0;
             const totalCount = count + houtbij;
@@ -397,12 +421,25 @@ function calculateCardScore(
                     getSortCount(input, cards, scoreFunc[2] as string)) *
                 Number(scoreFunc[3]) *
                 count;
+        } else if (predicate == "3-sort-count-x") {
+            score =
+                (getSortCount(input, cards, scoreFunc[1] as string) +
+                    getSortCount(input, cards, scoreFunc[2] as string) +
+                    getSortCount(input, cards, scoreFunc[3] as string)) *
+                Number(scoreFunc[4]) *
+                count;
         } else if (predicate == "sub") {
             const subCount = input.cardSubCount[card.id] ?? 0;
             score = subCount * Number(scoreFunc[1]);
         } else if (predicate == "sub-x") {
             const subCount = input.cardSubCount[card.id] ?? 0;
             score = subCount * Number(scoreFunc[1]) * count;
+        } else if (predicate == "$1-if-sub") {
+            const m = input.cardSubCount[card.id] ?? 0;
+            score = (scoreFunc[1] as number) * m;
+        } else if (predicate == "$1-if-at-least-$2-of-sort-$3") {
+            const m = getSortCount(input, cards, scoreFunc[3] as string);
+            score = (m >= (scoreFunc[2] as number) ? (scoreFunc[1] as number) : 0) * count;
         } else if (predicate == "pair-x") {
             const subCount = input.cardSubCount[card.id] ?? 0;
             score = subCount * Number(scoreFunc[1]);
@@ -485,6 +522,12 @@ function calculateCardScore(
         } else if (predicate == "zeearend-telling") {
             const m = getSortCount(input, cards, "Vis");
             score = m >= 5 ? 30 * count : 10;
+        } else if (predicate == "$1-or-$2-when-at-least-$3-of-sort-$4") {
+            const m = getSortCount(input, cards, scoreFunc[4] as string);
+            score = (m >= (scoreFunc[3] as number) ? (scoreFunc[2] as number) : (scoreFunc[1] as number)) * count;
+        } else if (predicate == "zwarte-beer-telling") {
+            const subCount = input.cardSubCount[card.id] ?? 0;
+            score = subCount * 30 + (count - subCount) * 10;
         } else if (predicate == "zilveresdoorn-telling") {
             const m = getCanonicalNameCardCount(input, cards, "Zilveresdoorn");
             score = m >= 3 ? 5 * count : 0;

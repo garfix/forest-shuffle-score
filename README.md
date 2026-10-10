@@ -8,6 +8,7 @@ De volgende varianten zijn opgenomen:
     - Exploration
 - Dartmoor
     - Exmoor
+- Smoky mountains
 
 ## Eerste opmerkingen
 

@@ -244,6 +244,16 @@ export default function SortPage({
                                     card={card}
                                 />
                             )}
+                            {card.name == "Kalkoen" && getCount(card) > 0 && (
+                                <ColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={["lightgreen", "orange", "yellow", "red"]}
+                                    card={card}
+                                    maxChecks={getCount(card)}
+                                />
+                            )}
                             {card.sub_question && !!getCount(card) && (
                                 <div className={styles.card}>
                                     <div></div>

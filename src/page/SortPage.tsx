@@ -116,7 +116,7 @@ export default function SortPage({
         setPage("user");
     };
 
-    const categoryCards: Card[] = useMemo(() => getCategoryCards(cards, category), [category]);
+    const categoryCards: Record<string, Card[]> = useMemo(() => getCategoryCards(cards, category), [category]);
 
     const dekenveen = getCardByCanonicalName("Dekenveen", cards);
     const userHasDekenveen = dekenveen && !!inputs[user.id].cardCount[dekenveen.id];
@@ -140,162 +140,167 @@ export default function SortPage({
                 {category.name == "Grot" ? (
                     <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
                 ) : (
-                    categoryCards.map((card) => (
-                        <React.Fragment key={card.id}>
-                            <div className={styles.card}>
-                                <SortColor sort={card.sort[0]} />
-                                <div className={styles.name}>{card.display_name}</div>
-                                <Amount
-                                    value={getCount(card)}
-                                    setValue={(count) => setCount(card, count)}
-                                    max={getMaxCount(card)}
-                                />
-                                {inputs[user.id].cardCount[card.id] ? (
-                                    <Chip
-                                        className={styles.chip}
-                                        label={getScoreLabel(scores[user.id].cardScores[card.id])}
-                                        color="success"
-                                    ></Chip>
-                                ) : (
-                                    <div></div>
-                                )}
-                            </div>
-                            {card.name == "Wisent" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["darkgreen", "brown"]}
-                                    card={card}
-                                />
+                    Object.entries(categoryCards).map(([sort, cards]) => (
+                        <React.Fragment key={sort}>
+                            {Object.keys(categoryCards).length > 1 && (
+                                <SortColor sort={sort}>
+                                    <span className={styles.sortName}>{sort}</span>
+                                </SortColor>
                             )}
-                            {card.name == "Eland" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["lightblue", "lightgreen"]}
-                                    card={card}
-                                />
-                            )}
-                            {card.name == "Ree" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["darkblue", "yellow", "lightgreen", "darkgreen", "orange"]}
-                                    card={card}
-                                    maxChecks={getCount(card)}
-                                />
-                            )}
-                            {card.name == "Ree (Dartmoor)" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["lightgreen", "darkblue2", "greyblue", "greyblue2", "oldpink"]}
-                                    card={card}
-                                    maxChecks={getCount(card)}
-                                />
-                            )}
-                            {card.name == "Gems" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["lightblue", "pink", "purple"]}
-                                    card={card}
-                                    maxChecks={getCount(card)}
-                                />
-                            )}
-                            {card.name == "Es" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["darkblue2"]}
-                                    card={card}
-                                />
-                            )}
-                            {card.name == "Beek" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["darkyellow"]}
-                                    card={card}
-                                />
-                            )}
-                            {card.name == "Gladde slang" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["lightgreen"]}
-                                    card={card}
-                                />
-                            )}
-                            {card.name == "Gele pavia" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["orange"]}
-                                    card={card}
-                                />
-                            )}
-                            {card.name == "Kalkoen" && getCount(card) > 0 && (
-                                <ColorCardTable
-                                    inputs={inputs}
-                                    user={user}
-                                    setInputs={setInputs}
-                                    colors={["lightgreen", "orange", "yellow", "red"]}
-                                    card={card}
-                                    maxChecks={getCount(card)}
-                                />
-                            )}
-                            {card.sub_question && !!getCount(card) && (
-                                <div className={styles.card}>
-                                    <div></div>
-                                    <div className={styles.sub_question}>{card.sub_question}</div>
-                                    <Amount
-                                        buttonColor="info"
-                                        valueColor="secondary"
-                                        value={getSubCount(card)}
-                                        setValue={(count) => setSubCount(card, count)}
-                                        max={getSubCountMax(card)}
-                                    />
-                                    <div></div>
-                                </div>
-                            )}
-                            {card.sort.includes("Plant") && userHasDekenveen && !!getCount(card) && (
-                                <div className={styles.card}>
-                                    <div></div>
-                                    <div className={styles.sub_question}>Hoeveel onder een Dekenveen?</div>
-                                    <Amount
-                                        buttonColor="info"
-                                        valueColor="secondary"
-                                        value={getDekenveenCount(card)}
-                                        setValue={(count) => setDekenveenCount(card, count)}
-                                        max={getCount(card)}
-                                    />
-                                    <div></div>
-                                </div>
-                            )}
-                            {card.sort.includes("Vogel") && userHasKustheide && !!getCount(card) && (
-                                <div className={styles.card}>
-                                    <div></div>
-                                    <div className={styles.sub_question}>Hoeveel bij een Kustheide?</div>
-                                    <Amount
-                                        buttonColor="info"
-                                        valueColor="secondary"
-                                        value={getKustheideCount(card)}
-                                        setValue={(count) => setKustheideCount(card, count)}
-                                        max={getCount(card)}
-                                    />
-                                    <div></div>
-                                </div>
-                            )}
+                            {cards.map((card) => (
+                                <React.Fragment key={card.id}>
+                                    <div className={styles.card}>
+                                        <div className={styles.name}>{card.display_name}</div>
+                                        <Amount
+                                            value={getCount(card)}
+                                            setValue={(count) => setCount(card, count)}
+                                            max={getMaxCount(card)}
+                                        />
+                                        {inputs[user.id].cardCount[card.id] ? (
+                                            <Chip
+                                                className={styles.chip}
+                                                label={getScoreLabel(scores[user.id].cardScores[card.id])}
+                                                color="success"
+                                            ></Chip>
+                                        ) : (
+                                            <div></div>
+                                        )}
+                                    </div>
+                                    {card.name == "Wisent" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["darkgreen", "brown"]}
+                                            card={card}
+                                        />
+                                    )}
+                                    {card.name == "Eland" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["lightblue", "lightgreen"]}
+                                            card={card}
+                                        />
+                                    )}
+                                    {card.name == "Ree" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["darkblue", "yellow", "lightgreen", "darkgreen", "orange"]}
+                                            card={card}
+                                            maxChecks={getCount(card)}
+                                        />
+                                    )}
+                                    {card.name == "Ree (Dartmoor)" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["lightgreen", "darkblue2", "greyblue", "greyblue2", "oldpink"]}
+                                            card={card}
+                                            maxChecks={getCount(card)}
+                                        />
+                                    )}
+                                    {card.name == "Gems" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["lightblue", "pink", "purple"]}
+                                            card={card}
+                                            maxChecks={getCount(card)}
+                                        />
+                                    )}
+                                    {card.name == "Es" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["darkblue2"]}
+                                            card={card}
+                                        />
+                                    )}
+                                    {card.name == "Beek" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["darkyellow"]}
+                                            card={card}
+                                        />
+                                    )}
+                                    {card.name == "Gladde slang" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["lightgreen"]}
+                                            card={card}
+                                        />
+                                    )}
+                                    {card.name == "Gele pavia" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["orange"]}
+                                            card={card}
+                                        />
+                                    )}
+                                    {card.name == "Kalkoen" && getCount(card) > 0 && (
+                                        <ColorCardTable
+                                            inputs={inputs}
+                                            user={user}
+                                            setInputs={setInputs}
+                                            colors={["lightgreen", "orange", "yellow", "red"]}
+                                            card={card}
+                                            maxChecks={getCount(card)}
+                                        />
+                                    )}
+                                    {card.sub_question && !!getCount(card) && (
+                                        <div className={styles.card}>
+                                            <div className={styles.sub_question}>{card.sub_question}</div>
+                                            <Amount
+                                                buttonColor="info"
+                                                valueColor="secondary"
+                                                value={getSubCount(card)}
+                                                setValue={(count) => setSubCount(card, count)}
+                                                max={getSubCountMax(card)}
+                                            />
+                                            <div></div>
+                                        </div>
+                                    )}
+                                    {card.sort.includes("Plant") && userHasDekenveen && !!getCount(card) && (
+                                        <div className={styles.card}>
+                                            <div className={styles.sub_question}>Hoeveel onder een Dekenveen?</div>
+                                            <Amount
+                                                buttonColor="info"
+                                                valueColor="secondary"
+                                                value={getDekenveenCount(card)}
+                                                setValue={(count) => setDekenveenCount(card, count)}
+                                                max={getCount(card)}
+                                            />
+                                            <div></div>
+                                        </div>
+                                    )}
+                                    {card.sort.includes("Vogel") && userHasKustheide && !!getCount(card) && (
+                                        <div className={styles.card}>
+                                            <div className={styles.sub_question}>Hoeveel bij een Kustheide?</div>
+                                            <Amount
+                                                buttonColor="info"
+                                                valueColor="secondary"
+                                                value={getKustheideCount(card)}
+                                                setValue={(count) => setKustheideCount(card, count)}
+                                                max={getCount(card)}
+                                            />
+                                            <div></div>
+                                        </div>
+                                    )}
+                                </React.Fragment>
+                            ))}
                         </React.Fragment>
                     ))
                 )}

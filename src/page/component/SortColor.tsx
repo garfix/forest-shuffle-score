@@ -1,4 +1,6 @@
-type Props = { sort: string };
+import type { ReactNode } from "react";
+
+type Props = { sort: string; children: ReactNode };
 
 const colors: Record<string, string> = {
     Vogel: "#3eb5e8",
@@ -18,7 +20,7 @@ const colors: Record<string, string> = {
     Rivier: "#2e308e",
 };
 
-export default function SortColot({ sort }: Props) {
+export default function SortColor({ sort, children }: Props) {
     const color = colors[sort];
-    return <div style={{ backgroundColor: color }}>&nbsp;</div>;
+    return <div style={{ backgroundColor: color }}>{children}</div>;
 }

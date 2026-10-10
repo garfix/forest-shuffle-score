@@ -60,9 +60,9 @@ export function loadCards(game: Game): Card[] {
     return cards;
 }
 
-export function getCategoryCards(cards: Card[], category: Category): Card[] {
+export function getCategoryCards(cards: Card[], category: Category): Record<string, Card[]> {
     const filtered = cards.filter((card) => card.category == category.name);
-    return filtered.sort((c1: Card, c2: Card) => {
+    const sorted = filtered.sort((c1: Card, c2: Card) => {
         if (c1.sort[0] < c2.sort[0]) {
             return -1;
         } else if (c1.sort[0] > c2.sort[0]) {
@@ -75,6 +75,16 @@ export function getCategoryCards(cards: Card[], category: Category): Card[] {
         }
         return 0;
     });
+    const grouped: Record<string, Card[]> = {};
+    for (const card of sorted) {
+        const sort = card.sort[0];
+        if (!grouped[sort]) {
+            grouped[card.sort[0]] = [];
+        }
+
+        grouped[sort].push(card);
+    }
+    return grouped;
 }
 
 export function getCountsByCategory(cards: Card[], input: Input) {

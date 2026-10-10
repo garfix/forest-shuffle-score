@@ -58,7 +58,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     "Wilde appelboom": ["sub", 8],
     Wintereik: ["2-sort-count-x", "Boom", "Struiken", 1],
     "Zwarte els": ["count-x", 5],
-    "Amerikaanse linde": ["sub", 2],
+    "Amerikaanse linde": ["sub-x", 2],
     "Carolina-hemlockspar": ["count-x", 5],
     Fraserspar: ["sort-count-x", "Boom", 1],
     "Gele berk": ["count-x", 1],

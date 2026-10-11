@@ -10,7 +10,6 @@ import purple from "./icons/purple.png";
 import brown from "./icons/brown.png";
 import pink from "./icons/pink.png";
 import darkyellow from "./icons/darkyellow.png";
-import Amount from "./Amount";
 import type { User } from "../../entity/user";
 import { Checkbox } from "@mui/material";
 import type { Card } from "../../entity/card";
@@ -48,19 +47,6 @@ const colorImages: Record<string, string> = {
 };
 
 export default function ColorCardTable({ inputs, user, setInputs, card, maxChecks, colors }: Props) {
-    const getColorCardCount = (color: string) => {
-        return inputs[user.id].colorCardCount[color] ?? 0;
-    };
-
-    const setColorCardCount = (color: string, count: number) => {
-        const newInputs: Inputs = { ...inputs };
-        newInputs[user.id] = { ...inputs[user.id] };
-        newInputs[user.id].colorCardCount = { ...inputs[user.id].colorCardCount };
-        newInputs[user.id].colorCardCount[color] = count;
-
-        setInputs(newInputs);
-    };
-
     const isColorCardChecked = (card: Card, color: string) => {
         if (inputs[user.id].colorCardChecks[card.id]) {
             return inputs[user.id].colorCardChecks[card.id].includes(color);
@@ -100,36 +86,21 @@ export default function ColorCardTable({ inputs, user, setInputs, card, maxCheck
     };
 
     return (
-        <>
+        <div>
             {colors.map((color) => (
-                <div className={styles.row} key={color}>
-                    <div className={styles.label}>
-                        {!!maxChecks && (
-                            <Checkbox
-                                checked={isColorCardChecked(card, color)}
-                                onChange={(event) => {
-                                    setColorCardChecked(color, !!event.target.value);
-                                }}
-                                disabled={checkForDisabled(color)}
-                            />
-                        )}
-                        <img src={colorImages[color]} height="32" />
-                    </div>
-                    {!maxChecks || isColorCardChecked(card, color) ? (
-                        <Amount
-                            buttonColor="info"
-                            valueColor="secondary"
-                            value={getColorCardCount(color)}
-                            setValue={(count) => {
-                                setColorCardCount(color, count);
+                <span key={color} className={styles.label}>
+                    {!!maxChecks && (
+                        <Checkbox
+                            checked={isColorCardChecked(card, color)}
+                            onChange={(event) => {
+                                setColorCardChecked(color, !!event.target.value);
                             }}
+                            disabled={checkForDisabled(color)}
                         />
-                    ) : (
-                        <div></div>
                     )}
-                    <div></div>
-                </div>
+                    <img src={colorImages[color]} height="32" />
+                </span>
             ))}
-        </>
+        </div>
     );
 }

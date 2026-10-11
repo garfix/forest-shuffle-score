@@ -18,6 +18,7 @@ const colors: Record<string, string> = {
     Libel: "#b873b8",
     Vis: "#030583",
     Rivier: "#2e308e",
+    Generiek: "#777",
 };
 
 export default function SortColor({ sort, children }: Props) {

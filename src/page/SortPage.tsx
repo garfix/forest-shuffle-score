@@ -3,7 +3,7 @@ import type { User } from "../entity/user";
 import { type Category } from "../entity/category";
 import { useMemo } from "react";
 import type { Card } from "../entity/card";
-import { getCategoryCards, getFreeCount } from "../utils/cards";
+import { getCategoryCards, getFreeCount, getUsedColors } from "../utils/cards";
 import Amount from "./component/Amount";
 import type { Scores } from "../entity/score";
 import { getNextCategory } from "../utils/categories";
@@ -16,6 +16,7 @@ import { getCardByCanonicalName, getScoreLabel } from "../utils/scores";
 import ColorCardTable from "./component/ColorCardTable";
 import SortColor from "./component/SortColor";
 import { Button } from "@mui/material";
+import SelectedColorCardTable from "./component/SelectedColorCardTable";
 
 type Props = {
     setPage: (page: string) => void;
@@ -124,6 +125,8 @@ export default function SortPage({
     const kustheide = getCardByCanonicalName("Kustheide", cards);
     const userHasKustheide = kustheide && !!inputs[user.id].cardCount[kustheide.id];
 
+    const colors = getUsedColors(inputs, user.id, cards);
+
     return (
         <>
             <div>
@@ -137,8 +140,19 @@ export default function SortPage({
                 &nbsp;&nbsp;/&nbsp;&nbsp;<span>{category.name}</span>
             </div>
             <div className={styles.cards}>
-                {category.name == "Grot" ? (
-                    <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
+                {category.name == "Extra" ? (
+                    <>
+                        <SortColor sort="Generiek">
+                            <span className={styles.sortName}>Grot</span>
+                        </SortColor>
+                        <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
+                        <SortColor sort="Generiek">
+                            <span className={styles.sortName}>Kleuren</span>
+                        </SortColor>
+                        <div className={styles.cards}>
+                            <SelectedColorCardTable inputs={inputs} user={user} setInputs={setInputs} colors={colors} />
+                        </div>
+                    </>
                 ) : (
                     Object.entries(categoryCards).map(([sort, cards]) => (
                         <React.Fragment key={sort}>
@@ -166,24 +180,6 @@ export default function SortPage({
                                             <div></div>
                                         )}
                                     </div>
-                                    {card.name == "Wisent" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["darkgreen", "brown"]}
-                                            card={card}
-                                        />
-                                    )}
-                                    {card.name == "Eland" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["lightblue", "lightgreen"]}
-                                            card={card}
-                                        />
-                                    )}
                                     {card.name == "Ree" && getCount(card) > 0 && (
                                         <ColorCardTable
                                             inputs={inputs}
@@ -212,42 +208,6 @@ export default function SortPage({
                                             colors={["lightblue", "pink", "purple"]}
                                             card={card}
                                             maxChecks={getCount(card)}
-                                        />
-                                    )}
-                                    {card.name == "Es" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["darkblue2"]}
-                                            card={card}
-                                        />
-                                    )}
-                                    {card.name == "Beek" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["darkyellow"]}
-                                            card={card}
-                                        />
-                                    )}
-                                    {card.name == "Gladde slang" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["lightgreen"]}
-                                            card={card}
-                                        />
-                                    )}
-                                    {card.name == "Gele pavia" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["orange"]}
-                                            card={card}
                                         />
                                     )}
                                     {card.name == "Kalkoen" && getCount(card) > 0 && (

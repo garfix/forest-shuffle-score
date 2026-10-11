@@ -1,9 +1,14 @@
-import type { Card } from "../entity/card";
+import { COLOR_TYPE_FIXED, COLOR_TYPE_NONE, COLOR_TYPE_SOME, type Card } from "../entity/card";
 import csv from "../assets/Forest shuffle features - Sheet1.csv?raw";
 import { parseCSV } from "./parseCsv";
 import type { Category } from "../entity/category";
 import type { Input, Inputs } from "../entity/input";
 import type { Game } from "../entity/game";
+
+type Color = {
+    colors: string[];
+    type: string;
+};
 
 export function loadCards(game: Game): Card[] {
     const rows = parseCSV(csv);
@@ -12,6 +17,33 @@ export function loadCards(game: Game): Card[] {
 
     let id = 0;
     const byName: Record<string, Card> = {};
+
+    const colors: Record<string, Color> = {
+        Wisent: {
+            colors: ["darkgreen", "brown"],
+            type: COLOR_TYPE_FIXED,
+        },
+        Eland: {
+            colors: ["lightblue", "lightgreen"],
+            type: COLOR_TYPE_FIXED,
+        },
+        Es: {
+            colors: ["darkblue2"],
+            type: COLOR_TYPE_FIXED,
+        },
+        Beek: {
+            colors: ["darkyellow"],
+            type: COLOR_TYPE_FIXED,
+        },
+        "Gladde slang": {
+            colors: ["lightgreen"],
+            type: COLOR_TYPE_FIXED,
+        },
+        "Gele parvia": {
+            colors: ["orange"],
+            type: COLOR_TYPE_FIXED,
+        },
+    };
 
     for (const row of rows) {
         if (row["Spelvariant"] == "") {
@@ -50,6 +82,8 @@ export function loadCards(game: Game): Card[] {
                 belongs_to: variant,
                 canonical_name: canonicalName,
                 sub_question_max: row["Subvraag max"],
+                colors: colors[displayName]?.colors ?? [],
+                colorType: colors[displayName]?.type ?? COLOR_TYPE_NONE,
             };
             byName[card.name] = card;
             cards.push(card);
@@ -129,4 +163,21 @@ export function getFreeCount(card: Card, inputs: Inputs, userId: number) {
     }
 
     return freeCount;
+}
+
+// Returns a simple list of all colors selected for cards with tree colors
+export function getUsedColors(inputs: Inputs, userId: number, cards: Card[]) {
+    let allColors: string[] = [];
+
+    for (const card of cards) {
+        if (inputs[userId].cardCount[card.id]) {
+            if (card.colorType == COLOR_TYPE_FIXED) {
+                allColors = allColors.concat(...card.colors);
+            } else if (inputs[userId].colorCardChecks[card.id]) {
+                allColors = allColors.concat(...inputs[userId].colorCardChecks[card.id]);
+            }
+        }
+    }
+
+    return [...new Set(allColors)];
 }

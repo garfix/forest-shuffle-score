@@ -31,7 +31,7 @@ const categories: Category[] = [
         spel_variant: [],
     },
     {
-        name: "Grot",
+        name: "Extra",
         spel_variant: [],
     },
 ];

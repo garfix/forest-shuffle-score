@@ -43,6 +43,22 @@ export function loadCards(game: Game): Card[] {
             colors: ["orange"],
             type: COLOR_TYPE_FIXED,
         },
+        Ree: {
+            colors: ["darkblue", "yellow", "lightgreen", "darkgreen", "orange"],
+            type: COLOR_TYPE_SOME,
+        },
+        "Ree (Dartmoor)": {
+            colors: ["lightgreen", "darkblue2", "greyblue", "greyblue2", "oldpink"],
+            type: COLOR_TYPE_SOME,
+        },
+        Gems: {
+            colors: ["lightblue", "pink", "purple"],
+            type: COLOR_TYPE_SOME,
+        },
+        Kalkoen: {
+            colors: ["lightgreen", "orange", "yellow", "red"],
+            type: COLOR_TYPE_SOME,
+        },
     };
 
     for (const row of rows) {

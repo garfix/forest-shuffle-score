@@ -2,7 +2,7 @@ import styles from "./SortPage.module.css";
 import type { User } from "../entity/user";
 import { type Category } from "../entity/category";
 import { useMemo } from "react";
-import type { Card } from "../entity/card";
+import { COLOR_TYPE_SOME, type Card } from "../entity/card";
 import { getCategoryCards, getFreeCount, getUsedColors } from "../utils/cards";
 import Amount from "./component/Amount";
 import type { Scores } from "../entity/score";
@@ -180,42 +180,12 @@ export default function SortPage({
                                             <div></div>
                                         )}
                                     </div>
-                                    {card.name == "Ree" && getCount(card) > 0 && (
+                                    {card.colorType == COLOR_TYPE_SOME && getCount(card) > 0 && (
                                         <ColorCardTable
                                             inputs={inputs}
                                             user={user}
                                             setInputs={setInputs}
-                                            colors={["darkblue", "yellow", "lightgreen", "darkgreen", "orange"]}
-                                            card={card}
-                                            maxChecks={getCount(card)}
-                                        />
-                                    )}
-                                    {card.name == "Ree (Dartmoor)" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["lightgreen", "darkblue2", "greyblue", "greyblue2", "oldpink"]}
-                                            card={card}
-                                            maxChecks={getCount(card)}
-                                        />
-                                    )}
-                                    {card.name == "Gems" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["lightblue", "pink", "purple"]}
-                                            card={card}
-                                            maxChecks={getCount(card)}
-                                        />
-                                    )}
-                                    {card.name == "Kalkoen" && getCount(card) > 0 && (
-                                        <ColorCardTable
-                                            inputs={inputs}
-                                            user={user}
-                                            setInputs={setInputs}
-                                            colors={["lightgreen", "orange", "yellow", "red"]}
+                                            colors={card.colors}
                                             card={card}
                                             maxChecks={getCount(card)}
                                         />

@@ -9,6 +9,7 @@ import type { Card } from "../entity/card";
 import type { Inputs } from "../entity/input";
 import type { Scores } from "../entity/score";
 import { getScoreLabel } from "../utils/scores";
+import { Header } from "./component/Header";
 
 type Props = {
     setPage: (page: string) => void;
@@ -30,12 +31,9 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
 
     return (
         <>
-            <div>
-                <Button variant="outlined" onClick={() => setPage("user")}>
-                    Start
-                </Button>
-                &nbsp;&nbsp;/&nbsp;&nbsp;<span>{user.name}</span>
-            </div>
+            <Header setPage={setPage}>
+                <span>{user.name}</span>
+            </Header>
             <div className={styles.categories}>
                 <div></div>
                 <div>Kaarten</div>

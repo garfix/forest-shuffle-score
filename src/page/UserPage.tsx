@@ -9,6 +9,7 @@ import type { Inputs } from "../entity/input";
 import { getScoreLabel } from "../utils/scores";
 import { activeUsers } from "../utils/users";
 import githubIcon from "../assets/github.svg?raw";
+import { Header } from "./component/Header";
 
 type Props = {
     users: User[];
@@ -37,6 +38,9 @@ export default function UserPage({ users, setUser, scores, setPage, inputs }: Pr
 
     return (
         <>
+            <Header setPage={setPage}>
+                <span>Forest Shuffle Score</span>
+            </Header>
             <div className={styles.users}>
                 <div></div>
                 <div>Kaarten</div>

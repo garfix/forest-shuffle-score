@@ -17,6 +17,7 @@ import ColorCardTable from "./component/ColorCardTable";
 import SortColor from "./component/SortColor";
 import { Button } from "@mui/material";
 import SelectedColorCardTable from "./component/SelectedColorCardTable";
+import { Header } from "./component/Header";
 
 type Props = {
     setPage: (page: string) => void;
@@ -129,16 +130,12 @@ export default function SortPage({
 
     return (
         <>
-            <div>
-                <Button variant="outlined" onClick={() => setPage("user")}>
-                    Start
-                </Button>
-                &nbsp;&nbsp;/&nbsp;&nbsp;
+            <Header setPage={setPage}>
                 <Button variant="outlined" onClick={() => setPage("category")}>
                     {user.name}
                 </Button>
                 &nbsp;&nbsp;/&nbsp;&nbsp;<span>{category.name}</span>
-            </div>
+            </Header>
             <div className={styles.cards}>
                 {category.name == "Extra" ? (
                     <>
@@ -234,16 +231,16 @@ export default function SortPage({
                         </React.Fragment>
                     ))
                 )}
+                {nextCategory ? (
+                    <Button variant="outlined" onClick={next}>
+                        Volgende
+                    </Button>
+                ) : (
+                    <Button variant="outlined" onClick={done}>
+                        Einde, naar overzicht
+                    </Button>
+                )}
             </div>
-            {nextCategory ? (
-                <Button variant="outlined" onClick={next}>
-                    Volgende
-                </Button>
-            ) : (
-                <Button variant="outlined" onClick={done}>
-                    Einde, naar overzicht
-                </Button>
-            )}
         </>
     );
 }

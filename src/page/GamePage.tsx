@@ -7,6 +7,7 @@ import { initInputs } from "../utils/scores";
 import { Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
 import type { Game } from "../entity/game";
 import { variants } from "../utils/game";
+import { Header } from "./component/Header";
 
 type Props = {
     users: User[];
@@ -30,10 +31,6 @@ export default function GamePage({ users, setUsers, setPage, setInputs, game, se
         setPage("user");
     };
 
-    const back = () => {
-        setPage("user");
-    };
-
     const setSpelVarianten = function (spelVarianten: string[]) {
         const newGame = { ...game };
         newGame.spelVarianten = spelVarianten;
@@ -42,11 +39,9 @@ export default function GamePage({ users, setUsers, setPage, setInputs, game, se
 
     return (
         <>
-            <div className={styles.below}>
-                <Button variant="outlined" onClick={back}>
-                    Terug
-                </Button>
-            </div>
+            <Header setPage={setPage}>
+                <span>Nieuw spel</span>
+            </Header>
             <h2>Spelers</h2>
             <div>
                 {users.map((user, index) => (

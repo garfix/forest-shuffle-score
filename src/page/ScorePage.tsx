@@ -7,6 +7,7 @@ import React from "react";
 import type { Scores } from "../entity/score";
 import { getScoreLabel } from "../utils/scores";
 import { activeUsers } from "../utils/users";
+import { Header } from "./component/Header";
 
 type Props = { setPage: (page: string) => void; users: User[]; game: Game; scores: Scores };
 
@@ -18,12 +19,9 @@ export default function Home({ setPage, users, game, scores }: Props) {
 
     return (
         <>
-            <div>
-                <Button variant="outlined" onClick={() => setPage("user")}>
-                    Start
-                </Button>
-                &nbsp;&nbsp;/&nbsp;&nbsp;<span>Scores</span>
-            </div>
+            <Header setPage={setPage}>
+                <span>Scores</span>
+            </Header>
             <div className={styles.scores} style={tableStyle}>
                 <div></div>
                 {theUsers.map((user) => (

@@ -4,7 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import { useEffect, useMemo, useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import HomePage from "./page/HomePage";
 import UserPage from "./page/UserPage";
 import CategoryPage from "./page/CategoryPage";
@@ -87,7 +87,7 @@ function App() {
         <>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <section id="center">
+                <section id="center" className={styles.center}>
                     {page == "home" && <HomePage setPage={setPage}></HomePage>}
                     {page == "game" && (
                         <GamePage

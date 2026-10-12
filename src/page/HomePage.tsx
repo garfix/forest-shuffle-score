@@ -1,5 +1,7 @@
 import Button from "@mui/material/Button";
 import frontImg from "@/assets/front.jpg";
+import styles from "./HomePage.module.css";
+import githubIcon from "../assets/github.svg?raw";
 
 type Props = { setPage: (page: string) => void };
 
@@ -16,6 +18,13 @@ export default function Home({ setPage }: Props) {
             <Button variant="contained" onClick={() => setPage("user")}>
                 Start
             </Button>
+            <div className={styles.bottomRight}>
+                <a href="https://github.com/garfix/forest-shuffle-score" target="_blank">
+                    <span dangerouslySetInnerHTML={{ __html: githubIcon }} />
+                    <br />
+                    Github repository
+                </a>
+            </div>
         </>
     );
 }

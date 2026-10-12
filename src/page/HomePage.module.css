@@ -1,0 +1,10 @@
+.bottomRight {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+}
+
+.bottomRight * {
+    color: green !important;
+}

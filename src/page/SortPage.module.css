@@ -12,9 +12,19 @@
     gap: 20px;
 }
 
-.sortName {
-    padding: 4px 20px;
+.sortTitle {
+    padding: 2px 20px;
     background-color: #ffffffc0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: bold;
+    height: 24px;
+}
+
+.sortTitle img {
+    transform: rotate(15deg);
 }
 
 .name {

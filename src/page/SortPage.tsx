@@ -18,6 +18,7 @@ import SortColor from "./component/SortColor";
 import { Button } from "@mui/material";
 import SelectedColorCardTable from "./component/SelectedColorCardTable";
 import { Header } from "./component/Header";
+import { SortIcon } from "./component/SortIcon";
 
 type Props = {
     setPage: (page: string) => void;
@@ -155,7 +156,9 @@ export default function SortPage({
                         <React.Fragment key={sort}>
                             {Object.keys(categoryCards).length > 1 && (
                                 <SortColor sort={sort}>
-                                    <span className={styles.sortName}>{sort}</span>
+                                    <span className={styles.sortTitle}>
+                                        <SortIcon sort={sort} /> {sort}
+                                    </span>
                                 </SortColor>
                             )}
                             {cards.map((card) => (

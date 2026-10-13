@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import styles from "./SortColor.module.css";
 
 type Props = { sort: string; children: ReactNode };
 
@@ -23,5 +24,9 @@ const colors: Record<string, string> = {
 
 export default function SortColor({ sort, children }: Props) {
     const color = colors[sort];
-    return <div style={{ backgroundColor: color }}>{children}</div>;
+    return (
+        <div className={styles.component} style={{ background: color }}>
+            {children}
+        </div>
+    );
 }

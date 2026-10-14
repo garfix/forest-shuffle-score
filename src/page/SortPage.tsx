@@ -141,11 +141,13 @@ export default function SortPage({
                 {category.name == "Extra" ? (
                     <>
                         <SortColor sort="Generiek">
-                            <span className={styles.sortName}>Grot</span>
+                            <span className={styles.sortTitle}>
+                                <SortIcon sort={"Grot"} /> Grot
+                            </span>
                         </SortColor>
                         <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
                         <SortColor sort="Generiek">
-                            <span className={styles.sortName}>Kleuren</span>
+                            <span className={styles.sortTitle}>Aantal kaartjes met</span>
                         </SortColor>
                         <div className={styles.cards}>
                             <SelectedColorCardTable inputs={inputs} user={user} setInputs={setInputs} colors={colors} />
@@ -154,7 +156,7 @@ export default function SortPage({
                 ) : (
                     Object.entries(categoryCards).map(([sort, cards]) => (
                         <React.Fragment key={sort}>
-                            {Object.keys(categoryCards).length > 1 && (
+                            {Object.keys(categoryCards).length > 0 && (
                                 <SortColor sort={sort}>
                                     <span className={styles.sortTitle}>
                                         <SortIcon sort={sort} /> {sort}

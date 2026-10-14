@@ -6,6 +6,7 @@ import type { Scores } from "../../entity/score";
 import styles from "./Grot.module.css";
 import type { Game } from "../../entity/game";
 import { getScoreLabel } from "../../utils/scores";
+import { SortIcon } from "./SortIcon";
 
 type Props = {
     user: User;

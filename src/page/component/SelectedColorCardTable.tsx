@@ -60,21 +60,25 @@ export default function SelectedColorCardTable({ inputs, user, setInputs, colors
 
     return (
         <>
-            {colors.map((color) => (
-                <div className={styles.row} key={color}>
-                    <div className={styles.label}>
-                        <img src={colorImages[color]} height="32" />
+            {colors.length > 0 ? (
+                colors.map((color) => (
+                    <div className={styles.row} key={color}>
+                        <div className={styles.label}>
+                            <img src={colorImages[color]} height="32" />
+                        </div>
+                        <Amount
+                            buttonColor="info"
+                            valueColor="secondary"
+                            value={getColorCardCount(color)}
+                            setValue={(count) => {
+                                setColorCardCount(color, count);
+                            }}
+                        />
                     </div>
-                    <Amount
-                        buttonColor="info"
-                        valueColor="secondary"
-                        value={getColorCardCount(color)}
-                        setValue={(count) => {
-                            setColorCardCount(color, count);
-                        }}
-                    />
-                </div>
-            ))}
+                ))
+            ) : (
+                <p>Geen</p>
+            )}
         </>
     );
 }

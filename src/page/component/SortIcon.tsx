@@ -10,11 +10,13 @@ import vis from "./sorts/Vis.png";
 import eekhoorn from "./sorts/Eekhoorn.png";
 import vleermuis from "./sorts/Vleermuis.png";
 import libel from "./sorts/Libel.png";
-import struik from "./sorts/Struik.png";
+import struiken from "./sorts/Struiken.png";
 import heide from "./sorts/Heide.png";
 import hert from "./sorts/Hert.png";
 import paddenstoel from "./sorts/Paddenstoel.png";
 import vlinder from "./sorts/Vlinder.png";
+import rivier from "./sorts/Rivier.png";
+import grot from "./sorts/Grot.png";
 
 const icons: Record<string, any> = {
     Plant: plant,
@@ -29,13 +31,15 @@ const icons: Record<string, any> = {
     Eekhoorn: eekhoorn,
     Vleermuis: vleermuis,
     Libel: libel,
-    Struik: struik,
+    Struiken: struiken,
     Heide: heide,
     Hert: hert,
     Paddenstoel: paddenstoel,
     Vlinder: vlinder,
+    Rivier: rivier,
+    Grot: grot,
 };
 
 export function SortIcon({ sort }: { sort: string }) {
-    return <img src={icons[sort]} width="30" height="30" />;
+    return <img src={icons[sort]} width="30" />;
 }

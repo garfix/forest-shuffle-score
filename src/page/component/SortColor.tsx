@@ -7,7 +7,7 @@ const colors: Record<string, string> = {
     Vogel: "#3eb5e8",
     Vlinder: "#8d4f92",
     Pootdier: "#aa6338",
-    Struiken: "#478754",
+    Struiken: "#668346",
     Amfibie: "#ccc",
     Plant: "#478754",
     "Evenhoevig dier": "#7d6447",
@@ -18,8 +18,9 @@ const colors: Record<string, string> = {
     Paddenstoel: "#79391c",
     Libel: "#b873b8",
     Vis: "#030583",
-    Rivier: "#2e308e",
+    Rivier: "#49659c",
     Generiek: "#777",
+    Heide: "#77c3bd",
 };
 
 export default function SortColor({ sort, children }: Props) {

@@ -292,10 +292,11 @@ function calculateTotal(
     const categoryScores: Record<string, number> = {};
     const vlinderStats: SortStats = getVlinderStats(input, cards);
     const libelStats: SortStats = getLibelStats(input, cards);
+    const squirrelStats: SortStats = getSquirrelStats(input, cards);
 
     for (const [cardId, count] of Object.entries(input.cardCount)) {
         const card = cards[Number(cardId)];
-        const score = calculateCardScore(count, card, cards, input, inputs, vlinderStats, libelStats);
+        const score = calculateCardScore(count, card, cards, input, inputs, vlinderStats, libelStats, squirrelStats);
         cardScores[Number(cardId)] = score;
         categoryScores[card.category] = categoryScores[card.category] ? categoryScores[card.category] + score : score;
         total += score;
@@ -345,6 +346,7 @@ function calculateCardScore(
     inputs: Inputs,
     vlinderStats: SortStats,
     libelStats: SortStats,
+    squirrelStats: SortStats,
 ) {
     if (count == 0) {
         return 0;
@@ -485,12 +487,16 @@ function calculateCardScore(
                     score += libelStats.scorePerLayer[layer] / libelStats.cardsPerLayer[layer].length;
                 }
             }
+        } else if (predicate == "eekhoorn-telling") {
+            score = 0;
+            for (let layer = 0; layer < squirrelStats.layerCount; layer++) {
+                if (squirrelStats.cardsPerLayer[layer].includes(card.id)) {
+                    score += squirrelStats.scorePerLayer[layer] / squirrelStats.cardsPerLayer[layer].length;
+                }
+            }
         } else if (predicate == "vingerhoedskruid-telling") {
             const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Plant");
             score = getIndexedScore(m, { 0: 0, 1: 1, 2: 3, 3: 6, 4: 10, 5: 15 }) * count;
-        } else if (predicate == "eekhoorn-telling") {
-            const m = getDifferentCanonicalNamesOfSortCount(input, cards, "Eekhoorn");
-            score = getIndexedScore(m, { 0: 0, 1: 5, 2: 10, 3: 20, 4: 40 });
         } else if (predicate == "wateraardbei-telling") {
             const m = getSortCount(input, cards, "Boom");
             score =
@@ -717,6 +723,40 @@ function getLibelStats(input: Input, cards: Card[]): SortStats {
 
         cardsPerLayer.push(cardsInLayer.slice(0, count));
         scorePerLayer[layer] = { 0: 0, 1: 0, 2: 5, 3: 10, 4: 15, 5: 30, 6: 50 }[count]!;
+    }
+
+    return {
+        layerCount,
+        cardsPerLayer,
+        scorePerLayer,
+    };
+}
+
+function getSquirrelStats(input: Input, cards: Card[]): SortStats {
+    const cardCounts: Record<number, number> = {};
+
+    for (const card of cards) {
+        if (card.sort.includes("Eekhoorn")) {
+            if (input.cardCount[card.id]) {
+                cardCounts[card.id] = input.cardCount[card.id];
+            }
+        }
+    }
+
+    const scorePerLayer: number[] = [];
+    const cardsPerLayer: number[][] = [];
+    const layerCount = 4;
+    for (let layer = 0; layer < layerCount; layer++) {
+        let cardsInLayer: number[] = [];
+        for (const [cardId, cardCount] of Object.entries(cardCounts)) {
+            if (cardCount > layer) {
+                cardsInLayer.push(Number(cardId));
+            }
+        }
+        let count = cardsInLayer.length;
+
+        cardsPerLayer.push(cardsInLayer.slice(0, count));
+        scorePerLayer[layer] = { 0: 0, 1: 5, 2: 10, 3: 20, 4: 40 }[count]!;
     }
 
     return {

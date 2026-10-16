@@ -146,12 +146,21 @@ export default function SortPage({
                             </span>
                         </SortColor>
                         <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
-                        <SortColor sort="Generiek">
-                            <span className={styles.sortTitle}>Aantal kaartjes met</span>
-                        </SortColor>
-                        <div className={styles.cards}>
-                            <SelectedColorCardTable inputs={inputs} user={user} setInputs={setInputs} colors={colors} />
-                        </div>
+                        {colors.length > 0 && (
+                            <>
+                                <SortColor sort="Generiek">
+                                    <span className={styles.sortTitle}>Aantal kaartjes met</span>
+                                </SortColor>
+                                <div className={styles.cards}>
+                                    <SelectedColorCardTable
+                                        inputs={inputs}
+                                        user={user}
+                                        setInputs={setInputs}
+                                        colors={colors}
+                                    />
+                                </div>
+                            </>
+                        )}
                     </>
                 ) : (
                     Object.entries(categoryCards).map(([sort, cards]) => (

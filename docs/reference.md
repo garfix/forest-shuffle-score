@@ -1,14 +1,17 @@
-Description of all cards
+## Scoring rules
 
-https://www.lookout-spiele.de/upload/en_forrestshuffle.html_Forest_Shuffle_175_Appendix_EN_SW_WEB_260326.pdf
+- [Forest shuffle](https://www.lookout-spiele.de/upload/en_forrestshuffle.html_Forest_Shuffle_175_Appendix_EN_SW_WEB_260326.pdf)
+- [Smoky mountains](https://www.lookout-spiele.de/upload/en_smoky.html_SmokyMountains_0195_Appendix_EN_WEB_260521.pdf)
 
-## Smoky mountains
+## Other scoring apps
 
-- [appendix](https://www.lookout-spiele.de/upload/en_smoky.html_SmokyMountains_0195_Appendix_EN_WEB_260521.pdf)
+On the web
 
-## Alternative scoring apps
+- [Forest Shuffle: Dartmoor Scoring Tool](https://www.mikkosaari.fi/dartmoor/)
+- [Forest Shuffle app](https://forestshuffle.app/define-forest)
+- [Forest Shuffle Score App](https://soldag.github.io/forest-shuffle-scoring/#/forest)
 
-https://forestshuffle.app/define-forest
-https://soldag.github.io/forest-shuffle-scoring/#/forest
+In the Play store
 
-Forest Shuffle Smart Counter by Digidiced
+- Forest shuffle smart counter
+- Dartmoor smart counter

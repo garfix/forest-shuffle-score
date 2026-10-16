@@ -42,6 +42,7 @@ export default function SelectedColorCardTable({ inputs, user, setInputs, colors
                                 setColorCardCount(color, count);
                             }}
                         />
+                        <div></div>
                     </div>
                 ))
             ) : (

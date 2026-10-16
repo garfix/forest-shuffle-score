@@ -123,9 +123,11 @@ export default function SortPage({
 
     const dekenveen = getCardByCanonicalName("Dekenveen", cards);
     const userHasDekenveen = dekenveen && !!inputs[user.id].cardCount[dekenveen.id];
+    const dekenveencards = cards.filter((card) => card.sort.includes("Plant") && !!getCount(card));
 
     const kustheide = getCardByCanonicalName("Kustheide", cards);
     const userHasKustheide = kustheide && !!inputs[user.id].cardCount[kustheide.id];
+    const kustheideCards = cards.filter((card) => card.sort.includes("Vogel") && !!getCount(card));
 
     const colors = getUsedColors(inputs, user.id, cards);
 
@@ -148,17 +150,64 @@ export default function SortPage({
                         <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
                         {colors.length > 0 && (
                             <>
-                                <SortColor sort="Generiek">
-                                    <span className={styles.sortTitle}>Aantal kaartjes met</span>
+                                <div>&nbsp;</div>
+                                <SortColor sort="Boom">
+                                    <span className={styles.sortTitle}>
+                                        <SortIcon sort={"Boom"} /> Aantal kaartjes met
+                                    </span>
                                 </SortColor>
-                                <div className={styles.cards}>
-                                    <SelectedColorCardTable
-                                        inputs={inputs}
-                                        user={user}
-                                        setInputs={setInputs}
-                                        colors={colors}
-                                    />
-                                </div>
+                                <SelectedColorCardTable
+                                    inputs={inputs}
+                                    user={user}
+                                    setInputs={setInputs}
+                                    colors={colors}
+                                />
+                            </>
+                        )}
+                        {userHasKustheide && !!kustheideCards.length && (
+                            <>
+                                <div>&nbsp;</div>
+                                <SortColor sort="Heide">
+                                    <span className={styles.sortTitle}>
+                                        <SortIcon sort={"Vogel"} /> Bij een kustheide
+                                    </span>
+                                </SortColor>
+                                {kustheideCards.map((card) => (
+                                    <div className={styles.card} key={card.id}>
+                                        <div className={styles.name}>{card.canonical_name}</div>
+                                        <Amount
+                                            buttonColor="info"
+                                            valueColor="secondary"
+                                            value={getKustheideCount(card)}
+                                            setValue={(count) => setKustheideCount(card, count)}
+                                            max={getCount(card)}
+                                        />
+                                        <div></div>
+                                    </div>
+                                ))}
+                            </>
+                        )}
+                        {userHasDekenveen && !!dekenveencards.length && (
+                            <>
+                                <div>&nbsp;</div>
+                                <SortColor sort="Heide">
+                                    <span className={styles.sortTitle}>
+                                        <SortIcon sort={"Plant"} /> Bij een dekenveen
+                                    </span>
+                                </SortColor>
+                                {dekenveencards.map((card) => (
+                                    <div className={styles.card} key={card.id}>
+                                        <div className={styles.name}>{card.canonical_name}</div>
+                                        <Amount
+                                            buttonColor="info"
+                                            valueColor="secondary"
+                                            value={getDekenveenCount(card)}
+                                            setValue={(count) => setDekenveenCount(card, count)}
+                                            max={getCount(card)}
+                                        />
+                                        <div></div>
+                                    </div>
+                                ))}
                             </>
                         )}
                     </>
@@ -210,32 +259,6 @@ export default function SortPage({
                                                 value={getSubCount(card)}
                                                 setValue={(count) => setSubCount(card, count)}
                                                 max={getSubCountMax(card)}
-                                            />
-                                            <div></div>
-                                        </div>
-                                    )}
-                                    {card.sort.includes("Plant") && userHasDekenveen && !!getCount(card) && (
-                                        <div className={styles.card}>
-                                            <div className={styles.sub_question}>Hoeveel onder een Dekenveen?</div>
-                                            <Amount
-                                                buttonColor="info"
-                                                valueColor="secondary"
-                                                value={getDekenveenCount(card)}
-                                                setValue={(count) => setDekenveenCount(card, count)}
-                                                max={getCount(card)}
-                                            />
-                                            <div></div>
-                                        </div>
-                                    )}
-                                    {card.sort.includes("Vogel") && userHasKustheide && !!getCount(card) && (
-                                        <div className={styles.card}>
-                                            <div className={styles.sub_question}>Hoeveel bij een Kustheide?</div>
-                                            <Amount
-                                                buttonColor="info"
-                                                valueColor="secondary"
-                                                value={getKustheideCount(card)}
-                                                setValue={(count) => setKustheideCount(card, count)}
-                                                max={getCount(card)}
                                             />
                                             <div></div>
                                         </div>

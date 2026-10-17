@@ -1,4 +1,4 @@
-import styles from "./ColorCardTable.module.css";
+import styles from "./SelectedColorCardTable.module.css";
 import type { Inputs } from "../../entity/input";
 import Amount from "./Amount";
 import type { User } from "../../entity/user";

@@ -54,9 +54,10 @@ export default function ColorCardTable({ inputs, user, setInputs, card, maxCheck
     };
 
     return (
-        <div>
+        <div className={styles.checks}>
             {colors.map((color) => (
                 <span key={color} className={styles.label}>
+                    <img src={colorImages[color]} height="32" />
                     {!!maxChecks && (
                         <Checkbox
                             checked={isColorCardChecked(card, color)}
@@ -66,7 +67,6 @@ export default function ColorCardTable({ inputs, user, setInputs, card, maxCheck
                             disabled={checkForDisabled(color)}
                         />
                     )}
-                    <img src={colorImages[color]} height="32" />
                 </span>
             ))}
         </div>

@@ -31,7 +31,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
 
     return (
         <>
-            <Header setPage={setPage}>
+            <Header setPage={setPage} score={scores[user.id].total}>
                 <span>{user.name}</span>
             </Header>
             <div className={styles.categories}>

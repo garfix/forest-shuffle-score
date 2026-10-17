@@ -2,8 +2,17 @@ import styles from "./Header.module.css";
 import tree from "../../assets/tree.png";
 import type { ReactNode } from "react";
 import { Button } from "@mui/material";
+import { acornImage } from "../../utils/images";
 
-export function Header({ children, setPage }: { children: ReactNode; setPage: (page: string) => void }) {
+export function Header({
+    children,
+    setPage,
+    score,
+}: {
+    children: ReactNode;
+    setPage: (page: string) => void;
+    score?: number;
+}) {
     return (
         <div className={styles.header}>
             <Button variant="outlined" onClick={() => setPage("user")}>
@@ -11,6 +20,11 @@ export function Header({ children, setPage }: { children: ReactNode; setPage: (p
             </Button>
 
             <div className={styles.title}>{children}</div>
+            {!!score && (
+                <div className={styles.score}>
+                    <span>{score}</span> <img src={acornImage} width="16" />
+                </div>
+            )}
         </div>
     );
 }

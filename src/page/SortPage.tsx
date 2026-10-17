@@ -133,11 +133,12 @@ export default function SortPage({
 
     return (
         <>
-            <Header setPage={setPage}>
+            <Header setPage={setPage} score={scores[user.id].total}>
                 <Button variant="outlined" onClick={() => setPage("category")}>
                     {user.name}
                 </Button>
-                &nbsp;&nbsp;/&nbsp;&nbsp;<span>{category.name}</span>
+                &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span>{category.name}</span>
             </Header>
             <div className={styles.cards}>
                 {category.name == "Extra" ? (

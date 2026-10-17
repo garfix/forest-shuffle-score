@@ -13,6 +13,7 @@ import greyblue from "./icons/greyblue.png";
 import greyblue2 from "./icons/greyblue2.png";
 import oldpink from "./icons/oldpink.png";
 import red from "./icons/red.png";
+import acorn from "../assets/acorn.png";
 
 export const colorImages: Record<string, string> = {
     yellow: yellow,
@@ -31,3 +32,5 @@ export const colorImages: Record<string, string> = {
     oldpink: oldpink,
     red: red,
 };
+
+export const acornImage: string = acorn;

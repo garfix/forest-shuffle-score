@@ -137,11 +137,11 @@ export default function SortPage({
                 <Button variant="outlined" onClick={() => setPage("category")}>
                     {user.name}
                 </Button>
-                &nbsp;/&nbsp;
-                <span>{category.name}</span>
+                &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span>{category.title}</span>
             </Header>
             <div className={styles.cards}>
-                {category.name == "Extra" ? (
+                {category.name == "Grot" ? (
                     <>
                         <SortColor sort="Generiek">
                             <span className={styles.sortTitle}>

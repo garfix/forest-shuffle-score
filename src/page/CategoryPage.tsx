@@ -41,7 +41,7 @@ export default function CategoryPage({ setPage, setCategory, user, cards, inputs
                 <div></div>
                 {categories.map((category) => (
                     <React.Fragment key={category.name}>
-                        <div className={styles.label}>{category.name}</div>
+                        <div className={styles.label}>{category.title}</div>
                         <Chip className={styles.chip} label={counts[category.name]} color="info"></Chip>
                         <Chip
                             className={styles.chip}

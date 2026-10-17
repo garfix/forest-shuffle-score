@@ -4,34 +4,42 @@ import type { Game } from "../entity/game";
 const categories: Category[] = [
     {
         name: "Boom",
+        title: "Boom",
         spel_variant: [],
     },
     {
         name: "Struiken",
+        title: "Struik",
         spel_variant: ["Woodland edge", "Dartmoor"],
     },
     {
         name: "Heide",
+        title: "Heide",
         spel_variant: ["Dartmoor"],
     },
     {
         name: "Rivier",
+        title: "Rivier",
         spel_variant: ["Smoky mountains"],
     },
     {
         name: "Boven",
+        title: "Boven",
         spel_variant: [],
     },
     {
         name: "Onder",
+        title: "Onder",
         spel_variant: [],
     },
     {
         name: "Naast",
+        title: "Naast",
         spel_variant: [],
     },
     {
-        name: "Extra",
+        name: "Grot",
+        title: "Extra",
         spel_variant: [],
     },
 ];

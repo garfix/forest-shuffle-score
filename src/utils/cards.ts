@@ -39,7 +39,7 @@ export function loadCards(game: Game): Card[] {
             colors: ["lightgreen"],
             type: COLOR_TYPE_FIXED,
         },
-        "Gele parvia": {
+        "Gele pavia": {
             colors: ["orange"],
             type: COLOR_TYPE_FIXED,
         },

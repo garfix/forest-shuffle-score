@@ -150,7 +150,6 @@ export default function SortPage({
                         <Grot user={user} inputs={inputs} setUserInput={setInputs} scores={scores} game={game} />
                         {colors.length > 0 && (
                             <>
-                                <div>&nbsp;</div>
                                 <SortColor sort="Boom">
                                     <span className={styles.sortTitle}>
                                         <SortIcon sort={"Boom"} /> Aantal kaartjes met
@@ -166,7 +165,6 @@ export default function SortPage({
                         )}
                         {userHasKustheide && !!kustheideCards.length && (
                             <>
-                                <div>&nbsp;</div>
                                 <SortColor sort="Heide">
                                     <span className={styles.sortTitle}>
                                         <SortIcon sort={"Vogel"} /> Bij een kustheide
@@ -189,7 +187,6 @@ export default function SortPage({
                         )}
                         {userHasDekenveen && !!dekenveencards.length && (
                             <>
-                                <div>&nbsp;</div>
                                 <SortColor sort="Heide">
                                     <span className={styles.sortTitle}>
                                         <SortIcon sort={"Plant"} /> Bij een dekenveen

@@ -31,7 +31,7 @@ export default function Amount({ value, setValue, valueColor = "warning", button
             >
                 -1
             </Button>
-            <Chip className={styles.chip} label={value} color={valueColor} />
+            <Chip label={value} color={valueColor} />
             <Button
                 variant="contained"
                 onClick={inc}

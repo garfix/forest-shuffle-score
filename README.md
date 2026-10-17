@@ -13,7 +13,7 @@ De volgende varianten zijn opgenomen:
 ## Eerste opmerkingen
 
 - Je voert het aantal kaarten van elk type in, en beantwoord enkele vragen over kaart-aantallen, en de app berekent de score.
-- De score kan worden bijgehouden voor het basisspel, Dartmoor, en eventueel de varianten Woodland Edge (bosrand), Alpine, en Exploration.
+- De score kan worden bijgehouden voor het basisspel, Dartmoor, Smoky mountains, en eventueel de varianten Woodland Edge (bosrand), Alpine, en Exploration.
 - Standaard begint het spel met de gebruikers Patrick en Katja. Je kunt deze aanpassen bij het begin van een nieuw spel.
 - Je input wordt bijgehouden in je browser (local storage).
 - De kaart-input wordt gewist aan het begin van elk nieuw spel. Er worden geen historische resultaten bijgehouden.
@@ -28,6 +28,8 @@ De app start op. Druk op Start.
 
 ![Home page](docs/img/home.png)
 
+De link **Github repository** brengt je naar de de ontwikkelomgeving van de applicatie, waar je fouten kunt melden.
+
 ## Gebruikers-overzicht
 
 In het gebruikersoverzicht zie je de actieve gebruikers, met het aantal kaarten dat ze hebben ingevoerd, en hun totale score. Je kunt de namen van de gebruikers aanpassen op de volgende pagina.
@@ -40,7 +42,7 @@ Ook kun je hier een nieuw spel beginnen en naar het score-overzicht.
 
 Op deze pagina stel je in met welke personen je speelt en welke varianten je gebruikt. Je hoeft deze alleen in te stellen als ze veranderen.
 
-NB: als je op de knop "Nieuw spel" drukt worden de ingevoerde waarden van het vorige spel verwijderd om een nieuw spel te kunnen beginnen. Als je dat niet wil kun je terug met de knop "Terug".
+NB: als je op de knop "Nieuw spel" drukt worden de ingevoerde waarden van het vorige spel verwijderd om een nieuw spel te kunnen beginnen. Als je dat niet wil kun je terug met de boom-knop linksboven.
 
 ![Nieuw spel](docs/img/game.png)
 
@@ -70,15 +72,19 @@ Sommige kaarten hebben een subvraag nodig om de score te kunnen berekenen. In di
 
 ![Bosmier](docs/img/subvraag.png)
 
-Andere kaarten vragen om het aantal kaarten van een boom-kleur. Nadat je het aantal kaarten van Ree hebt opgegeven, kruis je aan welke kleur de reeën hebben en daarna vul je per boom-kleur het aantal kaarten in. Er zijn enkele varianten op dit principe.
+Andere kaarten vragen om het boom-kleuren. Nadat je het aantal kaarten van Ree hebt opgegeven, kruis je aan welke boom-kleur de reeën hebben. De aantallen kaarten van elke kleur wordt later opgegeven bij "Extra".
 
 ![Ree subvraag](docs/img/ree.png)
 
-## Grot-pagina
+## Extra-pagina
 
 Op deze pagina wordt het aantal grot-kaarten ingevoerd, alsook de soort grotkaart (als er met de Exploration uitbreiding gespeeld wordt).
 
-![Grot-pagina](docs/img/grot.png)
+![Extra-pagina](docs/img/extra.png)
+
+Op deze pagina geef je ook op hoeveel kaartjes van elke boom-kleur je hebt. Alleen de relevante kleuren worden gevraagd.
+
+Als je Dartmoor speelt en een Dekenveen of Kustheide kaart hebt gespeeld, wordt hier ook gevraagd hoeveel van welke planten of vogels er bij liggen, omdat die voor een verdubbeling van die scores zorgen.
 
 ## Score overzicht
 

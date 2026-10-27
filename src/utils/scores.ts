@@ -172,7 +172,7 @@ const scoreFuncs: Record<string, (string | number | string[])[]> = {
     Ringslang: ["count-x", 5],
     "Blauwe schallebijter": ["onder-kaarten-x"],
     Bever: ["grot-x", 1],
-    Otter: ["sort-count-x", "Amfibie", 2],
+    Otter: ["sort-count-x", "Amfibie", 3],
     Tormentil: ["count-x", 5],
     "Grote veldbies": ["count-x", 3],
     "Gladde slang": ["color-card-counts-x", ["lightgreen"], 1],
